@@ -13,7 +13,6 @@ jobs:
           node-version: 20
       - name: Run install, build and test
         run: |
-          cd frontend
           npm install
           npm run build
           npm run test:ci
