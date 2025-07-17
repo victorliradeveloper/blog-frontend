@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const StyledLoginAlertModal = styled.div`
   width: 400px;
-  height: 400px;
-  background: #fff;
+  height: 230px;
+  background: #434242;
   position: fixed;
   z-index: 10;
   right: 50%;
@@ -15,18 +15,26 @@ export const StyledLoginAlertModal = styled.div`
   justify-content: center;
   border-radius: 4px;
   padding: 20px;
+  color: #fff;
 
   @media screen and (max-width: 501px) {
     width: 90%;
-    height: 300px;
+    height: 210px;
   }
 
   h1 {
     font-size: 20px;
     text-align: center;
 
+     @media screen and (max-width: 501px) {
+        font-size: 16px;
+    }
+
     &.txt-2 {
       margin-bottom: 50px;
+       @media screen and (max-width: 501px) {
+        font-size: 16px;
+      }
     }
   }
 

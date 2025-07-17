@@ -28,7 +28,7 @@ const LoginAlertModal = function (props: IProps) {
 
       <GoogleLogin
         onError={() => console.log('Login failed')}
-        theme="filled_black"
+        theme="outline"
         size="large"
         shape="square"
         type="standard"
