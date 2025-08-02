@@ -1,10 +1,7 @@
 import axios from 'axios'
-import { DEV_API_URL, PROD_API_URL } from '@/constants/endpoints'
-
-const API_URL = process.env.NODE_ENV === 'production' ? PROD_API_URL : DEV_API_URL
 
 export const httpClient = axios.create({
-  baseURL: API_URL,
+  baseURL: process.env.NEXT_PUBLIC_DEV_API_URL,
   timeout: 30000,
 })
 
