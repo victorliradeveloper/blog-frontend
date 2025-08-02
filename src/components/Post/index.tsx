@@ -30,7 +30,7 @@ const Post: React.FC<IProps> = props => {
     }
 
     router.push({
-      pathname: `/posts/${generateSlug(props.title)}`,
+      pathname: `/article/${generateSlug(props.title)}`,
       query: {},
     });
   };
