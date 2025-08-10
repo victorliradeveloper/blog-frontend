@@ -1,21 +1,8 @@
+import { Post } from '@/domain/posts/entities/Post';
 import { HttpClient } from './HttpClient';
 import { PostHttpRepository } from './PostHttpRepository';
 import { GetPostsUseCase } from '@/application/posts/use-cases/GetPostsUseCase';
 import { SearchPostsUseCase } from '@/application/posts/use-cases/SearchPostsUseCase';
-
-export interface Post {
-  id: number;
-  title: string;
-  content: string;
-  date: string;
-  category: string;
-  metaTagTitle: string;
-  metaTagDescription: string;
-  postImage: string;
-  postBackground: string;
-  author: string;
-  keywords: string;
-}
 
 export interface PostsResponse {
   totalPages: number;
