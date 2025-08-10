@@ -24,9 +24,7 @@ src/
 │   └── memory/
 │       └── PostMemoryRepository.ts
 └── presentation/     # Camada de apresentação (UI React)
-    ├── pages/
-    │   └── PostsPage.tsx
-    ├── components/
+    ├── components/   # Componentes React
     │   ├── Post/
     │   ├── Header/
     │   ├── Footer/
@@ -36,7 +34,7 @@ src/
     │   ├── SearchPost/
     │   ├── LoginAlertModal/
     │   └── MarkdownRenderer/
-    └── hooks/
+    └── hooks/        # Hooks customizados
         └── usePosts.ts
 ```
 

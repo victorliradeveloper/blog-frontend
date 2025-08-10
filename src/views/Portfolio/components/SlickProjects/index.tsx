@@ -49,7 +49,7 @@ const SlickProjects = (props: SlickProjectsProps) => {
         </p>
       </div>
       <Slider {...settings}>
-        {projects.projects.map(item => {
+        {projects.map(item => {
           return (
             <div className="slider-container" key={item.id}>
               <div className="slider-box project-1">

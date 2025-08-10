@@ -4,7 +4,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import StyledPostNew from './Posts.styled';
 import MarkdownRenderer from '@/presentation/components/MarkdownRenderer';
 import dateFormatter from '@/helper/functions/dateFormatter';
-import Post from '@/presentation/components/Post';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Slider from 'react-slick';
@@ -27,41 +26,17 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
 import { ServerPostsService } from '@/infrastructure/http/ServerPostsService';
-
-type PostProps = {
-  id: number;
-  title: string;
-  content: string;
-  date: string;
-  category: string;
-  metaTagTitle: string;
-  metaTagDescription: string;
-  postImage: string;
-  author: string;
-};
+import { Post, PostPagination } from '@/domain/posts/entities/Post';
+import PostComponent from '@/presentation/components/Post';
 
 type IProps = {
-  post: {
-    id: number;
-    category: string;
-    postBackground: string;
-    date: string;
-    metaTagTitle: string;
-    metaTagDescription: string;
-    title: string;
-    content: string;
-    postImage: string;
-    author: string;
-    keywords: string;
-  };
-  data: {
-    results: PostProps[];
-  };
+  post: Post;
+  data: PostPagination;
 };
 
 function Posts(props: IProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const [lastPosts, setLastPost] = useState<PostProps[]>([]);
+  const [lastPosts, setLastPost] = useState<Post[]>([]);
   const [settings, setSettings] = useState({});
 
   useEffect(() => {
@@ -226,10 +201,10 @@ function Posts(props: IProps) {
       <h1 className="title">Últimas postagens</h1>
       <div className="last-posts">
         <Slider {...settings}>
-          {lastPosts.map((post: PostProps) => {
-            return (
-              <div className="slider-content" key={post.id}>
-                <Post
+                  {lastPosts.map((post: Post) => {
+          return (
+            <div className="slider-content" key={post.id}>
+              <PostComponent
                   onDisplayLoginAlert={displayLoginAlert}
                   id={post.id}
                   category={post.category}
@@ -239,7 +214,9 @@ function Posts(props: IProps) {
                   metaTagTitle={post.metaTagTitle}
                   title={post.title}
                   postImage={post.postImage}
+                  postBackground={post.postBackground}
                   author={post.author ?? 'Unknown Author'}
+                  keywords={post.keywords}
                   aos_delay=""
                   aos_type=""
                   hover_animation={-7}
@@ -262,7 +239,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   try {
     const data = await ServerPostsService.getAllPosts(page, limit, category);
     // Aqui removi o tipo ICurrentPost para evitar erro de incompatibilidade
-    const paths = data.results.map((post: PostProps) => ({
+    const paths = data.results.map((post: Post) => ({
       params: { slug: generateSlug(post.title) },
     }));
 
@@ -286,7 +263,7 @@ export const getStaticProps: GetStaticProps = async context => {
 
     const data = await ServerPostsService.getAllPosts(page, limit, category);
 
-    const currentPost = data.results.find((post: PostProps) => {
+    const currentPost = data.results.find((post: Post) => {
       return generateSlug(post.title) === slug;
     });
 

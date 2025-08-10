@@ -117,8 +117,10 @@ function Profile() {
                     metaTagTitle={post.metaTagTitle}
                     metaTagDescription={post.metaTagDescription}
                     postImage={post.postImage}
+                    postBackground={post.postBackground}
                     date={post.date}
                     category={post.category}
+                    keywords={post.keywords}
                     aos_delay="100"
                     aos_type="fade-up"
                     hover_animation={-7}
