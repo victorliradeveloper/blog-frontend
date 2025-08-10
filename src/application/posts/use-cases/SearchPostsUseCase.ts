@@ -1,5 +1,5 @@
-import { PostRepository } from '../../../domain/posts/PostRepository';
-import { PostPagination } from '../../../domain/posts/Post';
+import { PostRepository } from '@/domain/posts/contracts/PostRepository';
+import { PostPagination } from '@/domain/posts/entities/Post';
 
 export class SearchPostsUseCase {
   constructor(private postRepository: PostRepository) {}

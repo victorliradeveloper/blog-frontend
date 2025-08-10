@@ -1,4 +1,4 @@
-import { Post, PostPagination } from './Post';
+import { Post, PostPagination } from "../entities/Post";
 
 export interface PostRepository {
   searchPosts(query: string, page: string | string[], limit: string): Promise<PostPagination>;

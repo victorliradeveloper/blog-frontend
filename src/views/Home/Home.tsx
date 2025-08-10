@@ -1,14 +1,14 @@
 import Head from 'next/head';
-import Post from '@/components/Post';
-import About from '@/components/About';
+import Post from '@/presentation/components/Post';
+import About from '@/presentation/components/About';
 import { useContext, useState, useEffect } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { META_TAG_IMAGE, FAVICON } from '@/constants/images';
-import LoginAlertModal from '@/components/LoginAlertModal';
+import LoginAlertModal from '@/presentation/components/LoginAlertModal';
 import { useCurrentUser } from '@/Context/currentUser';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/presentation/components/Pagination';
 import { GlobalContext } from '@/Context/pagination';
 import MainPage from '@/views/Home/components/MainPage';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';

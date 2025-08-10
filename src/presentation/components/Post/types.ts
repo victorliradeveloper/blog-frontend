@@ -1,4 +1,4 @@
-import { Post } from '../../domain/entities/Post';
+import { Post } from '@/domain/posts/entities/Post';
 
 export interface IProps extends Post {
   aos_delay?: string;

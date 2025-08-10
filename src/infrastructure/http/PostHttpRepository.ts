@@ -1,5 +1,5 @@
-import { Post, PostPagination } from '../../domain/posts/Post';
-import { PostRepository } from '../../domain/posts/PostRepository';
+import { Post, PostPagination } from '@/domain/posts/entities/Post';
+import { PostRepository } from '@/domain/posts/contracts/PostRepository';
 import { HttpClient } from './HttpClient';
 
 export interface BlogPostResponse {

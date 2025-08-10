@@ -8,8 +8,10 @@ Este projeto foi refatorado para seguir os princípios da Clean Architecture, pr
 src/
 ├── domain/           # Camada de domínio (entidades e contratos)
 │   └── posts/        # Domínio de posts
-│       ├── Post.ts
-│       └── PostRepository.ts
+│       ├── entities/ # Entidades do domínio
+│       │   └── Post.ts
+│       └── contracts/ # Contratos do domínio
+│           └── PostRepository.ts
 ├── application/      # Camada de aplicação (casos de uso)
 │   └── posts/
 │       └── use-cases/
@@ -25,7 +27,15 @@ src/
     ├── pages/
     │   └── PostsPage.tsx
     ├── components/
-    │   └── Post/
+    │   ├── Post/
+    │   ├── Header/
+    │   ├── Footer/
+    │   ├── Layout/
+    │   ├── About/
+    │   ├── Pagination/
+    │   ├── SearchPost/
+    │   ├── LoginAlertModal/
+    │   └── MarkdownRenderer/
     └── hooks/
         └── usePosts.ts
 ```

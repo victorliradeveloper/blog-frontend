@@ -1,7 +1,7 @@
 import { HttpClient } from './HttpClient';
 import { PostHttpRepository } from './PostHttpRepository';
-import { GetPostsUseCase } from '../../application/posts/use-cases/GetPostsUseCase';
-import { SearchPostsUseCase } from '../../application/posts/use-cases/SearchPostsUseCase';
+import { GetPostsUseCase } from '@/application/posts/use-cases/GetPostsUseCase';
+import { SearchPostsUseCase } from '@/application/posts/use-cases/SearchPostsUseCase';
 
 export interface Post {
   id: number;

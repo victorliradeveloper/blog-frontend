@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { GetPostsUseCase } from '../../application/posts/use-cases/GetPostsUseCase';
-import { SearchPostsUseCase } from '../../application/posts/use-cases/SearchPostsUseCase';
-import { PostHttpRepository } from '../../infrastructure/http/PostHttpRepository';
-import { HttpClient } from '../../infrastructure/http/HttpClient';
+import { GetPostsUseCase } from '@/application/posts/use-cases/GetPostsUseCase';
+import { SearchPostsUseCase } from '@/application/posts/use-cases/SearchPostsUseCase';
+import { PostHttpRepository } from '@/infrastructure/http/PostHttpRepository';
+import { HttpClient } from '@/infrastructure/http/HttpClient';
 
 interface UsePostsParams {
   query?: string;
@@ -17,16 +17,13 @@ export function usePosts({
   page, 
   limit, 
   category, 
-  enabled = true, 
-  useMock = false 
+  enabled = true 
 }: UsePostsParams) {
   return useQuery({
-    queryKey: ['posts', query, page, limit, category, useMock],
+    queryKey: ['posts', query, page, limit, category],
     queryFn: async () => {
-      // Decide qual repositório usar baseado na flag useMock ou se não há API configurada
-      const repository = useMock || !process.env.NEXT_PUBLIC_API_URL
-        ? new PostMemoryRepository()
-        : new PostHttpRepository(new HttpClient(process.env.NEXT_PUBLIC_API_URL));
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://blog-backend-production-88d3.up.railway.app';
+      const repository = new PostHttpRepository(new HttpClient(apiUrl));
 
       if (query) {
         const searchUseCase = new SearchPostsUseCase(repository);

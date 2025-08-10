@@ -4,7 +4,7 @@ import 'aos/dist/aos.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
-import Post from '@/components/Post';
+import Post from '@/presentation/components/Post';
 import Image from 'next/image';
 import StyledProfile from './Profile.styled';
 import { PostsProps } from './types';
