@@ -6,8 +6,3 @@ export type IHeaderProps = {
   openMobileMenu: boolean;
   setOpenMobileMenu: (a: boolean) => void
 };
-
-export type UrlParams = {
-  page: string;
-  category: string;
-};
