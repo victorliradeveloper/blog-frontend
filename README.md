@@ -6,19 +6,6 @@
   <p>Um blog moderno desenvolvido com React, Next.js, TypeScript e Clean Architecture</p>
 </div>
 
-## 📋 Índice
-
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Tecnologias](#-tecnologias)
-- [Arquitetura](#-arquitetura)
-- [Funcionalidades](#-funcionalidades)
-- [Instalação](#-instalação)
-- [Como Usar](#-como-usar)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [API](#-api)
-- [Deploy](#-deploy)
-- [Contribuição](#-contribuição)
-- [Licença](#-licença)
 
 ## 🎯 Sobre o Projeto
 
@@ -172,29 +159,6 @@ npm run build:dev
 npm start
 ```
 
-### Testes
-```bash
-# Testes unitários
-npm test
-
-# Testes E2E
-npm run cypress:open
-
-# Testes com coverage
-npm run test:coverage
-```
-
-### Linting e Formatação
-```bash
-# Linting
-npm run lint
-
-# Formatação
-npm run format
-
-# Verificação de tipos
-npm run type-check
-```
 
 ## 📁 Estrutura do Projeto
 
@@ -224,40 +188,6 @@ blog-frontend/
 └── cypress/                # 🧪 Testes E2E
 ```
 
-## 🔌 API
-
-O projeto consome uma API externa para os dados dos posts:
-
-- **Base URL**: `https://blog-backend-production-88d3.up.railway.app/`
-- **Endpoints**:
-  - `GET /posts` - Lista de posts com paginação
-  - `GET /posts/search` - Busca de posts
-
-### Exemplo de uso
-```typescript
-// Hook personalizado para posts
-const { data, isLoading, error } = usePosts({
-  page: '1',
-  limit: '10',
-  category: 'all'
-});
-```
-
-## 🚀 Deploy
-
-### Vercel (Recomendado)
-1. Conecte seu repositório ao Vercel
-2. Configure as variáveis de ambiente
-3. Deploy automático a cada push
-
-### Docker
-```bash
-# Build da imagem
-docker build -t blog-frontend .
-
-# Executar container
-docker run -p 3000:3000 blog-frontend
-```
 
 ## 🤝 Contribuição
 
@@ -298,6 +228,5 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 <div align="center">
   <p>Feito com ❤️ por Victor Lira</p>
-  <p>⭐ Se este projeto te ajudou, considere dar uma estrela!</p>
 </div>
 
