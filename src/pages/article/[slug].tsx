@@ -26,7 +26,7 @@ import { generateSlug } from '@/helper/functions/generateSlug';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { PostsService } from '@/services/PostsService';
+import { ServerPostsService } from '@/infrastructure/http/ServerPostsService';
 
 type PostProps = {
   id: number;
@@ -260,7 +260,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const category = 'all';
 
   try {
-    const data = await PostsService.getAllPosts(page, limit, category);
+    const data = await ServerPostsService.getAllPosts(page, limit, category);
     // Aqui removi o tipo ICurrentPost para evitar erro de incompatibilidade
     const paths = data.results.map((post: PostProps) => ({
       params: { slug: generateSlug(post.title) },
@@ -284,7 +284,7 @@ export const getStaticProps: GetStaticProps = async context => {
     const limit = '100';
     const category = 'all';
 
-    const data = await PostsService.getAllPosts(page, limit, category);
+    const data = await ServerPostsService.getAllPosts(page, limit, category);
 
     const currentPost = data.results.find((post: PostProps) => {
       return generateSlug(post.title) === slug;

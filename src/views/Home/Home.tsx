@@ -12,7 +12,7 @@ import Pagination from '@/components/Pagination';
 import { GlobalContext } from '@/Context/pagination';
 import MainPage from '@/views/Home/components/MainPage';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { usePosts } from '@/hooks/postService';
+import { usePosts } from '@/presentation/hooks/usePosts';
 import { useRouter } from 'next/router';
 
 type PostProps = {

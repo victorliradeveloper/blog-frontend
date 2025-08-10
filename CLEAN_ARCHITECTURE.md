@@ -6,51 +6,53 @@ Este projeto foi refatorado para seguir os princípios da Clean Architecture, pr
 
 ```
 src/
-├── domain/           # Camada de domínio (regras de negócio)
-│   ├── entities/     # Entidades do domínio
-│   ├── usecases/     # Casos de uso
-│   ├── repositories/ # Interfaces dos repositórios
-│   └── value-objects/ # Objetos de valor
-├── data/             # Camada de dados
-│   ├── repositories/ # Implementações dos repositórios
-│   ├── datasources/  # Fontes de dados (API, local storage, etc.)
-│   └── mappers/      # Mapeadores entre camadas
-├── presentation/     # Camada de apresentação
-│   ├── pages/        # Páginas do Next.js
-│   ├── components/   # Componentes React
-│   ├── hooks/        # Hooks customizados
-│   └── providers/    # Providers de contexto
-└── shared/           # Código compartilhado
-    ├── constants/    # Constantes
-    ├── utils/        # Utilitários
-    ├── types/        # Tipos compartilhados
-    └── di/           # Injeção de dependências
+├── domain/           # Camada de domínio (entidades e contratos)
+│   └── posts/        # Domínio de posts
+│       ├── Post.ts
+│       └── PostRepository.ts
+├── application/      # Camada de aplicação (casos de uso)
+│   └── posts/
+│       └── use-cases/
+│           ├── GetPostsUseCase.ts
+│           └── SearchPostsUseCase.ts
+├── infrastructure/   # Camada de infraestrutura (implementações concretas)
+│   ├── http/
+│   │   ├── HttpClient.ts
+│   │   └── PostHttpRepository.ts
+│   └── memory/
+│       └── PostMemoryRepository.ts
+└── presentation/     # Camada de apresentação (UI React)
+    ├── pages/
+    │   └── PostsPage.tsx
+    ├── components/
+    │   └── Post/
+    └── hooks/
+        └── usePosts.ts
 ```
 
 ## Camadas
 
 ### 1. Domain (Domínio)
-- **Entities**: Entidades do domínio (Post, User, etc.)
+- **Entidades**: Modelos do domínio (Post, User, etc.)
+- **Repositórios**: Interfaces que definem contratos para acesso a dados
+- **Regras de Negócio**: Lógica central da aplicação
+
+### 2. Application (Aplicação)
 - **Use Cases**: Casos de uso que implementam as regras de negócio
-- **Repositories**: Interfaces que definem contratos para acesso a dados
-- **Value Objects**: Objetos imutáveis que representam conceitos do domínio
+- **Orquestração**: Coordenação entre diferentes partes do sistema
+- **Validações**: Validações de entrada e regras de aplicação
 
-### 2. Data (Dados)
-- **Data Sources**: Implementações concretas de acesso a dados (API, banco, etc.)
-- **Repositories**: Implementações das interfaces do domínio
-- **Mappers**: Conversores entre dados externos e entidades do domínio
+### 3. Infrastructure (Infraestrutura)
+- **HTTP**: Implementações de acesso a APIs externas
+- **Memory**: Implementações em memória para testes
+- **Database**: Implementações de acesso a banco de dados
+- **External Services**: Integrações com serviços externos
 
-### 3. Presentation (Apresentação)
+### 4. Presentation (Apresentação)
 - **Pages**: Páginas do Next.js
 - **Components**: Componentes React
 - **Hooks**: Hooks customizados que usam casos de uso
 - **Providers**: Context providers do React
-
-### 4. Shared (Compartilhado)
-- **Constants**: Constantes da aplicação
-- **Utils**: Funções utilitárias
-- **Types**: Tipos TypeScript compartilhados
-- **DI**: Container de injeção de dependências
 
 ## Benefícios da Clean Architecture
 
@@ -60,6 +62,7 @@ src/
 4. **Independência de UI**: A lógica de negócio não depende da interface
 5. **Independência de Banco de Dados**: Fácil trocar a fonte de dados
 6. **Independência de Agentes Externos**: APIs externas não afetam o domínio
+7. **Organização por Domínio**: Código organizado por conceitos de negócio
 
 ## Exemplo de Uso
 
@@ -71,35 +74,59 @@ function MyComponent() {
   const { data, isLoading, error } = usePosts({
     page: '1',
     limit: '10',
-    category: 'tech'
+    category: 'tech',
+    useMock: false // true para usar dados em memória
   });
 
   // ...
 }
 ```
 
-### Caso de Uso Direto
+### Página com Injeção de Dependências
 ```typescript
-import { container } from '@/shared/di/container';
+import { useMemo } from 'react';
+import { HttpClient } from '@/infrastructure/http/HttpClient';
+import { PostHttpRepository } from '@/infrastructure/http/PostHttpRepository';
+import { GetPostsUseCase } from '@/application/posts/use-cases/GetPostsUseCase';
 
-const getPostsUseCase = container.get<GetPostsUseCase>('GetPostsUseCase');
-const posts = await getPostsUseCase.execute('1', '10', 'tech');
+export default function PostsPage() {
+  const repository = useMemo(() => 
+    new PostHttpRepository(new HttpClient(process.env.NEXT_PUBLIC_API_URL)), 
+    []
+  );
+  
+  const getPostsUseCase = useMemo(() => 
+    new GetPostsUseCase(repository), 
+    [repository]
+  );
+
+  // ...
+}
 ```
+
+## Como as Camadas Conversam
+
+- **Presentation** injeta implementações concretas nos use cases
+- **Application** depende apenas dos contratos do domínio
+- **Infrastructure** implementa os contratos com detalhes técnicos
+- **Domain** contém contratos e modelos puros
 
 ## Migração
 
 Para migrar o código existente:
 
-1. **Identifique as entidades**: Quais são os conceitos principais do domínio?
-2. **Defina os casos de uso**: Quais são as ações que o usuário pode fazer?
-3. **Crie as interfaces**: Defina contratos para acesso a dados
+1. **Identifique os domínios**: Quais são os conceitos principais? (posts, users, comments, etc.)
+2. **Defina as entidades**: Quais são os modelos de cada domínio?
+3. **Crie os contratos**: Defina interfaces para acesso a dados
 4. **Implemente os repositórios**: Conecte com as fontes de dados reais
-5. **Atualize os componentes**: Use hooks que encapsulam os casos de uso
+5. **Crie os casos de uso**: Implemente as regras de negócio
+6. **Atualize os componentes**: Use hooks que encapsulam os casos de uso
 
 ## Próximos Passos
 
-1. Migrar outros serviços para a nova estrutura
+1. Migrar outros domínios (users, comments, etc.)
 2. Adicionar testes unitários para cada camada
 3. Implementar cache e otimizações
 4. Adicionar validações no domínio
-5. Implementar tratamento de erros centralizado 
+5. Implementar tratamento de erros centralizado
+6. Adicionar documentação de API 
