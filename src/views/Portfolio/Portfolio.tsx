@@ -167,11 +167,7 @@ const Portfolio = function () {
         <meta property="og:site_name" content="Victor Lira" />
         <link rel="icon" href={FAVICON} />
         <meta property="og:image" content={META_TAG_IMAGE} />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3834333278222212"
-          crossOrigin="anonymous"
-        ></script>
+
       </Head>
       <TechModal
         techName={currentModalTech.name}

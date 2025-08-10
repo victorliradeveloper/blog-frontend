@@ -79,11 +79,7 @@ function Profile() {
         />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href={FAVICON} />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3834333278222212"
-          crossOrigin="anonymous"
-        ></script>
+
       </Head>
 
       {currentUser.email && (

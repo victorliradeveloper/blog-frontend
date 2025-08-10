@@ -39,7 +39,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="pt-BR">
         <Head>
-          <AdSense pId='pub-3834333278222212' />
+          <AdSense />
         </Head>
         <body>
           <Main />

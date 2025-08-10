@@ -72,11 +72,7 @@ export default function Home({ postsData }: { postsData: Data }) {
         <meta property="og:image" content={META_TAG_IMAGE} />
         <meta property="og:url" content="https://www.victorlirablog.com/" />
         <link rel="icon" href={FAVICON} />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3834333278222212"
-          crossOrigin="anonymous"
-        ></script>
+
       </Head>
 
       {!currentUser.email && displayLoginModal && (
