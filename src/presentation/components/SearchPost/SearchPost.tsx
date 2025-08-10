@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import StyledSearchPost from './SearchPost.styled'
 import { SearchPostProps } from './SearchPost.types'
-import { usePosts } from '@/hooks/postService'
+import { usePosts } from '@/presentation/hooks/usePosts'
 import { useSearchContext } from '@/Context/searchContext'
 
 function SearchPost({

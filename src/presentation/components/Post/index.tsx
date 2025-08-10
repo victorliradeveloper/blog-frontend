@@ -1,5 +1,5 @@
 import StyledPost from './Post.styled';
-import { removeSpecialChars } from '../../helper/functions/removeSpecialChars';
+import { removeSpecialChars } from '../../../helper/functions/removeSpecialChars';
 import dateFormatter from '@/helper/functions/dateFormatter';
 import 'aos/dist/aos.css';
 import { motion } from 'framer-motion';

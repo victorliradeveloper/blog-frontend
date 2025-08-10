@@ -1,44 +1,22 @@
 import Head from 'next/head';
-import Post from '@/components/Post';
-import About from '@/components/About';
+import PostComponent from '@/presentation/components/Post';
+import About from '@/presentation/components/About';
 import { useContext, useState, useEffect } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { META_TAG_IMAGE, FAVICON } from '@/constants/images';
-import LoginAlertModal from '@/components/LoginAlertModal';
+import LoginAlertModal from '@/presentation/components/LoginAlertModal';
 import { useCurrentUser } from '@/Context/currentUser';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/presentation/components/Pagination';
 import { GlobalContext } from '@/Context/pagination';
 import MainPage from '@/views/Home/components/MainPage';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { usePosts } from '@/hooks/postService';
+import { usePosts } from '@/presentation/hooks/usePosts';
 import { useRouter } from 'next/router';
+import { Post, PostPagination } from '@/domain/posts/entities/Post';
 
-type PostProps = {
-  id: number;
-  title: string;
-  content: string;
-  date: string;
-  category: string;
-  metaTagTitle: string;
-  metaTagDescription: string;
-  postImage: string;
-  author: string;
-};
-
-type Data = {
-  totalPages: number;
-  next?: {
-    page: number;
-    limit: number;
-  };
-  previous?: {
-    page: number;
-    limit: number;
-  };
-  results?: PostProps[];
-};
+type Data = PostPagination;
 
 export default function Home({ postsData }: { postsData: Data }) {
   const { setPage } = useContext(GlobalContext);
@@ -121,7 +99,7 @@ export default function Home({ postsData }: { postsData: Data }) {
 
       <MainPage className="main-page">
         <div className="container">
-          {postsToDisplay.results?.map((post: PostProps, index: number) => {
+          {postsToDisplay.results?.map((post: Post, index: number) => {
             const costumizeFirstPost = index === 0;
             const styled = {
               width: 'calc(66.66667% - 40px)',
@@ -129,7 +107,7 @@ export default function Home({ postsData }: { postsData: Data }) {
             };
 
             return (
-              <Post
+              <PostComponent
                 onDisplayLoginAlert={displayLoginAlert}
                 style={costumizeFirstPost ? styled : {}}
                 id={post.id}
@@ -140,8 +118,10 @@ export default function Home({ postsData }: { postsData: Data }) {
                 metaTagTitle={post.metaTagTitle}
                 metaTagDescription={post.metaTagDescription}
                 postImage={post.postImage}
+                postBackground={post.postBackground}
                 date={post.date}
                 category={post.category}
+                keywords={post.keywords}
                 aos_delay="100"
                 aos_type="fade-up"
                 hover_animation={-7}

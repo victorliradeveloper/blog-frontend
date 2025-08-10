@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import 'aos/dist/aos.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
-import Post from '@/components/Post';
+import Post from '@/presentation/components/Post';
 import Image from 'next/image';
 import StyledProfile from './Profile.styled';
 import { PostsProps } from './types';
@@ -12,13 +12,19 @@ import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
 import { useRouter } from 'next/router';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { PostsService } from '@/services/PostsService';
+import { usePosts } from '@/presentation/hooks/usePosts';
 
 function Profile() {
   const { favoritPosts } = useAddToFavoritsContext();
-  const [currentPostArray, setCurrentPostArray] = useState<PostsProps[]>();
   const { currentUser, callSetCurrentUser } = useCurrentUser();
   const router = useRouter();
+
+  const { data: postsData } = usePosts({
+    page: '1',
+    limit: '9999',
+    category: 'all',
+    enabled: !!currentUser.email
+  });
 
   const redirect = async () => {
     try {
@@ -52,27 +58,12 @@ function Profile() {
     if (!currentUser.email) {
       router.push('/');
     }
+  }, [currentUser.email, router]);
 
-    const fetchDataAndUpdateState = async () => {
-      try {
-        const page = '1';
-        const limit = '9999';
-        const category = 'all';
-
-        const data = await PostsService.getAllPosts(page, limit, category);
-        const results = data.results;
-        const intersection = filterFavoritPosts(results);
-
-        if (intersection) {
-          setCurrentPostArray(intersection);
-        }
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-      }
-    };
-
-    fetchDataAndUpdateState();
-  }, [favoritPosts, currentUser, router, filterFavoritPosts]);
+  const currentPostArray = useMemo(() => {
+    if (!postsData?.results) return undefined;
+    return filterFavoritPosts(postsData.results);
+  }, [postsData?.results, filterFavoritPosts]);
 
   return (
     <div>
@@ -126,8 +117,10 @@ function Profile() {
                     metaTagTitle={post.metaTagTitle}
                     metaTagDescription={post.metaTagDescription}
                     postImage={post.postImage}
+                    postBackground={post.postBackground}
                     date={post.date}
                     category={post.category}
+                    keywords={post.keywords}
                     aos_delay="100"
                     aos_type="fade-up"
                     hover_animation={-7}

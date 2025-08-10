@@ -1,5 +1,5 @@
 import StyledPagination from './Pagination.styled';
-import { GlobalContext } from '../../Context/pagination';
+import { GlobalContext } from '@/Context/pagination';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import React from 'react';

@@ -1,5 +1,5 @@
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
+import Footer from '@/presentation/components/Footer';
+import Header from '@/presentation/components/Header';
 import { LayoutProps } from './Layout.types';
 import { useScrollContext } from '@/Context/scrollProvider';
 import { useState } from 'react';
