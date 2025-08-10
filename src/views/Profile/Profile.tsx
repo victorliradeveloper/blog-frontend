@@ -4,15 +4,15 @@ import 'aos/dist/aos.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
-import Post from '@/presentation/components/Post';
+import PostComponent from '@/presentation/components/Post';
 import Image from 'next/image';
 import StyledProfile from './Profile.styled';
-import { PostsProps } from './types';
 import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
 import { useRouter } from 'next/router';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
 import { usePosts } from '@/presentation/hooks/usePosts';
+import { Post } from '@/domain/posts/entities/Post';
 
 function Profile() {
   const { favoritPosts } = useAddToFavoritsContext();
@@ -45,8 +45,8 @@ function Profile() {
   };
 
   const filterFavoritPosts = useCallback(
-    (results: PostsProps[]) => {
-      const intersection = results.filter((variant1: PostsProps) =>
+    (results: Post[]) => {
+      const intersection = results.filter((variant1: Post) =>
         favoritPosts.some(variant2 => variant2.post === variant1.id),
       );
       return intersection;
@@ -107,7 +107,7 @@ function Profile() {
             {currentPostArray ? (
               currentPostArray.map(post => {
                 return (
-                  <Post
+                  <PostComponent
                     style={{}}
                     id={post.id}
                     key={post.id}
