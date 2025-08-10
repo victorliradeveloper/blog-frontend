@@ -13,7 +13,10 @@ export interface PostsResponse {
 
 export class ServerPostsService {
   private static getRepository() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://blog-backend-production-88d3.up.railway.app';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) {
+      throw new Error('NEXT_PUBLIC_API_URL não configurado');
+    }
     const httpClient = new HttpClient(apiUrl);
     return new PostHttpRepository(httpClient);
   }

@@ -22,7 +22,10 @@ export function usePosts({
   return useQuery({
     queryKey: ['posts', query, page, limit, category],
     queryFn: async () => {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://blog-backend-production-88d3.up.railway.app';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!apiUrl) {
+        throw new Error('NEXT_PUBLIC_API_URL não configurado');
+      }
       const repository = new PostHttpRepository(new HttpClient(apiUrl));
 
       if (query) {

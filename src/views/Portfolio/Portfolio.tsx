@@ -93,7 +93,7 @@ const Portfolio = function () {
     message: string;
   }) => {
 
-    const data = await Axios.post(`${process.env.NEXT_PUBLIC_DEV_API_URL}api/sendEmail`, formData)
+    const data = await Axios.post(`${process.env.NEXT_PUBLIC_API_URL}api/sendEmail`, formData)
       .then(res => res.data)
       .catch(() => null);
     return data;

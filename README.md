@@ -127,11 +127,6 @@ yarn install
 cp .env.example .env.local
 ```
 
-Edite o arquivo `.env.local`:
-```env
-NEXT_PUBLIC_API_URL=https://blog-backend-production-88d3.up.railway.app/
-NEXT_PUBLIC_GOOGLE_CLIENT_ID=seu_google_client_id
-```
 
 4. **Execute o projeto**
 ```bash
