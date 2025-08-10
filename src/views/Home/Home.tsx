@@ -129,7 +129,7 @@ export default function Home({ postsData }: { postsData: Data }) {
             };
 
             return (
-              <Post
+              <Post 
                 onDisplayLoginAlert={displayLoginAlert}
                 style={costumizeFirstPost ? styled : {}}
                 id={post.id}
