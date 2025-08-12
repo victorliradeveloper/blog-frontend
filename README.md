@@ -205,23 +205,3 @@ blog-frontend/
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-## 👨‍💻 Autor
-
-**Victor Lira**
-- GitHub: [@victorlirafront](https://github.com/victorlirafront)
-- LinkedIn: [Victor Lira](https://www.linkedin.com/in/victor-lira-front-end/)
-- Blog: [victorlirablog.com](https://www.victorlirablog.com/)
-
-## 🙏 Agradecimentos
-
-- [Next.js](https://nextjs.org/) - Framework React
-- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - Uncle Bob
-- [React Query](https://tanstack.com/query) - Gerenciamento de estado
-- [Framer Motion](https://www.framer.com/motion/) - Animações
-
----
-
-<div align="center">
-  <p>Feito com ❤️ por Victor Lira</p>
-</div>
-
