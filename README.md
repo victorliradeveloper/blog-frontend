@@ -1,8 +1,7 @@
 
 <div align="center">
   <img src="https://ik.imagekit.io/Victorliradev/github/react_64hQyXkw9.png?updatedAt=1752626856336" width="120" alt="React Logo" />
-  <h3>Blog Pessoal com Clean Architecture</h3>
-  <p>Um blog moderno desenvolvido com React, Next.js, TypeScript e Clean Architecture</p>
+  <h3>Blog desenvolvido seguindo os princípios da Clean Architecture</h3>
 </div>
 
 
