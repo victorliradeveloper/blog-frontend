@@ -1,4 +1,3 @@
-# 🚀 Blog Frontend - Victor Lira
 
 <div align="center">
   <img src="https://ik.imagekit.io/Victorliradev/github/react_64hQyXkw9.png?updatedAt=1752626856336" width="120" alt="React Logo" />
