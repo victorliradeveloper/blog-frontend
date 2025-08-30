@@ -6,7 +6,7 @@ export const getServerSideProps: GetServerSideProps<{ postsData: PostsResponse }
 ) => {
   try {
     const page = String(context.query?.page ?? '1');
-    const category = String(context.query?.category ?? 'all');
+    const category = context.query?.category ? String(context.query.category) : 'all';
     const limit = '8';
 
     let data: PostsResponse;

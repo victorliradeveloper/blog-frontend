@@ -37,8 +37,21 @@ export class PostHttpRepository implements PostRepository {
     const pageParam = Array.isArray(page) ? page[0] : page;
     const categoryParam = Array.isArray(category) ? category[0] : category;
 
-    const response = await this.http.get<BlogResponse>('/api/get', {
-      params: { page: pageParam, limit, category: categoryParam },
+    let endpoint: string;
+    let params: Record<string, string>;
+
+    if (categoryParam === 'all') {
+      // Para "all", usa o endpoint geral
+      endpoint = '/api/get';
+      params = { page: pageParam, limit };
+    } else {
+      // Para categorias específicas, usa o endpoint de categoria
+      endpoint = `/api/get/category/${categoryParam}`;
+      params = { page: pageParam, limit };
+    }
+
+    const response = await this.http.get<BlogResponse>(endpoint, {
+      params,
     });
     return this.mapResponse(response);
   }

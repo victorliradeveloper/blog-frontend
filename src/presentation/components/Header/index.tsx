@@ -122,21 +122,21 @@ const Header = function (props: IHeaderProps) {
                     className={`web-option ${currentTab === 'web' ? 'active' : ''}`}
                     onClick={() => categoryOptionHandler('1', 'web')}
                   >
-                    Web
+                    Front-end
                   </li>
 
                   <li
                     className={`mobile-option ${currentTab === 'mobile' ? 'active' : ''}`}
                     onClick={() => categoryOptionHandler('1', 'mobile')}
                   >
-                    Mobile
+                    Back-end
                   </li>
                   <li
                     className={`others-option ${currentTab === 'outros' ? 'active' : ''}`}
                     onClick={() => categoryOptionHandler('1', 'outros')}
                     data-id="outros-link"
                   >
-                    Outros
+                    Arquitetura
                   </li>
                   <li className={`anchor ${currentTab === 'portfolio' ? 'active' : ''}`}>
                     <Link
