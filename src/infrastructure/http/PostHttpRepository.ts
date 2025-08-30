@@ -27,7 +27,7 @@ export class PostHttpRepository implements PostRepository {
   constructor(private readonly http: HttpClient) {}
 
   async searchPosts(query: string, page: string | string[], limit: string): Promise<PostPagination> {
-    const response = await this.http.get<BlogResponse>('/api/search', {
+    const response = await this.http.get<BlogResponse>('/api/get/search', {
       params: { query, page, limit },
     });
     return this.mapResponse(response);
