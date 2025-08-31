@@ -12,10 +12,7 @@
     "test:staged": "jest --passWithNoTests --bail --detectOpenHandles --findRelatedTests --onlyChanged --coverage",
     "cypress:open": "cypress open",
     "test": "jest --watch",
-    "test:ci": "jest --ci",
-    "prepare": "husky",
-    "commit": "git-cz",
-    "commit:check": "commitlint --from HEAD~1 --to HEAD --verbose"
+    "test:ci": "jest --ci"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
@@ -102,10 +99,6 @@
       }
     ]
   ],
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
+
   "license": "MIT"
 }
