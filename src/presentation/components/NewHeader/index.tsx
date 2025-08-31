@@ -7,14 +7,12 @@ import { motion, LayoutGroup } from 'framer-motion'
 export default function Navbar() {
   const router = useRouter()
   const pages = [
-    'About',
-    'Articles',
-    'Projects',
-    'Talks',
-    'Podcasts',
-    'Investing',
-    'Uses',
-    'Reminder',
+    'home',
+    'frontend',
+    'backend',
+    'avançado',
+    'portfolio',
+    ,
   ]
   const [hovered, setHovered] = useState('')
 
@@ -106,19 +104,6 @@ const ButtonHeader = styled.div`
   }
 `
 
-const Icon = styled.i`
-  font-size: 24px;
-  line-height: 32px;
-`
-
-const ButtonLogo = styled(ButtonHeader)`
-  font-weight: 700;
-  font-size: 32px;
-  text-decoration: none;
-  margin-left: 12px;
-  font-family: 'Inter', sans-serif;
-`
-
 const Nav = styled.nav`
   text-align: center;
   flex: 1;
@@ -129,13 +114,6 @@ const Nav = styled.nav`
     order: 0;
     flex-basis: initial;
   }
-`
-
-const Aside = styled.div`
-  display: flex;
-  align-items: center;
-  padding-right: 12px;
-  margin-left: auto;
 `
 
 const Anchor = styled.a`
@@ -183,7 +161,7 @@ const NavContainer = styled(motion.span)<{ $isActive: boolean }>`
 
 const NavHovered = styled(motion.span)`
   position: absolute;
-  top: 0px;
+  top: 8px;
   left: 0;
   right: 0;
   background: rgba(255, 255, 255, 0.1);
