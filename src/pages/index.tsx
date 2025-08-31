@@ -10,6 +10,7 @@ export const getServerSideProps: GetServerSideProps<{ postsData: PostsResponse }
     const limit = '8';
 
     let data: PostsResponse;
+    console.log("testing")
 
     if (context.query.query) {
       data = await ServerPostsService.searchPosts(String(context.query.query), page, limit);
