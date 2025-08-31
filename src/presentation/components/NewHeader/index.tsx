@@ -21,10 +21,6 @@ export default function Navbar() {
   return (
     <LayoutGroup>
       <Header>
-        <Link href="/" passHref legacyBehavior>
-          <ButtonLogo as="a">z</ButtonLogo>
-        </Link>
-
         <Nav>
           <List>
             {pages.map(page => {
@@ -57,16 +53,6 @@ export default function Navbar() {
             })}
           </List>
         </Nav>
-
-        <Aside>
-          <ButtonHeader
-            as="button"
-            type="button"
-            aria-label="Command"
-          >
-            <Icon>⌘</Icon>
-          </ButtonHeader>
-        </Aside>
       </Header>
     </LayoutGroup>
   )
