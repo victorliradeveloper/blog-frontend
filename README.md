@@ -1,6 +1,9 @@
+<br/>
+<br/>
+<br/>
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=typescript,react,next,mysql,docker&theme=dark" alt="Java, Spring, Kotlin, GO, Postgres, MySql, MongoDB, Redis, NodeJs, Express, React, NextJs, TailwindCSS">
+  <img width="400" src="https://skillicons.dev/icons?i=typescript,react,next,mysql,docker&theme=dark" alt="Java, Spring, Kotlin, GO, Postgres, MySql, MongoDB, Redis, NodeJs, Express, React, NextJs, TailwindCSS">
 </p>
 
 ## 🎯 Sobre o Projeto
@@ -200,4 +203,5 @@ blog-frontend/
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
 
