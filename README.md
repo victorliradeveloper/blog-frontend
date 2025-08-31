@@ -1,8 +1,7 @@
 
-<div align="center">
-  <img src="https://ik.imagekit.io/Victorliradev/github/react_64hQyXkw9.png?updatedAt=1752626856336" width="120" alt="React Logo" />
-  <h3>Blog desenvolvido seguindo os princípios da Clean Architecture</h3>
-</div>
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=typescript,react,next,mysql,docker&theme=dark" alt="Java, Spring, Kotlin, GO, Postgres, MySql, MongoDB, Redis, NodeJs, Express, React, NextJs, TailwindCSS">
+</p>
 
 ## 🎯 Sobre o Projeto
 
@@ -201,3 +200,4 @@ blog-frontend/
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
