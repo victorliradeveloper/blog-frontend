@@ -4,35 +4,58 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { motion, LayoutGroup } from 'framer-motion'
 
+// Types
+interface NavItem {
+  label: string
+  path: string
+  category?: string
+}
+
+// Constants
+const NAV_ITEMS: NavItem[] = [
+  { label: 'home', path: '/', category: '' },
+  { label: 'frontend', path: '/', category: 'frontend' },
+  { label: 'backend', path: '/', category: 'backend' },
+  { label: 'avançado', path: '/', category: 'avancado' },
+  { label: 'portfolio', path: '/', category: 'portfolio' },
+]
+
+// Utils
+const buildNavPath = (item: NavItem): string => {
+  if (item.label === 'portfolio') {
+    return '/portfolio'
+  }
+  if (item.category) {
+    return `${item.path}?page=1&category=${item.category}`
+  }
+  return item.path
+}
+
 export default function Navbar() {
   const router = useRouter()
-  const pages = [
-    'home',
-    'frontend',
-    'backend',
-    'avançado',
-    'portfolio',
-    ,
-  ]
-  const [hovered, setHovered] = useState('')
+  const [hovered, setHovered] = useState<string>('')
+
+  const handleHoverStart = (label: string) => setHovered(label)
+  const handleHoverEnd = () => setHovered('')
 
   return (
     <LayoutGroup>
       <Header>
         <Nav>
           <List>
-            {pages.map(page => {
-              const path = `/${page.toLowerCase()}`
-              const isHovered = hovered === page
+            {NAV_ITEMS.map(item => {
+              const path = buildNavPath(item)
+              const isHovered = hovered === item.label
+              const isActive = router.pathname === path
 
               return (
-                <li key={page}>
+                <li key={item.label}>
                   <Link href={path} passHref legacyBehavior>
                     <Anchor>
                       <NavContainer
-                        onHoverStart={() => setHovered(page)}
-                        onHoverEnd={() => setHovered('')}
-                        $isActive={router.pathname === path}
+                        onHoverStart={() => handleHoverStart(item.label)}
+                        onHoverEnd={handleHoverEnd}
+                        $isActive={isActive}
                       >
                         {isHovered && (
                           <NavHovered
@@ -42,7 +65,7 @@ export default function Navbar() {
                             exit={{ opacity: 0 }}
                           />
                         )}
-                        {page}
+                        {item.label}
                       </NavContainer>
                     </Anchor>
                   </Link>
@@ -88,21 +111,7 @@ const List = styled.ul`
   }
 `
 
-const ButtonHeader = styled.div`
-  appearance: none;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  height: 34px;
-  padding: 0 10px;
-  transition: background 0.2s ease-in-out;
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-`
+
 
 const Nav = styled.nav`
   text-align: center;
