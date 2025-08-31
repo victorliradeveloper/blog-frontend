@@ -4,6 +4,7 @@ import { LayoutProps } from './Layout.types';
 import { useScrollContext } from '@/Context/scrollProvider';
 import { useState } from 'react';
 import SearchPost from '../SearchPost/SearchPost';
+import NewHeader from '../NewHeader';
 
 const Layout = ({ children }: LayoutProps) => {
 
@@ -43,6 +44,7 @@ const Layout = ({ children }: LayoutProps) => {
         openMobileMenu={openMobileMenu}
         setOpenMobileMenu={handleMobileMenu}
       />
+      <NewHeader />
       <SearchPost
         displaySearch={openSearchModal}
         onCloseSearch={closeSearch}
