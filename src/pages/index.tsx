@@ -11,6 +11,7 @@ export const getServerSideProps: GetServerSideProps<{ postsData: PostsResponse }
 
     let data: PostsResponse;
     console.log("testing");
+    console.log("testing");
 
     if (context.query.query) {
       data = await ServerPostsService.searchPosts(String(context.query.query), page, limit);
