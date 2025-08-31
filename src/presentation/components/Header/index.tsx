@@ -136,8 +136,9 @@ const Header = function (props: IHeaderProps) {
                     onClick={() => categoryOptionHandler('1', 'outros')}
                     data-id="outros-link"
                   >
-                    Arquitetura
+                    Avançado
                   </li>
+
                   <li className={`anchor ${currentTab === 'portfolio' ? 'active' : ''}`}>
                     <Link
                       href="/portfolio"
