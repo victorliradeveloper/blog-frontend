@@ -9,6 +9,7 @@ const StyledPost = styled.div`
   position: relative;
   overflow: hidden;
   padding-top: 10px;
+  border-radius: 10px;
 
   @media screen and (max-width: 640px) {
     min-width: 300px;
