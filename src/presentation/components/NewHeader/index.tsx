@@ -60,9 +60,9 @@ export default function Navbar() {
                         {isHovered && (
                           <NavHovered
                             layoutId="nav"
-                            initial={{ opacity: 0 }}
+                            initial={{ opacity: 1 }}
                             animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
+                            exit={{ opacity: 1 }}
                           />
                         )}
                         {item.label}
@@ -131,9 +131,7 @@ const Anchor = styled.a`
   text-decoration: none;
   color: inherit;
   
-  &:hover, &:focus {
-    opacity: 1;
-  }
+
 `
 
 const NavContainer = styled(motion.span)<{ $isActive: boolean }>`
@@ -146,7 +144,6 @@ const NavContainer = styled(motion.span)<{ $isActive: boolean }>`
   padding: 20px;
   text-decoration: none;
   text-transform: uppercase;
-  transition: color 0.2s ease-in-out;
   position: relative;
   
   &:hover {
@@ -157,14 +154,13 @@ const NavContainer = styled(motion.span)<{ $isActive: boolean }>`
     content: "";
     position: absolute;
     margin: 0px auto;
-    top: 18px;
+    top: 44px;
     left: 0px;
     right: 0px;
     height: 1px;
     width: 20px;
     background: rgb(255, 255, 255);
     opacity: ${props => props.$isActive ? 1 : 0};
-    transition: opacity 0.2s ease-in-out;
   }
 `
 
@@ -177,6 +173,5 @@ const NavHovered = styled(motion.span)`
   padding: 20px;
   border-radius: 8px;
   z-index: -1;
-  transition: 0.1s ease-out;
   overflow-y: hidden !important;
 `
