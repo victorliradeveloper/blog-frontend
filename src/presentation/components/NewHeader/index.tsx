@@ -46,7 +46,16 @@ export default function Navbar() {
             {NAV_ITEMS.map(item => {
               const path = buildNavPath(item)
               const isHovered = hovered === item.label
-              const isActive = router.pathname === path
+              
+              // Verifica se o item está ativo baseado no pathname e query params
+              let isActive = false
+              if (item.label === 'portfolio') {
+                isActive = router.pathname === '/portfolio'
+              } else if (item.label === 'home') {
+                isActive = router.pathname === '/' && !router.query.category
+              } else if (item.category) {
+                isActive = router.pathname === '/' && router.query.category === item.category
+              }
 
               return (
                 <li key={item.label}>
