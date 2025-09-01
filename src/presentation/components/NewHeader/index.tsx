@@ -174,98 +174,98 @@ export default function Navbar(props: NewHeaderProps) {
           </HamburgerMenu>
         </Container>
 
-        <MobileMenu className={props.openMobileMenu ? 'active' : ''}>
-          <CloseButton onClick={hideMobileMenu}>
-            <Image
-              width={20}
-              height={20}
-              src={CLOSE_MENU_ICON}
-              alt="close menu"
-            />
-          </CloseButton>
+                  <MobileMenu className={props.openMobileMenu ? 'active' : ''}>
+            <CloseButton onClick={hideMobileMenu}>
+              <Image
+                width={20}
+                height={20}
+                src={CLOSE_MENU_ICON}
+                alt="close menu"
+              />
+            </CloseButton>
 
-          <MobileMenuContent>
-            <List>
-              {NAV_ITEMS.map(item => {
-                const path = buildNavPath(item)
+            <MobileMenuContent>
+              <List>
+                {NAV_ITEMS.map(item => {
+                  const path = buildNavPath(item)
+                  
+                  // Verifica se o item está ativo baseado no pathname e query params
+                  let isActive = false
+                  if (item.label === 'portfolio') {
+                    isActive = router.pathname === '/portfolio'
+                  } else if (item.label === 'home') {
+                    isActive = router.pathname === '/' && !router.query.category
+                  } else if (item.category) {
+                    isActive = router.pathname === '/' && router.query.category === item.category
+                  }
+
+                  return (
+                    <li key={item.label}>
+                      <Link href={path} passHref legacyBehavior>
+                        <Anchor onClick={hideMobileMenu}>
+                          <NavContainer $isActive={isActive}>
+                            {item.label}
+                          </NavContainer>
+                        </Anchor>
+                      </Link>
+                    </li>
+                  )
+                })}
+              </List>
+
+              <MobileSearchAndLogin>
+                <SearchIcon onClick={() => {
+                  props.onOpenSearchModal?.()
+                  hideMobileMenu()
+                }}>
+                  <Image src="/search-icon.png" width={20} height={20} alt="search" />
+                </SearchIcon>
                 
-                // Verifica se o item está ativo baseado no pathname e query params
-                let isActive = false
-                if (item.label === 'portfolio') {
-                  isActive = router.pathname === '/portfolio'
-                } else if (item.label === 'home') {
-                  isActive = router.pathname === '/' && !router.query.category
-                } else if (item.category) {
-                  isActive = router.pathname === '/' && router.query.category === item.category
-                }
+                <GoogleWrapper>
+                  {!currentUser.name ? (
+                    <GoogleLogin
+                      onError={() => console.log('Login failed')}
+                      theme="filled_black"
+                      size="medium"
+                      shape="pill"
+                      type="standard"
+                      width="50"
+                      text="signin"
+                      onSuccess={credentialResponse => {
+                        try {
+                          if (credentialResponse?.credential) {
+                            const user = jwtDecode<{
+                              picture: string;
+                              name: string;
+                              email: string;
+                            }>(credentialResponse.credential);
 
-                return (
-                  <li key={item.label}>
-                    <Link href={path} passHref legacyBehavior>
-                      <Anchor onClick={hideMobileMenu}>
-                        <NavContainer $isActive={isActive}>
-                          {item.label}
-                        </NavContainer>
-                      </Anchor>
-                    </Link>
-                  </li>
-                )
-              })}
-            </List>
+                            const { picture, name, email } = user;
 
-            <SearchAndLogin>
-              <SearchIcon onClick={() => {
-                props.onOpenSearchModal?.()
-                hideMobileMenu()
-              }}>
-                <Image src="/search-icon.png" width={20} height={20} alt="search" />
-              </SearchIcon>
-              
-              <GoogleWrapper>
-                {!currentUser.name ? (
-                  <GoogleLogin
-                    onError={() => console.log('Login failed')}
-                    theme="filled_black"
-                    size="medium"
-                    shape="pill"
-                    type="standard"
-                    width="50"
-                    text="signin"
-                    onSuccess={credentialResponse => {
-                      try {
-                        if (credentialResponse?.credential) {
-                          const user = jwtDecode<{
-                            picture: string;
-                            name: string;
-                            email: string;
-                          }>(credentialResponse.credential);
+                            callSetCurrentUser({
+                              name,
+                              picture,
+                              email,
+                            });
 
-                          const { picture, name, email } = user;
-
-                          callSetCurrentUser({
-                            name,
-                            picture,
-                            email,
-                          });
-
-                          router.push('/profile');
-                        } else {
-                          console.log('No credential received');
+                            router.push('/profile');
+                          } else {
+                            console.log('No credential received');
+                          }
+                        } catch (error) {
+                          console.error('Error decoding JWT or handling Google login:', error);
                         }
-                      } catch (error) {
-                        console.error('Error decoding JWT or handling Google login:', error);
-                      }
-                    }}
-                  />
-                ) : (
-                  <ProfileLink href="/profile">
-                    Perfil
-                  </ProfileLink>
-                )}
-              </GoogleWrapper>
-            </SearchAndLogin>
-          </MobileMenuContent>
-        </MobileMenu>
+                      }}
+                    />
+                  ) : (
+                    <ProfileLink href="/profile">
+                      Perfil
+                    </ProfileLink>
+                  )}
+                </GoogleWrapper>
+              </MobileSearchAndLogin>
+            </MobileMenuContent>
+          </MobileMenu>
       </Header>
     </LayoutGroup>
   )
@@ -394,9 +394,7 @@ const SearchAndLogin = styled.div`
   gap: 20px;
 
   @media screen and (max-width: 700px) {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+    display: none;
   }
 `
 
@@ -486,5 +484,12 @@ const MobileMenuContent = styled.div`
   align-items: center;
   height: 100vh;
   padding: 20px;
+`
+
+const MobileSearchAndLogin = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 `
 
