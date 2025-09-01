@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { GoogleLogin } from '@react-oauth/google'
 import { jwtDecode } from 'jwt-decode'
 import { useCurrentUser } from '@/Context/currentUser'
-import { CODE_ICON } from '@/constants/images'
+import { CODE_ICON, CLOSE_MENU_ICON, MENU_HAMBURGUER } from '@/constants/images'
 
 // Types
 interface NavItem {
@@ -19,6 +19,8 @@ interface NavItem {
 interface NewHeaderProps {
   onOpenSearchModal?: () => void
   onResetSearch?: () => void
+  openMobileMenu?: boolean
+  setOpenMobileMenu?: (open: boolean) => void
 }
 
 // Constants
@@ -48,6 +50,14 @@ export default function Navbar(props: NewHeaderProps) {
 
   const handleHoverStart = (label: string) => setHovered(label)
   const handleHoverEnd = () => setHovered('')
+
+  const showMobileMenu = () => {
+    props.setOpenMobileMenu?.(true)
+  }
+
+  const hideMobileMenu = () => {
+    props.setOpenMobileMenu?.(false)
+  }
 
   return (
     <LayoutGroup>
@@ -153,7 +163,109 @@ export default function Navbar(props: NewHeaderProps) {
               )}
             </GoogleWrapper>
           </SearchAndLogin>
+
+          <HamburgerMenu onClick={showMobileMenu}>
+            <Image
+              width={30}
+              height={20}
+              src={MENU_HAMBURGUER}
+              alt="menu"
+            />
+          </HamburgerMenu>
         </Container>
+
+        <MobileMenu className={props.openMobileMenu ? 'active' : ''}>
+          <CloseButton onClick={hideMobileMenu}>
+            <Image
+              width={20}
+              height={20}
+              src={CLOSE_MENU_ICON}
+              alt="close menu"
+            />
+          </CloseButton>
+
+          <MobileMenuContent>
+            <List>
+              {NAV_ITEMS.map(item => {
+                const path = buildNavPath(item)
+                
+                // Verifica se o item está ativo baseado no pathname e query params
+                let isActive = false
+                if (item.label === 'portfolio') {
+                  isActive = router.pathname === '/portfolio'
+                } else if (item.label === 'home') {
+                  isActive = router.pathname === '/' && !router.query.category
+                } else if (item.category) {
+                  isActive = router.pathname === '/' && router.query.category === item.category
+                }
+
+                return (
+                  <li key={item.label}>
+                    <Link href={path} passHref legacyBehavior>
+                      <Anchor onClick={hideMobileMenu}>
+                        <NavContainer $isActive={isActive}>
+                          {item.label}
+                        </NavContainer>
+                      </Anchor>
+                    </Link>
+                  </li>
+                )
+              })}
+            </List>
+
+            <SearchAndLogin>
+              <SearchIcon onClick={() => {
+                props.onOpenSearchModal?.()
+                hideMobileMenu()
+              }}>
+                <Image src="/search-icon.png" width={20} height={20} alt="search" />
+              </SearchIcon>
+              
+              <GoogleWrapper>
+                {!currentUser.name ? (
+                  <GoogleLogin
+                    onError={() => console.log('Login failed')}
+                    theme="filled_black"
+                    size="medium"
+                    shape="pill"
+                    type="standard"
+                    width="50"
+                    text="signin"
+                    onSuccess={credentialResponse => {
+                      try {
+                        if (credentialResponse?.credential) {
+                          const user = jwtDecode<{
+                            picture: string;
+                            name: string;
+                            email: string;
+                          }>(credentialResponse.credential);
+
+                          const { picture, name, email } = user;
+
+                          callSetCurrentUser({
+                            name,
+                            picture,
+                            email,
+                          });
+
+                          router.push('/profile');
+                        } else {
+                          console.log('No credential received');
+                        }
+                      } catch (error) {
+                        console.error('Error decoding JWT or handling Google login:', error);
+                      }
+                    }}
+                  />
+                ) : (
+                  <ProfileLink href="/profile">
+                    Perfil
+                  </ProfileLink>
+                )}
+              </GoogleWrapper>
+            </SearchAndLogin>
+          </MobileMenuContent>
+        </MobileMenu>
       </Header>
     </LayoutGroup>
   )
@@ -201,9 +313,14 @@ const List = styled.ul`
   top: 5px;
   overflow: hidden;
   
-  
   @media (min-width: 640px) {
     justify-content: space-around;
+  }
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
   }
 `
 
@@ -212,12 +329,11 @@ const List = styled.ul`
 const Nav = styled.nav`
   text-align: center;
   flex: 1;
-  order: 2;
-  flex-basis: 100%;
-  
-  @media (min-width: 768px) {
-    order: 0;
-    flex-basis: initial;
+  display: flex;
+  justify-content: center;
+
+  @media screen and (max-width: 700px) {
+    display: none;
   }
 `
 
@@ -276,6 +392,12 @@ const SearchAndLogin = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
 `
 
 const SearchIcon = styled.div`
@@ -313,3 +435,56 @@ const ProfileLink = styled(Link)`
     background-color: rgba(255, 255, 255, 0.4);
   }
 `
+
+const HamburgerMenu = styled.div`
+  display: none;
+
+  @media screen and (max-width: 700px) {
+    display: block;
+    cursor: pointer;
+  }
+`
+
+const MobileMenu = styled.div`
+  display: none;
+
+  @media screen and (max-width: 700px) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+`
+
+const CloseButton = styled.div`
+  display: none;
+
+  @media screen and (max-width: 700px) {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+`
+
+const MobileMenuContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+`
+

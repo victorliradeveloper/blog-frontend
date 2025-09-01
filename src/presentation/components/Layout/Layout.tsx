@@ -8,7 +8,7 @@ import NewHeader from '../NewHeader';
 
 const Layout = ({ children }: LayoutProps) => {
 
-  const { scrollIntoViewHandler, containerRef } = useScrollContext();
+  const { containerRef } = useScrollContext();
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
     const [openSearchModal, setOpenSearchModal] = useState(false);
 
@@ -21,9 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   };
 
-  const handleMobileMenu = (toggle: boolean) => {
-    setOpenMobileMenu(toggle);
-  };
+
 
   const closeSearch = function () {
     setOpenSearchModal(false);
@@ -47,6 +45,8 @@ const Layout = ({ children }: LayoutProps) => {
       <NewHeader 
         onOpenSearchModal={onOpenSearchModal}
         onResetSearch={resetSearch}
+        openMobileMenu={openMobileMenu}
+        setOpenMobileMenu={setOpenMobileMenu}
       />
       <SearchPost
         displaySearch={openSearchModal}
