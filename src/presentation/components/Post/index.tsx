@@ -11,11 +11,21 @@ import { IProps } from './types';
 import { PAGINATION_ARROW } from '@/constants/images';
 import { generateSlug } from '@/helper/functions/generateSlug';
 
+
 const Post: React.FC<IProps> = props => {
   const { addToFavoritsHandler } = useAddToFavoritsContext();
 
   const formattedDate = dateFormatter(props.date);
   const router = useRouter();
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
 
   const handleLinkClick = async (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -36,13 +46,14 @@ const Post: React.FC<IProps> = props => {
   };
 
   return (
-    <StyledPost
-      data-aos-delay={props.aos_delay}
-      data-aos={props.aos_type}
-      style={props.style}
-      onClick={handleLinkClick}
-      data-id={props.id}
-    >
+          <StyledPost
+        data-aos-delay={props.aos_delay}
+        data-aos={props.aos_type}
+        style={props.style}
+        onClick={handleLinkClick}
+        onMouseMove={handleMouseMove}
+        data-id={props.id}
+      >
       <motion.div whileHover={{ y: props.hover_animation }} className="motion-box">
         <div className="post-image-wrapper">
           <div className="add-to-favorits__wrapper favorits--trigger">
