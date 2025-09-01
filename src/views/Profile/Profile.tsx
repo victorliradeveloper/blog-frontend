@@ -23,7 +23,7 @@ function Profile() {
     page: '1',
     limit: '9999',
     category: 'all',
-    enabled: !!currentUser.email
+    enabled: !!currentUser.email,
   });
 
   const redirect = async () => {
@@ -79,7 +79,6 @@ function Profile() {
         />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href={FAVICON} />
-
       </Head>
 
       {currentUser.email && (
@@ -136,5 +135,4 @@ function Profile() {
   );
 }
 
-
-export default Profile
+export default Profile;

@@ -12,13 +12,7 @@ interface UsePostsParams {
   enabled?: boolean;
 }
 
-export function usePosts({ 
-  query, 
-  page, 
-  limit, 
-  category, 
-  enabled = true 
-}: UsePostsParams) {
+export function usePosts({ query, page, limit, category, enabled = true }: UsePostsParams) {
   return useQuery({
     queryKey: ['posts', query, page, limit, category],
     queryFn: async () => {
@@ -32,10 +26,10 @@ export function usePosts({
         const searchUseCase = new SearchPostsUseCase(repository);
         return searchUseCase.execute(query, page, limit);
       }
-      
+
       const getPostsUseCase = new GetPostsUseCase(repository);
       return getPostsUseCase.execute(page, limit, category || '');
     },
     enabled,
   });
-} 
+}

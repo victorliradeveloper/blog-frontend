@@ -108,7 +108,7 @@ const Header = function (props: IHeaderProps) {
               />
 
               <div className="div-left">
-                <ul className='menu' style={{ display: 'flex' }}>
+                <ul className="menu" style={{ display: 'flex' }}>
                   <li
                     onClick={() => {
                       goBackToHomePage();
@@ -140,11 +140,7 @@ const Header = function (props: IHeaderProps) {
                   </li>
 
                   <li className={`anchor ${currentTab === 'portfolio' ? 'active' : ''}`}>
-                    <Link
-                      href="/portfolio"
-                    >
-                      Portfólio &nbsp;🚀
-                    </Link>
+                    <Link href="/portfolio">Portfólio &nbsp;🚀</Link>
                   </li>
                 </ul>
 

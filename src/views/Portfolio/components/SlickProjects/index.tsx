@@ -53,7 +53,10 @@ const SlickProjects = (props: SlickProjectsProps) => {
           return (
             <div className="slider-container" key={item.id}>
               <div className="slider-box project-1">
-              <div className="background-image" style={{ backgroundImage: `url(${item.background})` }}></div>
+                <div
+                  className="background-image"
+                  style={{ backgroundImage: `url(${item.background})` }}
+                ></div>
                 <div className="overlay">
                   <div>
                     <h1>{item.name}</h1>

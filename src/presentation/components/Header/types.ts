@@ -4,5 +4,5 @@ export type IHeaderProps = {
   onOpenSearchModal?: () => void;
   onResetSearch?: () => void;
   openMobileMenu: boolean;
-  setOpenMobileMenu: (a: boolean) => void
+  setOpenMobileMenu: (a: boolean) => void;
 };

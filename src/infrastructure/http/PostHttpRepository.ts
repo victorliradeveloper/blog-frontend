@@ -26,14 +26,22 @@ export interface BlogResponse {
 export class PostHttpRepository implements PostRepository {
   constructor(private readonly http: HttpClient) {}
 
-  async searchPosts(query: string, page: string | string[], limit: string): Promise<PostPagination> {
+  async searchPosts(
+    query: string,
+    page: string | string[],
+    limit: string,
+  ): Promise<PostPagination> {
     const response = await this.http.get<BlogResponse>('/api/get/search', {
       params: { query, page, limit },
     });
     return this.mapResponse(response);
   }
 
-  async getAllPosts(page: string | string[], limit: string, category: string | string[]): Promise<PostPagination> {
+  async getAllPosts(
+    page: string | string[],
+    limit: string,
+    category: string | string[],
+  ): Promise<PostPagination> {
     const pageParam = Array.isArray(page) ? page[0] : page;
     const categoryParam = Array.isArray(category) ? category[0] : category;
 
@@ -85,4 +93,4 @@ export class PostHttpRepository implements PostRepository {
       previous: response.previous ?? null,
     };
   }
-} 
+}

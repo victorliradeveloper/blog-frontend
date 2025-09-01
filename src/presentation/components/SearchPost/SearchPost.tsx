@@ -1,71 +1,62 @@
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import StyledSearchPost from './SearchPost.styled'
-import { SearchPostProps } from './SearchPost.types'
-import { usePosts } from '@/presentation/hooks/usePosts'
-import { useSearchContext } from '@/Context/searchContext'
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import StyledSearchPost from './SearchPost.styled';
+import { SearchPostProps } from './SearchPost.types';
+import { usePosts } from '@/presentation/hooks/usePosts';
+import { useSearchContext } from '@/Context/searchContext';
 
-function SearchPost({
-  displaySearch = false,
-  onCloseSearch,
-  onCloseMobileMenu,
-}: SearchPostProps) {
-  const [enabled, setEnabled] = useState(false)
-  const router = useRouter()
+function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }: SearchPostProps) {
+  const [enabled, setEnabled] = useState(false);
+  const router = useRouter();
 
-  const { query, setQuery, setSearchedPosts } = useSearchContext()
+  const { query, setQuery, setSearchedPosts } = useSearchContext();
 
   const { data } = usePosts({
     query,
     page: '1',
     limit: '8',
     enabled,
-  })
+  });
 
   useEffect(() => {
     if (data?.results) {
-      setSearchedPosts(data.results)
+      setSearchedPosts(data.results);
     }
-  }, [data, setSearchedPosts])
+  }, [data, setSearchedPosts]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement
+    const target = event.target as HTMLInputElement;
     if (event.key === 'Enter') {
-      const value = target.value.trim()
+      const value = target.value.trim();
       if (value) {
-        setQuery(value)
-        setEnabled(true)
-        router.push(`/?query=${encodeURIComponent(value)}`)
+        setQuery(value);
+        setEnabled(true);
+        router.push(`/?query=${encodeURIComponent(value)}`);
       }
-      onCloseSearch()
+      onCloseSearch();
     }
-  }
+  };
 
   const handleIconClick = () => {
-    const inputElement = document.querySelector('.search') as HTMLInputElement
-    const value = inputElement?.value.trim()
+    const inputElement = document.querySelector('.search') as HTMLInputElement;
+    const value = inputElement?.value.trim();
 
     if (value) {
-      setQuery(value)
-      setEnabled(true)
-      router.push(`?query=${encodeURIComponent(value)}`)
+      setQuery(value);
+      setEnabled(true);
+      router.push(`?query=${encodeURIComponent(value)}`);
     }
-    onCloseMobileMenu()
-    onCloseSearch()
-  }
+    onCloseMobileMenu();
+    onCloseSearch();
+  };
 
-  if (!displaySearch) return null
+  if (!displaySearch) return null;
 
   return (
     <StyledSearchPost>
       <div className="search-wrapper">
-        <input
-          className="search"
-          type="search"
-          placeholder="Pesquisar"
-          onKeyDown={handleKeyDown}
-        />
+        <input className="search" type="search" placeholder="Pesquisar" onKeyDown={handleKeyDown} />
         <div className="search-grey-icon">
           <p>Aperte enter para buscar</p>
           <Image
@@ -79,7 +70,7 @@ function SearchPost({
       </div>
       <div className="overlay" onClick={onCloseSearch}></div>
     </StyledSearchPost>
-  )
+  );
 }
 
-export default SearchPost
+export default SearchPost;

@@ -7,7 +7,7 @@
   },
   {
     "id": 2,
-    "name": "Projeto 2", 
+    "name": "Projeto 2",
     "background": "/project2.jpg",
     "description": "Descrição do projeto 2"
   },
@@ -17,4 +17,4 @@
     "background": "/project3.jpg",
     "description": "Descrição do projeto 3"
   }
-] 
+]

@@ -12,7 +12,7 @@ const StyledPostNew = styled.div`
   //javascript start
   pre {
     .hljs-keyword,
-    .hljs-literal, 
+    .hljs-literal,
     .hljs-subst {
       color: #569cd6 !important;
     }
@@ -69,36 +69,34 @@ const StyledPostNew = styled.div`
     .language-xml {
       .hljs-tag {
         .hljs-name {
-          color: #569cd6 !important
+          color: #569cd6 !important;
         }
 
         .hljs-string {
-
         }
       }
     }
   }
 
-.hljs-keyword {
-  color: #f92672;
-}
+  .hljs-keyword {
+    color: #f92672;
+  }
 
-.hljs-string {
-  /* color: red;  */
-}
+  .hljs-string {
+    /* color: red;  */
+  }
 
-.hljs-comment {
-  color: #75715e; 
-}
+  .hljs-comment {
+    color: #75715e;
+  }
 
-.hljs-title.function_ {
-  /* color: red;  */
-}
+  .hljs-title.function_ {
+    /* color: red;  */
+  }
 
-
-.hljs-number {
-  color: #ae81ff; 
-}
+  .hljs-number {
+    color: #ae81ff;
+  }
 
   //XML
   .profile {

@@ -20,7 +20,13 @@ import {
   VERIFY_ICON,
   WHITE_LOADING_SPINNER,
 } from '@/constants/images';
-import { validateName, validateEmail, validatePhone, validateSubject, validateMessage } from './functions/formValidation';
+import {
+  validateName,
+  validateEmail,
+  validatePhone,
+  validateSubject,
+  validateMessage,
+} from './functions/formValidation';
 import SlickProjects from './components/SlickProjects';
 
 const Portfolio = function () {
@@ -92,7 +98,6 @@ const Portfolio = function () {
     subject: string;
     message: string;
   }) => {
-
     const data = await Axios.post(`${process.env.NEXT_PUBLIC_API_URL}api/sendEmail`, formData)
       .then(res => res.data)
       .catch(() => null);
@@ -167,7 +172,6 @@ const Portfolio = function () {
         <meta property="og:site_name" content="Victor Lira" />
         <link rel="icon" href={FAVICON} />
         <meta property="og:image" content={META_TAG_IMAGE} />
-
       </Head>
       <TechModal
         techName={currentModalTech.name}
@@ -345,5 +349,4 @@ const Portfolio = function () {
   );
 };
 
-
-export default Portfolio
+export default Portfolio;

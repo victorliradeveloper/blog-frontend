@@ -75,7 +75,7 @@ function Posts(props: IProps) {
   useEffect(() => {
     hljs.initHighlightingOnLoad();
   }, []);
-  
+
   useEffect(() => {
     setTimeout(() => {
       const codeBlocks = document.querySelectorAll('pre');
@@ -86,7 +86,6 @@ function Posts(props: IProps) {
           const highlighted = hljs.highlight(code, { language: 'javascript' }).value;
           block.innerHTML = highlighted;
         }
-        
       });
     }, 500);
   }, []);
@@ -201,10 +200,10 @@ function Posts(props: IProps) {
       <h1 className="title">Últimas postagens</h1>
       <div className="last-posts">
         <Slider {...settings}>
-                  {lastPosts.map((post: Post) => {
-          return (
-            <div className="slider-content" key={post.id}>
-              <PostComponent
+          {lastPosts.map((post: Post) => {
+            return (
+              <div className="slider-content" key={post.id}>
+                <PostComponent
                   onDisplayLoginAlert={displayLoginAlert}
                   id={post.id}
                   category={post.category}

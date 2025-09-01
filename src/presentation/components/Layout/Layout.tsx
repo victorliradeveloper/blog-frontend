@@ -7,21 +7,15 @@ import SearchPost from '../SearchPost/SearchPost';
 import NewHeader from '../NewHeader';
 
 const Layout = ({ children }: LayoutProps) => {
-
   const { containerRef } = useScrollContext();
-    const [openMobileMenu, setOpenMobileMenu] = useState(false);
-    const [openSearchModal, setOpenSearchModal] = useState(false);
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const [openSearchModal, setOpenSearchModal] = useState(false);
 
   const onOpenSearchModal = function () {
     setOpenSearchModal(prev => !prev);
   };
 
-
-  const resetSearch = function () {
-
-  };
-
-
+  const resetSearch = function () {};
 
   const closeSearch = function () {
     setOpenSearchModal(false);
@@ -30,7 +24,6 @@ const Layout = ({ children }: LayoutProps) => {
   const closeMobileMenu = function () {
     setOpenMobileMenu(false);
   };
-
 
   return (
     <>
@@ -42,7 +35,7 @@ const Layout = ({ children }: LayoutProps) => {
         openMobileMenu={openMobileMenu}
         setOpenMobileMenu={handleMobileMenu}
       /> */}
-      <NewHeader 
+      <NewHeader
         onOpenSearchModal={onOpenSearchModal}
         onResetSearch={resetSearch}
         openMobileMenu={openMobileMenu}

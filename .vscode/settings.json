@@ -8,12 +8,7 @@
   },
   "javascript.format.enable": false,
   "typescript.format.enable": false,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.workingDirectories": [
     "./frontend" // Adjust the path based on your project structure
   ],

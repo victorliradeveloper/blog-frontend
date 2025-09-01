@@ -106,7 +106,7 @@ const StyledHeader = styled.header`
           .search-wrapper {
             display: flex;
 
-            @media screen and (max-width: 700px){
+            @media screen and (max-width: 700px) {
               flex-direction: row-reverse;
               justify-content: flex-end;
             }
@@ -122,10 +122,10 @@ const StyledHeader = styled.header`
               margin-right: 30px;
               cursor: pointer;
 
-              @media screen and (max-width: 700px){
+              @media screen and (max-width: 700px) {
                 margin-right: 0px;
                 margin-left: 30px;
-            }
+              }
             }
 
             .google-wrapper {
@@ -231,9 +231,9 @@ const StyledHeader = styled.header`
               }
 
               &.anchor.active {
-                  border-bottom: 3px solid #0beeb2;
-                  padding-bottom: 6px;
-                  height: 40px;
+                border-bottom: 3px solid #0beeb2;
+                padding-bottom: 6px;
+                height: 40px;
               }
             }
           }
@@ -249,8 +249,6 @@ const StyledHeader = styled.header`
                 margin-bottom: 40px;
               }
             }
-
-            
           }
 
           cursor: pointer;

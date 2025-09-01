@@ -1,4 +1,3 @@
-
 <div align="center">
   <img src="https://ik.imagekit.io/Victorliradev/github/react_64hQyXkw9.png?updatedAt=1752626856336" width="120" alt="React Logo" />
   <h3>Blog desenvolvido seguindo os princípios da Clean Architecture</h3>
@@ -22,6 +21,7 @@ Este é um blog pessoal desenvolvido com foco em **Clean Architecture** e **boas
 ## 🛠️ Tecnologias
 
 ### Frontend
+
 - **React 18** - Biblioteca JavaScript para interfaces
 - **Next.js 15** - Framework React para produção
 - **TypeScript** - Superset JavaScript com tipagem
@@ -30,11 +30,13 @@ Este é um blog pessoal desenvolvido com foco em **Clean Architecture** e **boas
 - **React Query** - Gerenciamento de estado e cache
 
 ### Arquitetura
+
 - **Clean Architecture** - Separação de responsabilidades
 - **Domain-Driven Design** - Organização por domínios
 - **SOLID Principles** - Princípios de design de software
 
 ### Ferramentas
+
 - **ESLint** - Linting de código
 - **Prettier** - Formatação de código
 - **Jest** - Testes unitários
@@ -72,6 +74,7 @@ src/
 ## ✨ Funcionalidades
 
 ### 📝 Blog
+
 - **Listagem de posts** com paginação
 - **Busca por posts** com filtros
 - **Visualização de post** individual
@@ -79,12 +82,14 @@ src/
 - **SEO otimizado** para cada post
 
 ### 👤 Usuário
+
 - **Autenticação** com Google
 - **Perfil do usuário** personalizado
 - **Sistema de favoritos** com persistência
 - **Logout** seguro
 
 ### 🎨 Interface
+
 - **Design responsivo** para todos os dispositivos
 - **Animações suaves** com Framer Motion
 - **Tema escuro** moderno
@@ -92,6 +97,7 @@ src/
 - **Acessibilidade** implementada
 
 ### 📊 Performance
+
 - **SSR/SSG** com Next.js
 - **Lazy loading** de imagens
 - **Code splitting** automático
@@ -100,19 +106,22 @@ src/
 ## 🚀 Instalação
 
 ### Pré-requisitos
-- Node.js 18+ 
+
+- Node.js 18+
 - npm ou yarn
 - Git
 
 ### Passos
 
 1. **Clone o repositório**
+
 ```bash
 git clone https://github.com/victorlirafront/blog-frontend.git
 cd blog-frontend
 ```
 
 2. **Instale as dependências**
+
 ```bash
 npm install
 # ou
@@ -120,12 +129,13 @@ yarn install
 ```
 
 3. **Configure as variáveis de ambiente**
+
 ```bash
 cp .env.example .env.local
 ```
 
-
 4. **Execute o projeto**
+
 ```bash
 npm run dev
 # ou
@@ -137,6 +147,7 @@ Acesse [http://localhost:3000](http://localhost:3000)
 ## 📖 Como Usar
 
 ### Desenvolvimento
+
 ```bash
 # Servidor de desenvolvimento
 npm run dev
@@ -150,7 +161,6 @@ npm run build:dev
 # Servidor de produção
 npm start
 ```
-
 
 ## 📁 Estrutura do Projeto
 
@@ -180,7 +190,6 @@ blog-frontend/
 └── cypress/                # 🧪 Testes E2E
 ```
 
-
 ## 🤝 Contribuição
 
 1. **Fork** o projeto
@@ -190,6 +199,7 @@ blog-frontend/
 5. **Abra** um Pull Request
 
 ### 📋 Padrões de Commit
+
 - `feat:` Nova funcionalidade
 - `fix:` Correção de bug
 - `docs:` Documentação
