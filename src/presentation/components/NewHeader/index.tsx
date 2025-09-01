@@ -55,8 +55,8 @@ export default function Navbar(props: NewHeaderProps) {
         <Container>
           <Logo onClick={() => router.push('/')}>
             <Image
-              width={34}
-              height={40}
+              width={30}
+              height={36}
               src={CODE_ICON}
               alt="header icon"
             />
@@ -107,7 +107,7 @@ export default function Navbar(props: NewHeaderProps) {
 
           <SearchAndLogin>
             <SearchIcon onClick={props.onOpenSearchModal}>
-              <Image src="/search-icon.png" width={25} height={25} alt="search" />
+              <Image src="/search-icon.png" width={20} height={20} alt="search" />
             </SearchIcon>
             
             <GoogleWrapper>
@@ -115,10 +115,10 @@ export default function Navbar(props: NewHeaderProps) {
                 <GoogleLogin
                   onError={() => console.log('Login failed')}
                   theme="filled_black"
-                  size="large"
-                  shape="square"
+                  size="medium"
+                  shape="pill"
                   type="standard"
-                  width="100"
+                  width="50"
                   text="signin"
                   onSuccess={credentialResponse => {
                     try {
@@ -280,8 +280,8 @@ const SearchAndLogin = styled.div`
 
 const SearchIcon = styled.div`
   border: 2px solid #07ebb0;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
