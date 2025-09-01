@@ -1,26 +1,26 @@
-import styled from 'styled-components'
-import { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { motion, LayoutGroup } from 'framer-motion'
-import Image from 'next/image'
-import { GoogleLogin } from '@react-oauth/google'
-import { jwtDecode } from 'jwt-decode'
-import { useCurrentUser } from '@/Context/currentUser'
-import { CODE_ICON, CLOSE_MENU_ICON, MENU_HAMBURGUER } from '@/constants/images'
+import styled from 'styled-components';
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { motion, LayoutGroup } from 'framer-motion';
+import Image from 'next/image';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+import { useCurrentUser } from '@/Context/currentUser';
+import { CODE_ICON, CLOSE_MENU_ICON, MENU_HAMBURGUER } from '@/constants/images';
 
 // Types
 interface NavItem {
-  label: string
-  path: string
-  category?: string
+  label: string;
+  path: string;
+  category?: string;
 }
 
 interface NewHeaderProps {
-  onOpenSearchModal?: () => void
-  onResetSearch?: () => void
-  openMobileMenu?: boolean
-  setOpenMobileMenu?: (open: boolean) => void
+  onOpenSearchModal?: () => void;
+  onResetSearch?: () => void;
+  openMobileMenu?: boolean;
+  setOpenMobileMenu?: (open: boolean) => void;
 }
 
 // Constants
@@ -30,62 +30,57 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'backend', path: '/', category: 'backend' },
   { label: 'avançado', path: '/', category: 'avancado' },
   { label: 'portfolio', path: '/', category: 'portfolio' },
-]
+];
 
 // Utils
 const buildNavPath = (item: NavItem): string => {
   if (item.label === 'portfolio') {
-    return '/portfolio'
+    return '/portfolio';
   }
   if (item.category) {
-    return `${item.path}?page=1&category=${item.category}`
+    return `${item.path}?page=1&category=${item.category}`;
   }
-  return item.path
-}
+  return item.path;
+};
 
 export default function Navbar(props: NewHeaderProps) {
-  const router = useRouter()
-  const [hovered, setHovered] = useState<string>('')
-  const { callSetCurrentUser, currentUser } = useCurrentUser()
+  const router = useRouter();
+  const [hovered, setHovered] = useState<string>('');
+  const { callSetCurrentUser, currentUser } = useCurrentUser();
 
-  const handleHoverStart = (label: string) => setHovered(label)
-  const handleHoverEnd = () => setHovered('')
+  const handleHoverStart = (label: string) => setHovered(label);
+  const handleHoverEnd = () => setHovered('');
 
   const showMobileMenu = () => {
-    props.setOpenMobileMenu?.(true)
-  }
+    props.setOpenMobileMenu?.(true);
+  };
 
   const hideMobileMenu = () => {
-    props.setOpenMobileMenu?.(false)
-  }
+    props.setOpenMobileMenu?.(false);
+  };
 
   return (
     <LayoutGroup>
       <Header>
         <Container>
           <Logo onClick={() => router.push('/')}>
-            <Image
-              width={30}
-              height={36}
-              src={CODE_ICON}
-              alt="header icon"
-            />
+            <Image width={30} height={36} src={CODE_ICON} alt="header icon" />
           </Logo>
-          
+
           <Nav>
             <List>
               {NAV_ITEMS.map(item => {
-                const path = buildNavPath(item)
-                const isHovered = hovered === item.label
-                
+                const path = buildNavPath(item);
+                const isHovered = hovered === item.label;
+
                 // Verifica se o item está ativo baseado no pathname e query params
-                let isActive = false
+                let isActive = false;
                 if (item.label === 'portfolio') {
-                  isActive = router.pathname === '/portfolio'
+                  isActive = router.pathname === '/portfolio';
                 } else if (item.label === 'home') {
-                  isActive = router.pathname === '/' && !router.query.category
+                  isActive = router.pathname === '/' && !router.query.category;
                 } else if (item.category) {
-                  isActive = router.pathname === '/' && router.query.category === item.category
+                  isActive = router.pathname === '/' && router.query.category === item.category;
                 }
 
                 return (
@@ -110,7 +105,7 @@ export default function Navbar(props: NewHeaderProps) {
                       </Anchor>
                     </Link>
                   </li>
-                )
+                );
               })}
             </List>
           </Nav>
@@ -119,7 +114,7 @@ export default function Navbar(props: NewHeaderProps) {
             <SearchIcon onClick={props.onOpenSearchModal}>
               <Image src="/search-icon.png" width={20} height={20} alt="search" />
             </SearchIcon>
-            
+
             <GoogleWrapper>
               {!currentUser.name ? (
                 <GoogleLogin
@@ -157,118 +152,104 @@ export default function Navbar(props: NewHeaderProps) {
                   }}
                 />
               ) : (
-                <ProfileLink href="/profile">
-                  Perfil
-                </ProfileLink>
+                <ProfileLink href="/profile">Perfil</ProfileLink>
               )}
             </GoogleWrapper>
           </SearchAndLogin>
 
           <HamburgerMenu onClick={showMobileMenu}>
-            <Image
-              width={30}
-              height={20}
-              src={MENU_HAMBURGUER}
-              alt="menu"
-            />
+            <Image width={30} height={20} src={MENU_HAMBURGUER} alt="menu" />
           </HamburgerMenu>
         </Container>
 
-                  <MobileMenu className={props.openMobileMenu ? 'active' : ''}>
-            <CloseButton onClick={hideMobileMenu}>
-              <Image
-                width={20}
-                height={20}
-                src={CLOSE_MENU_ICON}
-                alt="close menu"
-              />
-            </CloseButton>
+        <MobileMenu className={props.openMobileMenu ? 'active' : ''}>
+          <CloseButton onClick={hideMobileMenu}>
+            <Image width={20} height={20} src={CLOSE_MENU_ICON} alt="close menu" />
+          </CloseButton>
 
-            <MobileMenuContent>
-              <List>
-                {NAV_ITEMS.map(item => {
-                  const path = buildNavPath(item)
-                  
-                  // Verifica se o item está ativo baseado no pathname e query params
-                  let isActive = false
-                  if (item.label === 'portfolio') {
-                    isActive = router.pathname === '/portfolio'
-                  } else if (item.label === 'home') {
-                    isActive = router.pathname === '/' && !router.query.category
-                  } else if (item.category) {
-                    isActive = router.pathname === '/' && router.query.category === item.category
-                  }
+          <MobileMenuContent>
+            <List>
+              {NAV_ITEMS.map(item => {
+                const path = buildNavPath(item);
 
-                  return (
-                    <li key={item.label}>
-                      <Link href={path} passHref legacyBehavior>
-                        <Anchor onClick={hideMobileMenu}>
-                          <NavContainer $isActive={isActive}>
-                            {item.label}
-                          </NavContainer>
-                        </Anchor>
-                      </Link>
-                    </li>
-                  )
-                })}
-              </List>
+                // Verifica se o item está ativo baseado no pathname e query params
+                let isActive = false;
+                if (item.label === 'portfolio') {
+                  isActive = router.pathname === '/portfolio';
+                } else if (item.label === 'home') {
+                  isActive = router.pathname === '/' && !router.query.category;
+                } else if (item.category) {
+                  isActive = router.pathname === '/' && router.query.category === item.category;
+                }
 
-              <MobileSearchAndLogin>
-                <SearchIcon onClick={() => {
-                  props.onOpenSearchModal?.()
-                  hideMobileMenu()
-                }}>
-                  <Image src="/search-icon.png" width={20} height={20} alt="search" />
-                </SearchIcon>
-                
-                <GoogleWrapper>
-                  {!currentUser.name ? (
-                    <GoogleLogin
-                      onError={() => console.log('Login failed')}
-                      theme="filled_black"
-                      size="medium"
-                      shape="pill"
-                      type="standard"
-                      width="50"
-                      text="signin"
-                      onSuccess={credentialResponse => {
-                        try {
-                          if (credentialResponse?.credential) {
-                            const user = jwtDecode<{
-                              picture: string;
-                              name: string;
-                              email: string;
-                            }>(credentialResponse.credential);
+                return (
+                  <li key={item.label}>
+                    <Link href={path} passHref legacyBehavior>
+                      <Anchor onClick={hideMobileMenu}>
+                        <NavContainer $isActive={isActive}>{item.label}</NavContainer>
+                      </Anchor>
+                    </Link>
+                  </li>
+                );
+              })}
+            </List>
 
-                            const { picture, name, email } = user;
+            <MobileSearchAndLogin>
+              <SearchIcon
+                onClick={() => {
+                  props.onOpenSearchModal?.();
+                  hideMobileMenu();
+                }}
+              >
+                <Image src="/search-icon.png" width={20} height={20} alt="search" />
+              </SearchIcon>
 
-                            callSetCurrentUser({
-                              name,
-                              picture,
-                              email,
-                            });
+              <GoogleWrapper>
+                {!currentUser.name ? (
+                  <GoogleLogin
+                    onError={() => console.log('Login failed')}
+                    theme="filled_black"
+                    size="medium"
+                    shape="pill"
+                    type="standard"
+                    width="50"
+                    text="signin"
+                    onSuccess={credentialResponse => {
+                      try {
+                        if (credentialResponse?.credential) {
+                          const user = jwtDecode<{
+                            picture: string;
+                            name: string;
+                            email: string;
+                          }>(credentialResponse.credential);
 
-                            router.push('/profile');
-                          } else {
-                            console.log('No credential received');
-                          }
-                        } catch (error) {
-                          console.error('Error decoding JWT or handling Google login:', error);
+                          const { picture, name, email } = user;
+
+                          callSetCurrentUser({
+                            name,
+                            picture,
+                            email,
+                          });
+
+                          router.push('/profile');
+                        } else {
+                          console.log('No credential received');
                         }
-                      }}
-                    />
-                  ) : (
-                    <ProfileLink href="/profile">
-                      Perfil
-                    </ProfileLink>
-                  )}
-                </GoogleWrapper>
-              </MobileSearchAndLogin>
-            </MobileMenuContent>
-          </MobileMenu>
+                      } catch (error) {
+                        console.error('Error decoding JWT or handling Google login:', error);
+                      }
+                    }}
+                  />
+                ) : (
+                  <ProfileLink href="/profile">Perfil</ProfileLink>
+                )}
+              </GoogleWrapper>
+            </MobileSearchAndLogin>
+          </MobileMenuContent>
+        </MobileMenu>
       </Header>
     </LayoutGroup>
-  )
+  );
 }
 
 const Header = styled.header`
@@ -288,7 +269,7 @@ const Header = styled.header`
   margin: 0;
   padding: 0;
   height: 88px;
-`
+`;
 
 const Container = styled.div`
   display: flex;
@@ -297,12 +278,12 @@ const Container = styled.div`
   width: 100%;
   max-width: 1200px;
   padding: 0 20px;
-`
+`;
 
 const Logo = styled.div`
   cursor: pointer;
   margin-right: 20px;
-`
+`;
 
 const List = styled.ul`
   margin: 0;
@@ -312,7 +293,7 @@ const List = styled.ul`
   position: relative;
   top: 5px;
   overflow: hidden;
-  
+
   @media (min-width: 640px) {
     justify-content: space-around;
   }
@@ -322,9 +303,7 @@ const List = styled.ul`
     gap: 20px;
     align-items: center;
   }
-`
-
-
+`;
 
 const Nav = styled.nav`
   text-align: center;
@@ -335,19 +314,17 @@ const Nav = styled.nav`
   @media screen and (max-width: 700px) {
     display: none;
   }
-`
+`;
 
 const Anchor = styled.a`
   border: 0;
   position: relative;
   text-decoration: none;
   color: inherit;
-  
-
-`
+`;
 
 const NavContainer = styled(motion.span)<{ $isActive: boolean }>`
-  color: ${props => props.$isActive ? '#ffffff' : '#a0a0a0'};
+  color: ${props => (props.$isActive ? '#ffffff' : '#a0a0a0')};
   cursor: pointer;
   display: inline-block;
   font-size: 12px;
@@ -357,13 +334,13 @@ const NavContainer = styled(motion.span)<{ $isActive: boolean }>`
   text-decoration: none;
   text-transform: uppercase;
   position: relative;
-  
+
   &:hover {
     color: #ffffff;
   }
-  
+
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     margin: 0px auto;
     top: 44px;
@@ -372,9 +349,9 @@ const NavContainer = styled(motion.span)<{ $isActive: boolean }>`
     height: 1px;
     width: 20px;
     background: rgb(255, 255, 255);
-    opacity: ${props => props.$isActive ? 1 : 0};
+    opacity: ${props => (props.$isActive ? 1 : 0)};
   }
-`
+`;
 
 const NavHovered = styled(motion.span)`
   position: absolute;
@@ -386,7 +363,7 @@ const NavHovered = styled(motion.span)`
   border-radius: 8px;
   z-index: -1;
   overflow-y: hidden !important;
-`
+`;
 
 const SearchAndLogin = styled.div`
   display: flex;
@@ -396,7 +373,7 @@ const SearchAndLogin = styled.div`
   @media screen and (max-width: 700px) {
     display: none;
   }
-`
+`;
 
 const SearchIcon = styled.div`
   border: 2px solid #07ebb0;
@@ -412,12 +389,12 @@ const SearchIcon = styled.div`
   &:hover {
     background: rgba(7, 235, 176, 0.1);
   }
-`
+`;
 
 const GoogleWrapper = styled.div`
   height: auto;
   position: relative;
-`
+`;
 
 const ProfileLink = styled(Link)`
   border: 2px solid #fff;
@@ -432,7 +409,7 @@ const ProfileLink = styled(Link)`
   &:hover {
     background-color: rgba(255, 255, 255, 0.4);
   }
-`
+`;
 
 const HamburgerMenu = styled.div`
   display: none;
@@ -441,7 +418,7 @@ const HamburgerMenu = styled.div`
     display: block;
     cursor: pointer;
   }
-`
+`;
 
 const MobileMenu = styled.div`
   display: none;
@@ -462,7 +439,7 @@ const MobileMenu = styled.div`
       transform: translateX(0);
     }
   }
-`
+`;
 
 const CloseButton = styled.div`
   display: none;
@@ -475,7 +452,7 @@ const CloseButton = styled.div`
     cursor: pointer;
     z-index: 1001;
   }
-`
+`;
 
 const MobileMenuContent = styled.div`
   display: flex;
@@ -484,12 +461,11 @@ const MobileMenuContent = styled.div`
   align-items: center;
   height: 100vh;
   padding: 20px;
-`
+`;
 
 const MobileSearchAndLogin = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
-`
-
+`;
