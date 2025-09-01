@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledSearchPost = styled.div`
-  top: 88px;
+  top: 80px;
   width: 100vw;
   height: 90px;
   padding: 23px;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { motion, LayoutGroup } from 'framer-motion';
@@ -8,6 +8,8 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { useCurrentUser } from '@/Context/currentUser';
 import { CODE_ICON, CLOSE_MENU_ICON, MENU_HAMBURGUER } from '@/constants/images';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 // Types
 interface NavItem {
@@ -47,6 +49,17 @@ export default function Navbar(props: NewHeaderProps) {
   const router = useRouter();
   const [hovered, setHovered] = useState<string>('');
   const { callSetCurrentUser, currentUser } = useCurrentUser();
+  const [headerFadeDown, setHeaderFadeDown] = useState('fade-down');
+
+  useEffect(() => {
+    AOS.init();
+    const updateWindowWidth = () => {
+      if (window.innerWidth < 700) {
+        setHeaderFadeDown('');
+      }
+    };
+    updateWindowWidth();
+  }, []);
 
   const handleHoverStart = (label: string) => setHovered(label);
   const handleHoverEnd = () => setHovered('');
@@ -61,7 +74,7 @@ export default function Navbar(props: NewHeaderProps) {
 
   return (
     <LayoutGroup>
-      <Header>
+      <Header data-aos={headerFadeDown}>
         <Container>
           <Logo onClick={() => router.push('/')}>
             <Image width={30} height={34} src={CODE_ICON} alt="header icon" />
@@ -260,15 +273,14 @@ const Header = styled.header`
   color: white;
   font-size: 12px;
   position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   z-index: 3;
   width: 100%;
-  max-width: 1200px;
   top: 0px;
   margin: 0;
   padding: 0;
-  height: 88px;
+  height: 80px;
 `;
 
 const Container = styled.div`
