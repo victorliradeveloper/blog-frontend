@@ -3,12 +3,22 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { motion, LayoutGroup } from 'framer-motion'
+import Image from 'next/image'
+import { GoogleLogin } from '@react-oauth/google'
+import { jwtDecode } from 'jwt-decode'
+import { useCurrentUser } from '@/Context/currentUser'
+import { CODE_ICON } from '@/constants/images'
 
 // Types
 interface NavItem {
   label: string
   path: string
   category?: string
+}
+
+interface NewHeaderProps {
+  onOpenSearchModal?: () => void
+  onResetSearch?: () => void
 }
 
 // Constants
@@ -31,9 +41,10 @@ const buildNavPath = (item: NavItem): string => {
   return item.path
 }
 
-export default function Navbar() {
+export default function Navbar(props: NewHeaderProps) {
   const router = useRouter()
   const [hovered, setHovered] = useState<string>('')
+  const { callSetCurrentUser, currentUser } = useCurrentUser()
 
   const handleHoverStart = (label: string) => setHovered(label)
   const handleHoverEnd = () => setHovered('')
@@ -41,48 +52,108 @@ export default function Navbar() {
   return (
     <LayoutGroup>
       <Header>
-        <Nav>
-          <List>
-            {NAV_ITEMS.map(item => {
-              const path = buildNavPath(item)
-              const isHovered = hovered === item.label
-              
-              // Verifica se o item está ativo baseado no pathname e query params
-              let isActive = false
-              if (item.label === 'portfolio') {
-                isActive = router.pathname === '/portfolio'
-              } else if (item.label === 'home') {
-                isActive = router.pathname === '/' && !router.query.category
-              } else if (item.category) {
-                isActive = router.pathname === '/' && router.query.category === item.category
-              }
+        <Container>
+          <Logo onClick={() => router.push('/')}>
+            <Image
+              width={34}
+              height={40}
+              src={CODE_ICON}
+              alt="header icon"
+            />
+          </Logo>
+          
+          <Nav>
+            <List>
+              {NAV_ITEMS.map(item => {
+                const path = buildNavPath(item)
+                const isHovered = hovered === item.label
+                
+                // Verifica se o item está ativo baseado no pathname e query params
+                let isActive = false
+                if (item.label === 'portfolio') {
+                  isActive = router.pathname === '/portfolio'
+                } else if (item.label === 'home') {
+                  isActive = router.pathname === '/' && !router.query.category
+                } else if (item.category) {
+                  isActive = router.pathname === '/' && router.query.category === item.category
+                }
 
-              return (
-                <li key={item.label}>
-                  <Link href={path} passHref legacyBehavior>
-                    <Anchor>
-                      <NavContainer
-                        onHoverStart={() => handleHoverStart(item.label)}
-                        onHoverEnd={handleHoverEnd}
-                        $isActive={isActive}
-                      >
-                        {isHovered && (
-                          <NavHovered
-                            layoutId="nav"
-                            initial={{ opacity: 1 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 1 }}
-                          />
-                        )}
-                        {item.label}
-                      </NavContainer>
-                    </Anchor>
-                  </Link>
-                </li>
-              )
-            })}
-          </List>
-        </Nav>
+                return (
+                  <li key={item.label}>
+                    <Link href={path} passHref legacyBehavior>
+                      <Anchor>
+                        <NavContainer
+                          onHoverStart={() => handleHoverStart(item.label)}
+                          onHoverEnd={handleHoverEnd}
+                          $isActive={isActive}
+                        >
+                          {isHovered && (
+                            <NavHovered
+                              layoutId="nav"
+                              initial={{ opacity: 1 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 1 }}
+                            />
+                          )}
+                          {item.label}
+                        </NavContainer>
+                      </Anchor>
+                    </Link>
+                  </li>
+                )
+              })}
+            </List>
+          </Nav>
+
+          <SearchAndLogin>
+            <SearchIcon onClick={props.onOpenSearchModal}>
+              <Image src="/search-icon.png" width={25} height={25} alt="search" />
+            </SearchIcon>
+            
+            <GoogleWrapper>
+              {!currentUser.name ? (
+                <GoogleLogin
+                  onError={() => console.log('Login failed')}
+                  theme="filled_black"
+                  size="large"
+                  shape="square"
+                  type="standard"
+                  width="100"
+                  text="signin"
+                  onSuccess={credentialResponse => {
+                    try {
+                      if (credentialResponse?.credential) {
+                        const user = jwtDecode<{
+                          picture: string;
+                          name: string;
+                          email: string;
+                        }>(credentialResponse.credential);
+
+                        const { picture, name, email } = user;
+
+                        callSetCurrentUser({
+                          name,
+                          picture,
+                          email,
+                        });
+
+                        router.push('/profile');
+                      } else {
+                        console.log('No credential received');
+                      }
+                    } catch (error) {
+                      console.error('Error decoding JWT or handling Google login:', error);
+                    }
+                  }}
+                />
+              ) : (
+                <ProfileLink href="/profile">
+                  Perfil
+                </ProfileLink>
+              )}
+            </GoogleWrapper>
+          </SearchAndLogin>
+        </Container>
       </Header>
     </LayoutGroup>
   )
@@ -92,17 +163,33 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  background: black;
   color: white;
   font-size: 12px;
-  position: absolute;
+  position: fixed;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   width: 100%;
   max-width: 1200px;
-  top: 100px;
+  top: 0px;
   margin: 0;
   padding: 0;
+  height: 88px;
+`
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+`
+
+const Logo = styled.div`
+  cursor: pointer;
+  margin-right: 20px;
 `
 
 const List = styled.ul`
@@ -183,4 +270,46 @@ const NavHovered = styled(motion.span)`
   border-radius: 8px;
   z-index: -1;
   overflow-y: hidden !important;
+`
+
+const SearchAndLogin = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`
+
+const SearchIcon = styled.div`
+  border: 2px solid #07ebb0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(7, 235, 176, 0.1);
+  }
+`
+
+const GoogleWrapper = styled.div`
+  height: auto;
+  position: relative;
+`
+
+const ProfileLink = styled(Link)`
+  border: 2px solid #fff;
+  padding: 5px 20px;
+  border-radius: 4px;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+  position: relative;
+  top: 8px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
 `

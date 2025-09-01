@@ -1,5 +1,5 @@
 import Footer from '@/presentation/components/Footer';
-import Header from '@/presentation/components/Header';
+// import Header from '@/presentation/components/Header';
 import { LayoutProps } from './Layout.types';
 import { useScrollContext } from '@/Context/scrollProvider';
 import { useState } from 'react';
@@ -36,15 +36,18 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
-      <Header
+      {/* <Header
         className="header"
         scrollIntoView={() => scrollIntoViewHandler()}
         onOpenSearchModal={onOpenSearchModal}
         onResetSearch={resetSearch}
         openMobileMenu={openMobileMenu}
         setOpenMobileMenu={handleMobileMenu}
+      /> */}
+      <NewHeader 
+        onOpenSearchModal={onOpenSearchModal}
+        onResetSearch={resetSearch}
       />
-      <NewHeader />
       <SearchPost
         displaySearch={openSearchModal}
         onCloseSearch={closeSearch}
