@@ -64,7 +64,7 @@ export default function Navbar(props: NewHeaderProps) {
       <Header>
         <Container>
           <Logo onClick={() => router.push('/')}>
-            <Image width={30} height={36} src={CODE_ICON} alt="header icon" />
+            <Image width={30} height={34} src={CODE_ICON} alt="header icon" />
           </Logo>
 
           <Nav>
@@ -394,6 +394,7 @@ const SearchIcon = styled.div`
 const GoogleWrapper = styled.div`
   height: auto;
   position: relative;
+  top: -2px;
 `;
 
 const ProfileLink = styled(Link)`
@@ -465,7 +466,7 @@ const MobileMenuContent = styled.div`
 
 const MobileSearchAndLogin = styled.div`
   display: flex;
-  flex-direction: column;
   gap: 20px;
   align-items: center;
+  padding: 20px;
 `;
