@@ -1,1 +1,0 @@
-export { CardSpotlightEffect } from './index'; 
