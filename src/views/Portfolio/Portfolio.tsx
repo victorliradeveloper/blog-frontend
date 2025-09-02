@@ -227,17 +227,7 @@ const Portfolio = function () {
               </h1>
             </div>
           </div>
-          <div className="item item-2">
-            <div className="about-wrapper">
-              <p className="skills">MINHAS SKILLS E POWER UP’S</p>
 
-              <p className="tip">
-                Sinta-se à vontade para <span className="span-click">clicar nos ícones</span> abaixo
-                : )
-              </p>
-              <SlideTech onClick={showTechInfo} />
-            </div>
-          </div>
           <div className="item item-3">
             <div className="form-wrapper">
               <h1 className="title">Fale comigo</h1>
