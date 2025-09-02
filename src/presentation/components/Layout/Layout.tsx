@@ -4,7 +4,7 @@ import { LayoutProps } from './Layout.types';
 import { useScrollContext } from '@/Context/scrollProvider';
 import { useState } from 'react';
 import SearchPost from '../SearchPost/SearchPost';
-import NewHeader from '../NewHeader';
+import Header from '../Header';
 
 const Layout = ({ children }: LayoutProps) => {
   const { containerRef } = useScrollContext();
@@ -35,7 +35,7 @@ const Layout = ({ children }: LayoutProps) => {
         openMobileMenu={openMobileMenu}
         setOpenMobileMenu={handleMobileMenu}
       /> */}
-      <NewHeader
+      <Header
         onOpenSearchModal={onOpenSearchModal}
         onResetSearch={resetSearch}
         openMobileMenu={openMobileMenu}
