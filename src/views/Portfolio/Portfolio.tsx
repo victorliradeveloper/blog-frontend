@@ -3,12 +3,9 @@ import Head from 'next/head';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { useEffect } from 'react';
-import TechModal from '@/views/Portfolio/components/TechModal';
-import techJson from '@/data/slider-tech.json';
-import { TechInfoProps, FormData } from './Portfolio.types';
+import { FormData } from './Portfolio.types';
 import StyledPortfolio from './Portfolio.styled';
 import Image from 'next/image';
-import SlideTech from '@/views/Portfolio/components/SlickTech';
 import Axios from 'axios';
 import FormModal from '@/views/Portfolio/components/FormModal';
 import { applyPhoneMask } from '@/helper/functions/applyPhoneMask';
@@ -30,7 +27,6 @@ import {
 
 const Portfolio = function () {
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -40,55 +36,10 @@ const Portfolio = function () {
     subject: '',
     message: '',
   });
-  const [currentModalTech, setCurrentModalTech] = useState({
-    name: '',
-    description: '',
-    link: '',
-  });
 
   useEffect(() => {
     AOS.init();
   }, []);
-
-  const filterByName = (json: Record<string, TechInfoProps>, name: string) => {
-    const keys = Object.keys(json);
-    const filteredKeys = keys.filter(key => json[key].name.toLowerCase() === name.toLowerCase());
-    return filteredKeys.map(key => json[key]);
-  };
-
-  const fetchTechDescription = async function (tech: string) {
-    const filteredData = filterByName(techJson, tech);
-    setCurrentModalTech({
-      name: filteredData[0].name,
-      description: filteredData[0].description,
-      link: filteredData[0].link,
-    });
-  };
-
-  const showTechInformationHandler = async (element: HTMLElement) => {
-    try {
-      const techAttribute = element.getAttribute('data-tech');
-      if (techAttribute) {
-        await fetchTechDescription(techAttribute);
-        setShowModal(true);
-      }
-    } catch (error) {
-      console.error('Failed to fetch tech description:', error);
-    }
-  };
-
-  const closeModalHandler = () => {
-    setShowModal(false);
-  };
-
-  const showTechInfo = async (e: React.MouseEvent) => {
-    const target = e.target as HTMLElement;
-    const closestWithDataTech = target.closest('[data-tech]');
-
-    if (closestWithDataTech) {
-      await showTechInformationHandler(closestWithDataTech as HTMLElement);
-    }
-  };
 
   const sendEmail = async (formData: {
     name: string;
@@ -172,13 +123,6 @@ const Portfolio = function () {
         <link rel="icon" href={FAVICON} />
         <meta property="og:image" content={META_TAG_IMAGE} />
       </Head>
-      <TechModal
-        techName={currentModalTech.name}
-        techDescription={currentModalTech.description}
-        techLink={currentModalTech.link}
-        className={showModal ? 'active' : ''}
-        closeModal={closeModalHandler}
-      />
 
       <FormModal onCloseFormModal={closeFormModal} className={showFormModal ? 'active' : ''} />
       <StyledPortfolio className="profile">
