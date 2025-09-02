@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "app/**/*.ts": {
+      "runtime": "nodejs22.x"
+    }
+  },
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "framework": "nextjs"
+} 
