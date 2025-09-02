@@ -27,7 +27,6 @@ import {
   validateSubject,
   validateMessage,
 } from './functions/formValidation';
-import SlickProjects from './components/SlickProjects';
 
 const Portfolio = function () {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -227,9 +226,6 @@ const Portfolio = function () {
                 <span>o amanhã</span>
               </h1>
             </div>
-          </div>
-          <div className="item item-1">
-            <SlickProjects onClick={() => console.log('slick projects')} />
           </div>
           <div className="item item-2">
             <div className="about-wrapper">
