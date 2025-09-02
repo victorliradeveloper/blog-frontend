@@ -1,6 +1,6 @@
 function dateFormatter(input: string) {
   if (!input) {
-    return ''; 
+    return '';
   }
 
   const date = new Date(input);
@@ -36,7 +36,7 @@ function dateFormatter(input: string) {
       return `de ${meses[month.toLowerCase()]}`;
     }
 
-    return match; 
+    return match;
   });
 }
 

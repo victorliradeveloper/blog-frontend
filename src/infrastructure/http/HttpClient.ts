@@ -1,5 +1,9 @@
 export class HttpError extends Error {
-  constructor(message: string, public readonly status: number, public readonly body?: unknown) {
+  constructor(
+    message: string,
+    public readonly status: number,
+    public readonly body?: unknown,
+  ) {
     super(message);
     this.name = 'HttpError';
   }
@@ -12,7 +16,10 @@ export class HttpClient {
     this.baseUrl = baseUrl.replace(/\/$/, '');
   }
 
-  async get<T>(path: string, init?: RequestInit & { params?: Record<string, string | string[]> }): Promise<T> {
+  async get<T>(
+    path: string,
+    init?: RequestInit & { params?: Record<string, string | string[]> },
+  ): Promise<T> {
     const url = this.buildUrl(path, init?.params);
     const res = await fetch(url, {
       method: 'GET',
@@ -25,7 +32,11 @@ export class HttpClient {
   async post<T>(path: string, body?: unknown, init?: RequestInit): Promise<T> {
     const res = await fetch(this.url(path), {
       method: 'POST',
-      headers: { Accept: 'application/json', 'Content-Type': 'application/json', ...(init?.headers ?? {}) },
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        ...(init?.headers ?? {}),
+      },
       body: body !== undefined ? JSON.stringify(body) : undefined,
       ...init,
     });
@@ -57,14 +68,15 @@ export class HttpClient {
     const contentType = res.headers.get('content-type') ?? '';
     const isJson = contentType.includes('application/json');
     const data = isJson ? await res.json() : await res.text();
-    
+
     if (!res.ok) {
-      const message = isJson && typeof data === 'object' && data && 'message' in data 
-        ? String((data as Record<string, unknown>).message) 
-        : `HTTP ${res.status}`;
+      const message =
+        isJson && typeof data === 'object' && data && 'message' in data
+          ? String((data as Record<string, unknown>).message)
+          : `HTTP ${res.status}`;
       throw new HttpError(message, res.status, data);
     }
-    
+
     return data as T;
   }
-} 
+}

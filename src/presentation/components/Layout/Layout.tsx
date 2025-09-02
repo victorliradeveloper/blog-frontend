@@ -1,28 +1,21 @@
 import Footer from '@/presentation/components/Footer';
-import Header from '@/presentation/components/Header';
+// import Header from '@/presentation/components/Header';
 import { LayoutProps } from './Layout.types';
 import { useScrollContext } from '@/Context/scrollProvider';
 import { useState } from 'react';
 import SearchPost from '../SearchPost/SearchPost';
+import Header from '../Header';
 
 const Layout = ({ children }: LayoutProps) => {
-
-  const { scrollIntoViewHandler, containerRef } = useScrollContext();
-    const [openMobileMenu, setOpenMobileMenu] = useState(false);
-    const [openSearchModal, setOpenSearchModal] = useState(false);
+  const { containerRef } = useScrollContext();
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
+  const [openSearchModal, setOpenSearchModal] = useState(false);
 
   const onOpenSearchModal = function () {
     setOpenSearchModal(prev => !prev);
   };
 
-
-  const resetSearch = function () {
-
-  };
-
-  const handleMobileMenu = (toggle: boolean) => {
-    setOpenMobileMenu(toggle);
-  };
+  const resetSearch = function () {};
 
   const closeSearch = function () {
     setOpenSearchModal(false);
@@ -32,16 +25,21 @@ const Layout = ({ children }: LayoutProps) => {
     setOpenMobileMenu(false);
   };
 
-
   return (
     <>
-      <Header
+      {/* <Header
         className="header"
         scrollIntoView={() => scrollIntoViewHandler()}
         onOpenSearchModal={onOpenSearchModal}
         onResetSearch={resetSearch}
         openMobileMenu={openMobileMenu}
         setOpenMobileMenu={handleMobileMenu}
+      /> */}
+      <Header
+        onOpenSearchModal={onOpenSearchModal}
+        onResetSearch={resetSearch}
+        openMobileMenu={openMobileMenu}
+        setOpenMobileMenu={setOpenMobileMenu}
       />
       <SearchPost
         displaySearch={openSearchModal}

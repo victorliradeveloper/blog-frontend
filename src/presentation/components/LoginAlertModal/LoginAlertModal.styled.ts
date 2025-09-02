@@ -26,13 +26,13 @@ export const StyledLoginAlertModal = styled.div`
     font-size: 20px;
     text-align: center;
 
-     @media screen and (max-width: 501px) {
-        font-size: 16px;
+    @media screen and (max-width: 501px) {
+      font-size: 16px;
     }
 
     &.txt-2 {
       margin-bottom: 50px;
-       @media screen and (max-width: 501px) {
+      @media screen and (max-width: 501px) {
         font-size: 16px;
       }
     }

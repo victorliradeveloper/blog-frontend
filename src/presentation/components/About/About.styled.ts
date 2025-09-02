@@ -21,7 +21,6 @@ const StyledAbout = styled.div`
   color: #fff;
   max-width: 1200px;
 
-
   h1 {
     font-size: 50px;
 

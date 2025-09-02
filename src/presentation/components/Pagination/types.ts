@@ -5,5 +5,5 @@ export type IpropsPagination = {
   hasPreviousPage: boolean;
   previousPage: number;
   nextPage: number;
-  queryParam: string
+  queryParam: string;
 };

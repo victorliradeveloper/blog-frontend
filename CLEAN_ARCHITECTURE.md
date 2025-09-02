@@ -41,22 +41,26 @@ src/
 ## Camadas
 
 ### 1. Domain (Domínio)
+
 - **Entidades**: Modelos do domínio (Post, User, etc.)
 - **Repositórios**: Interfaces que definem contratos para acesso a dados
 - **Regras de Negócio**: Lógica central da aplicação
 
 ### 2. Application (Aplicação)
+
 - **Use Cases**: Casos de uso que implementam as regras de negócio
 - **Orquestração**: Coordenação entre diferentes partes do sistema
 - **Validações**: Validações de entrada e regras de aplicação
 
 ### 3. Infrastructure (Infraestrutura)
+
 - **HTTP**: Implementações de acesso a APIs externas
 - **Memory**: Implementações em memória para testes
 - **Database**: Implementações de acesso a banco de dados
 - **External Services**: Integrações com serviços externos
 
 ### 4. Presentation (Apresentação)
+
 - **Pages**: Páginas do Next.js
 - **Components**: Componentes React
 - **Hooks**: Hooks customizados que usam casos de uso
@@ -75,6 +79,7 @@ src/
 ## Exemplo de Uso
 
 ### Hook Customizado
+
 ```typescript
 import { usePosts } from '@/presentation/hooks/usePosts';
 
@@ -83,7 +88,7 @@ function MyComponent() {
     page: '1',
     limit: '10',
     category: 'tech',
-    useMock: false // true para usar dados em memória
+    useMock: false, // true para usar dados em memória
   });
 
   // ...
@@ -91,6 +96,7 @@ function MyComponent() {
 ```
 
 ### Página com Injeção de Dependências
+
 ```typescript
 import { useMemo } from 'react';
 import { HttpClient } from '@/infrastructure/http/HttpClient';
@@ -98,15 +104,12 @@ import { PostHttpRepository } from '@/infrastructure/http/PostHttpRepository';
 import { GetPostsUseCase } from '@/application/posts/use-cases/GetPostsUseCase';
 
 export default function PostsPage() {
-  const repository = useMemo(() => 
-    new PostHttpRepository(new HttpClient(process.env.NEXT_PUBLIC_API_URL)), 
-    []
+  const repository = useMemo(
+    () => new PostHttpRepository(new HttpClient(process.env.NEXT_PUBLIC_API_URL)),
+    [],
   );
-  
-  const getPostsUseCase = useMemo(() => 
-    new GetPostsUseCase(repository), 
-    [repository]
-  );
+
+  const getPostsUseCase = useMemo(() => new GetPostsUseCase(repository), [repository]);
 
   // ...
 }
@@ -137,4 +140,4 @@ Para migrar o código existente:
 3. Implementar cache e otimizações
 4. Adicionar validações no domínio
 5. Implementar tratamento de erros centralizado
-6. Adicionar documentação de API 
+6. Adicionar documentação de API

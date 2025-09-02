@@ -9,7 +9,7 @@
   "typescript": {
     "id": 2,
     "name": "TypeScript",
-    "image": "/typescript.png", 
+    "image": "/typescript.png",
     "description": "Superset do JavaScript com tipagem",
     "link": "https://typescriptlang.org"
   },
@@ -27,4 +27,4 @@
     "description": "Linguagem de programação",
     "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
   }
-} 
+}

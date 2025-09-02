@@ -8,7 +8,7 @@ export class SearchPostsUseCase {
     if (!query || query.trim().length === 0) {
       throw new Error('Query não pode estar vazia');
     }
-    
+
     return this.postRepository.searchPosts(query, page, limit);
   }
-} 
+}

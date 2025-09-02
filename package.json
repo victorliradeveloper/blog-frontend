@@ -2,6 +2,9 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "CI=false && next build",
@@ -39,6 +42,7 @@
     "framer-motion": "^10.17.4",
     "highlight.js": "^11.10.0",
     "jwt-decode": "^4.0.0",
+    "kbar": "^0.1.0-beta.48",
     "markdown-it": "^13.0.1",
     "marked": "^5.1.0",
     "next": "^15.1.3",
@@ -99,6 +103,5 @@
       }
     ]
   ],
-
   "license": "MIT"
 }

@@ -32,4 +32,4 @@ export class ServerPostsService {
     const useCase = new GetPostsUseCase(repository);
     return useCase.execute(page, limit, category);
   }
-} 
+}
