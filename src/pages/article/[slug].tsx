@@ -8,7 +8,6 @@ import 'aos/dist/aos.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Image from 'next/image';
 import {
   FacebookShareButton,
@@ -17,7 +16,7 @@ import {
   TelegramShareButton,
 } from 'react-share';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
-import { FAVICON, POST_BACKGROUND_BLUR } from '@/constants/images';
+import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
 import LoginAlertModal from '@/presentation/components/LoginAlertModal';
 import hljs from 'highlight.js';
@@ -120,12 +119,7 @@ function Posts(props: IProps) {
 
       <div className="profile" data-aos="fade-down">
         <div className="background-image-container">
-          <LazyLoadImage
-            className="background-image"
-            src={props.post.postBackground}
-            placeholderSrc={POST_BACKGROUND_BLUR}
-            alt="Blur background"
-          />
+          <img src={props.post.postBackground} alt="post background" className="background-image" />
         </div>
 
         <div className="body-post" data-aos="fade-up">
@@ -196,31 +190,32 @@ function Posts(props: IProps) {
       <h1 className="title">Últimas postagens</h1>
       <div className="last-posts">
         <Slider {...settings}>
-          {props.relatedPosts && props.relatedPosts.map((post: Post) => {
-            return (
-              <div className="slider-content" key={post.id}>
-                <PostComponent
-                  onDisplayLoginAlert={displayLoginAlert}
-                  id={post.id}
-                  category={post.category}
-                  content={post.content}
-                  date={post.date}
-                  metaTagDescription={post.metaTagDescription}
-                  metaTagTitle={post.metaTagTitle}
-                  title={post.title}
-                  postImage={post.postImage}
-                  postBackground={post.postBackground}
-                  author={post.author ?? 'Unknown Author'}
-                  keywords={post.keywords}
-                  slug={post.slug}
-                  aos_delay=""
-                  aos_type=""
-                  hover_animation={-7}
-                  onUpdateFavoritSource={updateFavoritSource(favoritPosts, post)}
-                />
-              </div>
-            );
-          })}
+          {props.relatedPosts &&
+            props.relatedPosts.map((post: Post) => {
+              return (
+                <div className="slider-content" key={post.id}>
+                  <PostComponent
+                    onDisplayLoginAlert={displayLoginAlert}
+                    id={post.id}
+                    category={post.category}
+                    content={post.content}
+                    date={post.date}
+                    metaTagDescription={post.metaTagDescription}
+                    metaTagTitle={post.metaTagTitle}
+                    title={post.title}
+                    postImage={post.postImage}
+                    postBackground={post.postBackground}
+                    author={post.author ?? 'Unknown Author'}
+                    keywords={post.keywords}
+                    slug={post.slug}
+                    aos_delay=""
+                    aos_type=""
+                    hover_animation={-7}
+                    onUpdateFavoritSource={updateFavoritSource(favoritPosts, post)}
+                  />
+                </div>
+              );
+            })}
         </Slider>
       </div>
     </StyledPostNew>
@@ -245,12 +240,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async context => {
   const { slug } = context.params!;
 
   try {
     const post = await ServerPostsService.getPostBySlug(slug as string);
-    
+
     // Buscar apenas 3 posts mais recentes
     const relatedPostsData = await ServerPostsService.getAllPosts('1', '5', 'all');
     const relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);

@@ -150,7 +150,6 @@ const StyledPortfolio = styled.div`
         }
       }
 
-
       .form-wrapper {
         width: 800px;
         margin: 0 auto;

@@ -1,6 +1,6 @@
-import StyledWorkExperience from "./WorkExperience.styled";
+import StyledWorkExperience from './WorkExperience.styled';
 
-function WorkExperience(){
+function WorkExperience() {
   return (
     <StyledWorkExperience>
       <div className="experience-header">
@@ -9,7 +9,7 @@ function WorkExperience(){
         <div className="line-right"></div>
       </div>
     </StyledWorkExperience>
-  )
+  );
 }
 
 export default WorkExperience;

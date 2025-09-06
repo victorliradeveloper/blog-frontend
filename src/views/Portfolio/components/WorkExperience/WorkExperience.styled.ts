@@ -9,7 +9,8 @@ const StyledWorkExperience = styled.div`
     display: flex;
     align-items: center;
 
-    .line-left, .line-right {
+    .line-left,
+    .line-right {
       width: 100%;
       height: 2px;
       background: #fff;

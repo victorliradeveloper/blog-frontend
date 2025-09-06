@@ -83,7 +83,7 @@ export class PostHttpRepository implements PostRepository {
       postBackground: post.post_background,
       author: post.author,
       keywords: post.keywords,
-      slug: post.slug
+      slug: post.slug,
     };
   }
 
