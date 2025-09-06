@@ -10,6 +10,7 @@ export interface Post {
   postBackground: string;
   author: string;
   keywords: string;
+  slug: string;
 }
 
 export interface PostPagination {
