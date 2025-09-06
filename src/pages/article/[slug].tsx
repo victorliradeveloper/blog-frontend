@@ -252,7 +252,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const post = await ServerPostsService.getPostBySlug(slug as string);
     
     // Buscar apenas 3 posts mais recentes
-    const relatedPostsData = await ServerPostsService.getAllPosts('1', '3', 'all');
+    const relatedPostsData = await ServerPostsService.getAllPosts('1', '5', 'all');
     const relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);
 
     return {
