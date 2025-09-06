@@ -103,6 +103,7 @@ function Profile() {
               currentPostArray.map(post => {
                 return (
                   <PostComponent
+                    slug={post.slug}
                     style={{}}
                     id={post.id}
                     key={post.id}

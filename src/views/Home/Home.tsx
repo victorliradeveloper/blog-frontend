@@ -108,6 +108,7 @@ export default function Home({ postsData }: { postsData: Data }) {
                 id={post.id}
                 key={post.id}
                 title={post.title}
+                slug={post.slug}
                 content={post.content}
                 author={post.author}
                 metaTagTitle={post.metaTagTitle}

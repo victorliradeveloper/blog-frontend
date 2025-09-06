@@ -14,6 +14,7 @@ export interface BlogPostResponse {
   post_background: string;
   author: string;
   keywords: string;
+  slug: string;
 }
 
 export interface BlogResponse {
@@ -65,7 +66,7 @@ export class PostHttpRepository implements PostRepository {
   }
 
   async getPostBySlug(slug: string): Promise<Post> {
-    const response = await this.http.get<BlogPostResponse>(`/api/post/${slug}`);
+    const response = await this.http.get<BlogPostResponse>(`/api/get/slug/${slug}`);
     return this.mapPost(response);
   }
 
@@ -82,6 +83,7 @@ export class PostHttpRepository implements PostRepository {
       postBackground: post.post_background,
       author: post.author,
       keywords: post.keywords,
+      slug: post.slug,
     };
   }
 

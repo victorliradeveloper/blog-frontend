@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
 
 export const CardSpotlightEffect = ({
   children,
@@ -76,4 +76,4 @@ const SpotlightEffect = styled.div`
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 1;
-`; 
+`;

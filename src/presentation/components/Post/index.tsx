@@ -9,8 +9,6 @@ import Image from 'next/image';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { IProps } from './types';
 import { PAGINATION_ARROW } from '@/constants/images';
-import { generateSlug } from '@/helper/functions/generateSlug';
-
 
 const Post: React.FC<IProps> = props => {
   const { addToFavoritsHandler } = useAddToFavoritsContext();
@@ -22,7 +20,7 @@ const Post: React.FC<IProps> = props => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
     e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
   };
@@ -40,20 +38,20 @@ const Post: React.FC<IProps> = props => {
     }
 
     router.push({
-      pathname: `/article/${generateSlug(props.title)}`,
+      pathname: `/article/${props.slug}`,
       query: {},
     });
   };
 
   return (
-          <StyledPost
-        data-aos-delay={props.aos_delay}
-        data-aos={props.aos_type}
-        style={props.style}
-        onClick={handleLinkClick}
-        onMouseMove={handleMouseMove}
-        data-id={props.id}
-      >
+    <StyledPost
+      data-aos-delay={props.aos_delay}
+      data-aos={props.aos_type}
+      style={props.style}
+      onClick={handleLinkClick}
+      onMouseMove={handleMouseMove}
+      data-id={props.id}
+    >
       <motion.div whileHover={{ y: props.hover_animation }} className="motion-box">
         <div className="post-image-wrapper">
           <div className="add-to-favorits__wrapper favorits--trigger">

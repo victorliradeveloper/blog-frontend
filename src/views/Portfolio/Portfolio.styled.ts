@@ -23,18 +23,6 @@ const StyledPortfolio = styled.div`
         height: 600px;
       }
 
-      &.item-2 {
-        height: 600px;
-
-        @media screen and (max-width: 1274px) {
-          height: auto;
-        }
-
-        @media screen and (max-width: 500px) {
-          margin-bottom: 200px;
-        }
-      }
-
       &.item-3 {
         height: 600px;
         margin-top: 100px;
@@ -159,70 +147,6 @@ const StyledPortfolio = styled.div`
           @media screen and (max-width: 400px) {
             font-size: 34px;
           }
-        }
-      }
-
-      .about-wrapper {
-        position: relative;
-        max-width: 830px;
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-        scroll-snap-align: center;
-
-        .modal-tech-information {
-        }
-
-        @media screen and (max-width: 1274px) {
-          margin-top: 440px;
-        }
-
-        @media screen and (max-width: 1274px) {
-          margin-top: 20px;
-        }
-
-        .profession {
-          font-size: 20px;
-          @media screen and (max-width: 1040px) {
-            text-align: center;
-          }
-
-          @media screen and (max-width: 400px) {
-            font-size: 16px;
-          }
-        }
-
-        .description {
-          @media screen and (max-width: 400px) {
-            font-size: 14px;
-            line-height: 24px;
-          }
-        }
-
-        .skills {
-          font-size: 30px;
-          font-weight: bold;
-          margin-top: 0px;
-          background-size: 100%;
-          background-image: linear-gradient(135deg, #80ffea 0%, #8aff80 100%);
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          -webkit-box-decoration-break: clone;
-          font-size: 40px;
-          line-height: 80px;
-          font-weight: 700;
-
-          @media screen and (max-width: 800px) {
-            font-size: 20px;
-          }
-        }
-
-        .tip {
-          margin: 20px 0px 48px 0px;
         }
       }
 

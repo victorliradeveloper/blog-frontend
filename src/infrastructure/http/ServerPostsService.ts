@@ -32,4 +32,9 @@ export class ServerPostsService {
     const useCase = new GetPostsUseCase(repository);
     return useCase.execute(page, limit, category);
   }
+
+  static async getPostBySlug(slug: string): Promise<Post> {
+    const repository = this.getRepository();
+    return repository.getPostBySlug(slug);
+  }
 }
