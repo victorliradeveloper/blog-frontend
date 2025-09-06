@@ -24,6 +24,7 @@ import {
   validateSubject,
   validateMessage,
 } from './functions/formValidation';
+import WorkExperience from './components/WorkExperience/WorkExperience';
 
 const Portfolio = function () {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -125,6 +126,7 @@ const Portfolio = function () {
       </Head>
 
       <FormModal onCloseFormModal={closeFormModal} className={showFormModal ? 'active' : ''} />
+
       <StyledPortfolio className="profile">
         <div className="container-vh">
           <div className="item main-item">
@@ -171,6 +173,8 @@ const Portfolio = function () {
               </h1>
             </div>
           </div>
+
+          <WorkExperience />
 
           <div className="item item-3">
             <div className="form-wrapper">
