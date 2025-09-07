@@ -15,9 +15,9 @@ const StyledPortfolio = styled.div`
       scroll-snap-align: center;
       position: relative;
 
-      &.main-item {
+      /* &.main-item {
         height: calc(100vh - 86.5px);
-      }
+      } */
 
       &.item-1 {
         height: 600px;
