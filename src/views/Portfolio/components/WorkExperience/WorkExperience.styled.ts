@@ -77,6 +77,15 @@ const StyledWorkExperience = styled.div`
 
   .work-logo {
     flex-shrink: 0;
+    border: 2px solid #2d2d2d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    padding: 5px;
+    img {
+      border-radius: 100%;
+    }
   }
 
   .work-content {
@@ -135,6 +144,16 @@ const StyledWorkExperience = styled.div`
 
   .education-logo {
     flex-shrink: 0;
+    border: 2px solid #2d2d2d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    padding: 5px;
+
+    img {
+      border-radius: 100%;
+    }
   }
 
   .education-content {
