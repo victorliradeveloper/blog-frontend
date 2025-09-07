@@ -56,31 +56,103 @@ const StyledWorkExperience = styled.div`
   }
 
   .content {
-    padding: 16px;
-    border: 2px solid #2d2d2d;
+    margin-top: 20px;
+  }
+
+  .work-experiences {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .work-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px;
+    background: rgba(48, 44, 58, 0.3);
     border-radius: 15px;
-    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
 
-    .work-wrapper {
-      display: flex;
-      gap: 1rem;
+  .work-logo {
+    flex-shrink: 0;
+  }
 
-      .work-content  {
-        padding-left: 1rem;
-        .work-header {
-          display: flex;
-          justify-content: space-between;
-          font-size: 18px;
-          font-weight: 700;
-          margin-bottom: .5rem;
-        }
+  .work-content {
+    flex: 1;
+  }
 
-        ul {
-          li {
-            color: #ccc;
-          }
-        }
+  .work-header {
+    margin-bottom: 15px;
+    
+    p:first-child {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    p:last-child {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    
+    li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      line-height: 1.6;
+      
+      &::before {
+        content: "•";
+        color: #fff;
+        position: absolute;
+        left: 0;
       }
+    }
+  }
+
+  .education-experiences {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .education-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px;
+    background: rgba(48, 44, 58, 0.3);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .education-logo {
+    flex-shrink: 0;
+  }
+
+  .education-content {
+    flex: 1;
+  }
+
+  .education-header {
+    margin-bottom: 15px;
+    
+    p:first-child {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    p:last-child {
+      font-size: 0.9rem;
+      color: #ccc;
     }
   }
 `;

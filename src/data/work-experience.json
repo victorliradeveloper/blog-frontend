@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "company": "Wine",
+    "position": "Software Engineer",
+    "period": "Oct 2023 - Present",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "achievements": [
+      "Optimized a geolocation microservice by applying classification algorithms and caching, increasing accuracy by 95% and reducing costs by 50%.",
+      "Led the development of a real-time data processing pipeline that handles 1M+ events per day.",
+      "Implemented automated testing strategies that reduced bug reports by 40% in production.",
+      "Collaborated with cross-functional teams to deliver 3 major product features ahead of schedule.",
+      "Mentored 2 junior developers and conducted code reviews for team best practices."
+    ]
+  },
+  {
+    "id": 2,
+    "company": "TechCorp",
+    "position": "Frontend Developer",
+    "period": "Jan 2022 - Sep 2023",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "achievements": [
+      "Developed responsive web applications using React and TypeScript.",
+      "Improved application performance by 60% through code optimization and lazy loading.",
+      "Implemented CI/CD pipelines that reduced deployment time by 70%.",
+      "Created reusable component library used across 5 different projects.",
+      "Collaborated with UX/UI designers to implement pixel-perfect designs."
+    ]
+  }
+] 
