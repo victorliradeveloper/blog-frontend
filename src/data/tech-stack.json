@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Java",
+    "category": "Programming Language",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "description": "Backend development and enterprise applications"
+  },
+  {
+    "id": 2,
+    "name": "React",
+    "category": "Frontend Framework",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "description": "Modern UI development and component-based architecture"
+  },
+  {
+    "id": 3,
+    "name": "TypeScript",
+    "category": "Programming Language",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "description": "Type-safe JavaScript development"
+  },
+  {
+    "id": 4,
+    "name": "Node.js",
+    "category": "Runtime Environment",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "description": "Server-side JavaScript development"
+  },
+  {
+    "id": 5,
+    "name": "Next.js",
+    "category": "React Framework",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "description": "Full-stack React applications with SSR/SSG"
+  },
+  {
+    "id": 6,
+    "name": "PostgreSQL",
+    "category": "Database",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "description": "Relational database management system"
+  },
+  {
+    "id": 7,
+    "name": "Docker",
+    "category": "Containerization",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "description": "Application containerization and deployment"
+  },
+  {
+    "id": 8,
+    "name": "AWS",
+    "category": "Cloud Platform",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "description": "Cloud computing and infrastructure services"
+  }
+] 
