@@ -22,10 +22,11 @@ import LoginAlertModal from '@/presentation/components/LoginAlertModal';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { ServerPostsService } from '@/infrastructure/http/ServerPostsService';
+import { PostHttpRepository } from '@/infrastructure/http/PostHttpRepository';
+import { HttpClient } from '@/infrastructure/http/HttpClient';
 import { Post } from '@/domain/posts/entities/Post';
 import PostComponent from '@/presentation/components/Post';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPropsContext } from 'next';
 
 type IProps = {
   post: Post;
@@ -119,7 +120,7 @@ function Posts(props: IProps) {
 
       <div className="profile" data-aos="fade-down">
         <div className="background-image-container">
-          <img src={props.post.postBackground} alt="post background" className="background-image" />
+          {/* <Image src={props.post.postBackground} alt="post background" className="background-image" /> */}
         </div>
 
         <div className="body-post" data-aos="fade-up">
@@ -222,32 +223,43 @@ function Posts(props: IProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
   try {
     // Busca apenas os slugs necessários
-    const data = await ServerPostsService.getAllPosts('1', '50', 'all');
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    const httpClient = new HttpClient(baseUrl);
+    const postRepository = new PostHttpRepository(httpClient);
+    
+    const data = await postRepository.getAllPosts('1', '50', 'all');
     const paths = data.results.map((post: Post) => ({
       params: { slug: post.slug },
     }));
 
     return {
       paths,
-      fallback: 'blocking', // Gera páginas novas sob demanda
+      fallback: 'blocking',
     };
   } catch (error) {
     console.error('Error fetching paths:', error);
-    return { paths: [], fallback: false };
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
   }
-};
+}
 
-export const getStaticProps: GetStaticProps = async context => {
-  const { slug } = context.params!;
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const { slug } = params!;
 
   try {
-    const post = await ServerPostsService.getPostBySlug(slug as string);
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    const httpClient = new HttpClient(baseUrl);
+    const postRepository = new PostHttpRepository(httpClient);
+    
+    const post = await postRepository.getPostBySlug(slug as string);
 
     // Buscar apenas 3 posts mais recentes
-    const relatedPostsData = await ServerPostsService.getAllPosts('1', '5', 'all');
+    const relatedPostsData = await postRepository.getAllPosts('1', '5', 'all');
     const relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);
 
     return {
@@ -255,14 +267,14 @@ export const getStaticProps: GetStaticProps = async context => {
         post,
         relatedPosts,
       },
-      revalidate: 3600, // Revalida a cada hora
+      revalidate: 3600, // Revalida a cada 60 segundos
     };
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching post:', error);
     return {
       notFound: true,
     };
   }
-};
+}
 
 export default Posts;

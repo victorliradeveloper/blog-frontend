@@ -1,20 +1,25 @@
-import { ServerPostsService, PostsResponse } from '@/infrastructure/http/ServerPostsService';
+import { PostHttpRepository } from '@/infrastructure/http/PostHttpRepository';
+import { HttpClient } from '@/infrastructure/http/HttpClient';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { PostPagination } from '@/domain/posts/entities/Post';
 
-export const getServerSideProps: GetServerSideProps<{ postsData: PostsResponse }> = async (
+export const getServerSideProps: GetServerSideProps<{ postsData: PostPagination }> = async (
   context: GetServerSidePropsContext,
 ) => {
   try {
-    const page = String(context.query?.page ?? '1');
-    const category = context.query?.category ? String(context.query.category) : 'all';
-    const limit = '8';
+    const { page = '1', limit = '8', category = 'all', query } = context.query;
 
-    let data: PostsResponse;
+    // Adicionando a baseUrl necessária para o HttpClient
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    const httpClient = new HttpClient(baseUrl);
+    const postRepository = new PostHttpRepository(httpClient);
 
-    if (context.query.query) {
-      data = await ServerPostsService.searchPosts(String(context.query.query), page, limit);
+    let data;
+
+    if (query) {
+      data = await postRepository.searchPosts(String(query), String(page), String(limit));
     } else {
-      data = await ServerPostsService.getAllPosts(page, limit, category);
+      data = await postRepository.getAllPosts(String(page), String(limit), String(category));
     }
 
     return {

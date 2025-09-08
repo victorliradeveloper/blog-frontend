@@ -30,7 +30,7 @@ function TackStack() {
             <div>
               <p>{tech.name}</p>
               <p>{tech.category}</p>
-            </div>
+            </  div>
           </div>
         ))}
       </div>
