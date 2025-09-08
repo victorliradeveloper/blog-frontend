@@ -22,11 +22,13 @@ import LoginAlertModal from '@/presentation/components/LoginAlertModal';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { PostHttpRepository } from '@/infrastructure/http/PostHttpRepository';
-import { HttpClient } from '@/infrastructure/http/HttpClient';
-import { Post } from '@/domain/posts/entities/Post';
+import { PostApiRepository } from '../../http/PostApiRepository';
+import { HttpClient } from '../../http/HttpClient';
+import { Post } from '../../entities/Post';
 import PostComponent from '@/presentation/components/Post';
 import { GetStaticPropsContext } from 'next';
+import { GetPosts } from '../../usecases/posts/GetPosts';
+import { GetPostBySlug } from '../../usecases/posts/GetPostBySlug';
 
 type IProps = {
   post: Post;
@@ -225,12 +227,12 @@ function Posts(props: IProps) {
 
 export async function getStaticPaths() {
   try {
-    // Busca apenas os slugs necessários
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     const httpClient = new HttpClient(baseUrl);
-    const postRepository = new PostHttpRepository(httpClient);
+    const postRepository = new PostApiRepository(httpClient);
+    const getPosts = new GetPosts(postRepository);
     
-    const data = await postRepository.getAllPosts('1', '50', 'all');
+    const data = await getPosts.execute('1', '50', 'all');
     const paths = data.results.map((post: Post) => ({
       params: { slug: post.slug },
     }));
@@ -254,12 +256,13 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     const httpClient = new HttpClient(baseUrl);
-    const postRepository = new PostHttpRepository(httpClient);
+    const postRepository = new PostApiRepository(httpClient);
     
-    const post = await postRepository.getPostBySlug(slug as string);
-
-    // Buscar apenas 3 posts mais recentes
-    const relatedPostsData = await postRepository.getAllPosts('1', '5', 'all');
+    const getPostBySlug = new GetPostBySlug(postRepository);
+    const post = await getPostBySlug.execute(slug as string);
+    
+    const getPosts = new GetPosts(postRepository);
+    const relatedPostsData = await getPosts.execute('1', '5', 'all');
     const relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);
 
     return {
@@ -267,7 +270,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
         post,
         relatedPosts,
       },
-      revalidate: 3600, // Revalida a cada 60 segundos
+      revalidate: 3600,
     };
   } catch (error) {
     console.error('Error fetching post:', error);

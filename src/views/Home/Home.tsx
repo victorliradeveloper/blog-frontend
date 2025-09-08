@@ -12,9 +12,8 @@ import Pagination from '@/presentation/components/Pagination';
 import { GlobalContext } from '@/Context/pagination';
 import MainPage from '@/views/Home/components/MainPage';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { usePosts } from '@/presentation/hooks/usePosts';
 import { useRouter } from 'next/router';
-import { Post, PostPagination } from '@/domain/posts/entities/Post';
+import { Post, PostPagination } from '@/entities/Post';
 
 type Data = PostPagination;
 
@@ -25,14 +24,6 @@ export default function Home({ postsData }: { postsData: Data }) {
   const [displayLoginModal, setDisplayLoginModal] = useState(false);
   const router = useRouter();
   const searchQuery = router.query.query as string;
-  const pageParam = (router.query.page as string) || '1';
-
-  const { data: searchedPosts } = usePosts({
-    query: searchQuery || '',
-    page: pageParam,
-    limit: '8',
-    enabled: !!searchQuery,
-  });
 
   useEffect(() => {
     if (postsData?.next?.page) {
@@ -43,10 +34,9 @@ export default function Home({ postsData }: { postsData: Data }) {
   useEffect(() => {
     AOS.init();
   }, []);
-
+  
   const hasPost = !!postsData.results;
-  const hasSearchedPosts = !!searchedPosts?.results;
-  const postsToDisplay = hasSearchedPosts ? searchedPosts : postsData;
+  const postsToDisplay = postsData;
 
   const checkNextPage = () => !!postsToDisplay?.next;
   const checkPreviousPage = () => !!postsToDisplay?.previous;
@@ -78,15 +68,15 @@ export default function Home({ postsData }: { postsData: Data }) {
         <LoginAlertModal onCloseLoginAlertModal={closeLoginAlertModal} />
       )}
 
-      {(searchedPosts?.results?.length === 0 || hasPost) && <About />}
+      {(postsData?.results?.length === 0 || hasPost) && <About />}
 
-      {!hasSearchedPosts && !hasPost && (
+      {!hasPost && (
         <h1 style={{ paddingTop: 200, textAlign: 'center', color: '#fff' }}>
           Nenhum post encontrado
         </h1>
       )}
 
-      {hasSearchedPosts && searchedPosts?.results?.length === 0 && (
+      {postsData?.results?.length === 0 && searchQuery && (
         <h1 style={{ paddingTop: 200, textAlign: 'center', color: '#fff' }}>
           Nenhum post encontrado para sua busca
         </h1>

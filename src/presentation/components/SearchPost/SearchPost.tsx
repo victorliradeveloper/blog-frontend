@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import StyledSearchPost from './SearchPost.styled';
 import { SearchPostProps } from './SearchPost.types';
-import { usePosts } from '@/presentation/hooks/usePosts';
 import { useSearchContext } from '@/Context/searchContext';
 
 function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }: SearchPostProps) {
@@ -12,18 +11,22 @@ function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }:
 
   const { query, setQuery, setSearchedPosts } = useSearchContext();
 
-  const { data } = usePosts({
-    query,
-    page: '1',
-    limit: '8',
-    enabled,
-  });
+  // Removendo a importação do usePosts
+  // import { usePosts } from '@/presentation/hooks/usePosts';
 
-  useEffect(() => {
-    if (data?.results) {
-      setSearchedPosts(data.results);
-    }
-  }, [data, setSearchedPosts]);
+  // Removendo o hook usePosts e suas dependências
+  // const { data } = usePosts({
+  //   query,
+  //   page: '1',
+  //   limit: '8',
+  // });
+
+  // Removendo o useEffect que dependia do data
+  // useEffect(() => {
+  //   if (data) {
+  //     setSearchedPosts(data.results);
+  //   }
+  // }, [data, setSearchedPosts]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;

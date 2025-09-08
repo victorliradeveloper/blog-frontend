@@ -1,7 +1,9 @@
-import { PostHttpRepository } from '@/infrastructure/http/PostHttpRepository';
-import { HttpClient } from '@/infrastructure/http/HttpClient';
+import { PostApiRepository } from '../http/PostApiRepository';
+import { HttpClient } from '../http/HttpClient';
+import { GetPosts } from '../usecases/posts/GetPosts';
+import { SearchPosts } from '../usecases/posts/SearchPosts';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { PostPagination } from '@/domain/posts/entities/Post';
+import { PostPagination } from '../entities/Post';
 
 export const getServerSideProps: GetServerSideProps<{ postsData: PostPagination }> = async (
   context: GetServerSidePropsContext,
@@ -9,17 +11,18 @@ export const getServerSideProps: GetServerSideProps<{ postsData: PostPagination 
   try {
     const { page = '1', limit = '8', category = 'all', query } = context.query;
 
-    // Adicionando a baseUrl necessária para o HttpClient
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     const httpClient = new HttpClient(baseUrl);
-    const postRepository = new PostHttpRepository(httpClient);
+    const postRepository = new PostApiRepository(httpClient);
 
     let data;
 
     if (query) {
-      data = await postRepository.searchPosts(String(query), String(page), String(limit));
+      const searchPosts = new SearchPosts(postRepository);
+      data = await searchPosts.execute(String(query), String(page), String(limit));
     } else {
-      data = await postRepository.getAllPosts(String(page), String(limit), String(category));
+      const getPosts = new GetPosts(postRepository);
+      data = await getPosts.execute(String(page), String(limit), String(category));
     }
 
     return {

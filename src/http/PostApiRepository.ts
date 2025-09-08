@@ -1,6 +1,6 @@
-import { Post, PostPagination } from '@/domain/posts/entities/Post';
-import { PostRepository } from '@/domain/posts/contracts/PostRepository';
-import { HttpClient } from './HttpClient';
+import { Post, PostPagination } from "../entities/Post";
+import { PostRepository } from "../repositories/PostRepository";
+import { HttpClient } from "./HttpClient";
 
 export interface BlogPostResponse {
   id: number;
@@ -24,25 +24,10 @@ export interface BlogResponse {
   previous?: { page: number; limit: number };
 }
 
-export class PostHttpRepository implements PostRepository {
+export class PostApiRepository implements PostRepository {
   constructor(private readonly http: HttpClient) {}
 
-  async searchPosts(
-    query: string,
-    page: string | string[],
-    limit: string,
-  ): Promise<PostPagination> {
-    const response = await this.http.get<BlogResponse>('/api/get/search', {
-      params: { query, page, limit },
-    });
-    return this.mapResponse(response);
-  }
-
-  async getAllPosts(
-    page: string | string[],
-    limit: string,
-    category: string | string[],
-  ): Promise<PostPagination> {
+  async getAllPosts(page: string, limit: string, category: string): Promise<PostPagination> {
     const pageParam = Array.isArray(page) ? page[0] : page;
     const categoryParam = Array.isArray(category) ? category[0] : category;
 
@@ -50,17 +35,20 @@ export class PostHttpRepository implements PostRepository {
     let params: Record<string, string>;
 
     if (categoryParam === 'all') {
-      // Para "all", usa o endpoint geral
       endpoint = '/api/get';
       params = { page: pageParam, limit };
     } else {
-      // Para categorias específicas, usa o endpoint de categoria
       endpoint = `/api/get/category/${categoryParam}`;
       params = { page: pageParam, limit };
     }
 
-    const response = await this.http.get<BlogResponse>(endpoint, {
-      params,
+    const response = await this.http.get<BlogResponse>(endpoint, { params });
+    return this.mapResponse(response);
+  }
+
+  async searchPosts(query: string, page: string, limit: string): Promise<PostPagination> {
+    const response = await this.http.get<BlogResponse>('/api/get/search', {
+      params: { query, page, limit },
     });
     return this.mapResponse(response);
   }
@@ -95,4 +83,4 @@ export class PostHttpRepository implements PostRepository {
       previous: response.previous ?? null,
     };
   }
-}
+} 
