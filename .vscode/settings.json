@@ -30,4 +30,5 @@
   "prettier.trailingComma": "all",
   "prettier.jsxSingleQuote": true,
   "prettier.arrowParens": "always"
+  
 }

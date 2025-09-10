@@ -11,4 +11,4 @@
    Add some test user
 
 5. SCREENSHOT:
-   Add a screenshot here if your PR makes visual changes
+   Add a screenshot here if your PR makes visual changes 
