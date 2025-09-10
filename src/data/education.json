@@ -1,30 +1,16 @@
 [
   {
     "id": 1,
-    "institution": "Universidade Federal do Rio de Janeiro",
-    "degree": "Bachelor's in Computer Science",
-    "period": "2018 - 2022",
-    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "institution": "Multivix",
+    "degree": "Análise e Desenvolvimento de Sistemas",
+    "period": "2025 - 2027",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/multivix_pxa2_F3AX.jpeg?updatedAt=1757538256663",
     "achievements": [
-      "Graduated with honors (GPA: 3.8/4.0)",
-      "Completed final project on Machine Learning algorithms for data classification",
-      "Participated in programming competitions and hackathons",
-      "Member of the Computer Science Student Association",
-      "Completed internships in software development and data analysis"
-    ]
-  },
-  {
-    "id": 2,
-    "institution": "Rocketseat",
-    "degree": "Full Stack Development Bootcamp",
-    "period": "2021 - 2022",
-    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
-    "achievements": [
-      "Completed intensive 6-month full-stack development program",
-      "Built 10+ projects using React, Node.js, and modern web technologies",
-      "Learned best practices in software development and agile methodologies",
-      "Collaborated with peers on real-world projects",
-      "Achieved certification in React and Node.js development"
+      "Estudos avançados em algoritmos e estruturas de dados",
+      "Implementação de projetos práticos com foco em lógica computacional",
+      "Desenvolvimento de sistemas utilizando princípios de orientação a objetos",
+      "Aplicação de fundamentos de arquitetura de computadores e organização de sistemas",
+      "Análise de complexidade de algoritmos e boas práticas de otimização"
     ]
   }
-] 
+]

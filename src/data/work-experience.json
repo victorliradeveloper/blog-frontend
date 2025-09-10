@@ -2,29 +2,29 @@
   {
     "id": 1,
     "company": "Wine",
-    "position": "Software Engineer",
-    "period": "Oct 2023 - Present",
+    "position": "Software Developer",
+    "period": "Abril 2022 - Atual",
     "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
     "achievements": [
-      "Optimized a geolocation microservice by applying classification algorithms and caching, increasing accuracy by 95% and reducing costs by 50%.",
-      "Led the development of a real-time data processing pipeline that handles 1M+ events per day.",
-      "Implemented automated testing strategies that reduced bug reports by 40% in production.",
-      "Collaborated with cross-functional teams to deliver 3 major product features ahead of schedule.",
-      "Mentored 2 junior developers and conducted code reviews for team best practices."
+      "Atuei na Wine (via GlobalSys), maior e-commerce de vinhos da América Latina e líder mundial em clube de assinatura de vinhos, contribuindo para iniciativas de modernização e escalabilidade da plataforma.",
+      "Realizei a migração de projetos legados em Vanilla JavaScript para Next.js com TypeScript, aplicando princípios de Clean Architecture para melhorar a performance, a organização e a manutenibilidade do código.",
+      "Desenvolvi ferramentas internas em JavaScript e TypeScript, otimizando processos e aumentando significativamente a produtividade da equipe de marketing ao reduzir tarefas manuais e repetitivas.",
+      "Implementei testes automatizados com Jest, utilizando TDD, o que resultou em um aumento de 80% na cobertura de código e proporcionou maior confiabilidade e estabilidade ao sistema.",
+      "Conduzi code reviews, promovendo boas práticas, garantindo a aderência a padrões de qualidade e reforçando o uso de Clean Architecture para facilitar a evolução do software."
     ]
   },
   {
     "id": 2,
-    "company": "TechCorp",
-    "position": "Frontend Developer",
-    "period": "Jan 2022 - Sep 2023",
-    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "company": "Gerente Max Softwares",
+    "position": "Software Developer",
+    "period": "Jan 2021 - Sep 2022",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/1631372546006_Jv378w13R.jpeg?updatedAt=1757538010144",
     "achievements": [
-      "Developed responsive web applications using React and TypeScript.",
-      "Improved application performance by 60% through code optimization and lazy loading.",
-      "Implemented CI/CD pipelines that reduced deployment time by 70%.",
-      "Created reusable component library used across 5 different projects.",
-      "Collaborated with UX/UI designers to implement pixel-perfect designs."
+      "Atuei no desenvolvimento do projeto MedCenter, uma solução voltada para otimizar o atendimento em clínicas de saúde. O objetivo principal foi automatizar processos de cadastro e fluxo de atendimento, tornando-os mais ágeis, eficientes e organizados.",
+      "Estruturei a base do projeto utilizando Vite, React e TypeScript, adotando o Tailwind CSS para a estilização de componentes de forma consistente e escalável.",
+      "Implementei OCR (Reconhecimento Óptico de Caracteres) com o Azure Vision para extração de texto em imagens e documentos digitalizados, reduzindo erros e eliminando a necessidade de inserção manual de dados.",
+      "Adotei o padrão Data Mapper para separar a lógica de persistência da lógica de negócio, facilitando a manutenção, aumentando a testabilidade e proporcionando um mapeamento mais claro e organizado dos objetos para o banco de dados.",
+      "Desenvolvi testes unitários com Vitest e React Testing Library, garantindo maior confiabilidade das funcionalidades implementadas, ampliando a cobertura de testes e minimizando riscos de regressão."
     ]
   }
-] 
+]
