@@ -20,7 +20,7 @@ import { useCurrentUser } from '@/Context/currentUser';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { Post } from '../../entities/Post';
+import { Post } from '../../presenters/Post';
 import PostComponent from '@/components/Post';
 import { GetStaticPropsContext } from 'next';
 import { PostService } from '../../services/PostService';

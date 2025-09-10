@@ -10,7 +10,7 @@ import { GlobalContext } from '@/Context/pagination';
 import MainPage from '@/views/Home/components/MainPage';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
 import { useRouter } from 'next/router';
-import { Post, PostPagination } from '@/entities/Post';
+import { Post, PostPagination } from '@/presenters/Post';
 import Pagination from '@/components/Pagination';
 import LoginAlertModal from '@/components/LoginAlertModal';
 import About from '@/components/About';

@@ -1,6 +1,6 @@
 import { PostService } from '../services/PostService';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { PostPagination } from '../entities/Post';
+import { PostPagination } from '../presenters/Post';
 
 const postService = new PostService();
 

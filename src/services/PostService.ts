@@ -1,4 +1,4 @@
-import { Post, PostPagination } from '../entities/Post';
+import { Post, PostPagination } from '../presenters/Post';
 import { mapPost, mapPostPagination } from '../mappers/post.mapper';
 import { HttpClient } from '../http/HttpClient';
 

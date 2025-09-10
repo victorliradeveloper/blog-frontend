@@ -1,4 +1,4 @@
-import { Post, PostPagination } from '../entities/Post';
+import { Post, PostPagination } from '../presenters/Post';
 
 export interface BlogPostResponse {
   id: number;

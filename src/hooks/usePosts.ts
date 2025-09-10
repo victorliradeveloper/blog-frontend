@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { PostService } from '../services/PostService';
-import { Post, PostPagination } from '../entities/Post';
+import { Post, PostPagination } from '../presenters/Post';
 
 const postService = new PostService();
 
