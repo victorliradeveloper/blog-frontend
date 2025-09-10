@@ -1,9 +1,9 @@
 import { PostApiRepository } from '../http/PostApiRepository';
-import { HttpClient } from '../http/HttpClient';
-import { GetPosts } from '../usecases/posts/GetPosts';
-import { SearchPosts } from '../usecases/posts/SearchPosts';
+import { HttpClient } from '../http/HttpClient';  
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { PostPagination } from '../entities/Post';
+import { GetPosts } from '@/use-cases/posts/GetPosts';
+import { SearchPosts } from '@/use-cases/posts/SearchPosts';
 
 export const getServerSideProps: GetServerSideProps<{ postsData: PostPagination }> = async (
   context: GetServerSidePropsContext,

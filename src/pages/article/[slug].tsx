@@ -22,13 +22,13 @@ import LoginAlertModal from '@/presentation/components/LoginAlertModal';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { PostApiRepository } from '../../http/PostApiRepository';
 import { HttpClient } from '../../http/HttpClient';
 import { Post } from '../../entities/Post';
 import PostComponent from '@/presentation/components/Post';
 import { GetStaticPropsContext } from 'next';
-import { GetPosts } from '../../usecases/posts/GetPosts';
-import { GetPostBySlug } from '../../usecases/posts/GetPostBySlug';
+import { GetPosts } from '@/use-cases/posts/GetPosts';
+import { GetPostBySlug } from '@/use-cases/posts/GetPostBySlug';
+import { PostApiRepository } from '@/http/PostApiRepository';
 
 type IProps = {
   post: Post;
@@ -257,8 +257,8 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     const httpClient = new HttpClient(baseUrl);
     const postRepository = new PostApiRepository(httpClient);
-    
     const getPostBySlug = new GetPostBySlug(postRepository);
+    
     const post = await getPostBySlug.execute(slug as string);
     
     const getPosts = new GetPosts(postRepository);
