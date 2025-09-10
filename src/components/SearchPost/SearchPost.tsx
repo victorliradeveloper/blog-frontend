@@ -1,37 +1,40 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import StyledSearchPost from './SearchPost.styled';
 import { SearchPostProps } from './SearchPost.types';
-import { usePosts } from '@/presentation/hooks/usePosts';
-import { useSearchContext } from '@/Context/searchContext';
+// import { useSearchContext } from '@/Context/searchContext';
 
 function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }: SearchPostProps) {
-  const [enabled, setEnabled] = useState(false);
+  // const [enabled, setEnabled] = useState(false);
   const router = useRouter();
 
-  const { query, setQuery, setSearchedPosts } = useSearchContext();
+  // const { query, setQuery, setSearchedPosts } = useSearchContext();
 
-  const { data } = usePosts({
-    query,
-    page: '1',
-    limit: '8',
-    enabled,
-  });
+  // Removendo a importação do usePosts
+  // import { usePosts } from '@/presentation/hooks/usePosts';
 
-  useEffect(() => {
-    if (data?.results) {
-      setSearchedPosts(data.results);
-    }
-  }, [data, setSearchedPosts]);
+  // Removendo o hook usePosts e suas dependências
+  // const { data } = usePosts({
+  //   query,
+  //   page: '1',
+  //   limit: '8',
+  // });
+
+  // Removendo o useEffect que dependia do data
+  // useEffect(() => {
+  //   if (data) {
+  //     setSearchedPosts(data.results);
+  //   }
+  // }, [data, setSearchedPosts]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     if (event.key === 'Enter') {
       const value = target.value.trim();
       if (value) {
-        setQuery(value);
-        setEnabled(true);
+        // setQuery(value);
+        // setEnabled(true);
         router.push(`/?query=${encodeURIComponent(value)}`);
       }
       onCloseSearch();
@@ -43,8 +46,8 @@ function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }:
     const value = inputElement?.value.trim();
 
     if (value) {
-      setQuery(value);
-      setEnabled(true);
+      // setQuery(value);
+      // setEnabled(true);
       router.push(`?query=${encodeURIComponent(value)}`);
     }
     onCloseMobileMenu();

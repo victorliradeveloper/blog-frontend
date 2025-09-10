@@ -7,9 +7,9 @@ import React from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleSignInProvider } from '@/Context/googleSignIn';
 import { CurrentUserProvider } from '@/Context/currentUser';
-import Layout from '@/presentation/components/Layout/Layout';
 import { ReactQueryProvider } from '@/providers/queryProvider';
 import { SearchProvider } from '@/Context/searchContext';
+import Layout from '@/components/Layout/Layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "institution": "Multivix",
+    "degree": "Análise e Desenvolvimento de Sistemas",
+    "period": "2025 - 2027",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/multivix_pxa2_F3AX.jpeg?updatedAt=1757538256663",
+    "achievements": [
+      "Estudos avançados em algoritmos e estruturas de dados",
+      "Implementação de projetos práticos com foco em lógica computacional",
+      "Desenvolvimento de sistemas utilizando princípios de orientação a objetos",
+      "Aplicação de fundamentos de arquitetura de computadores e organização de sistemas",
+      "Análise de complexidade de algoritmos e boas práticas de otimização"
+    ]
+  }
+]

@@ -1,10 +1,10 @@
-import Footer from '@/presentation/components/Footer';
 // import Header from '@/presentation/components/Header';
 import { LayoutProps } from './Layout.types';
 import { useScrollContext } from '@/Context/scrollProvider';
 import { useState } from 'react';
 import SearchPost from '../SearchPost/SearchPost';
 import Header from '../Header';
+import Footer from '../Footer';
 
 const Layout = ({ children }: LayoutProps) => {
   const { containerRef } = useScrollContext();

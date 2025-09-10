@@ -1,20 +1,21 @@
-import { ServerPostsService, PostsResponse } from '@/infrastructure/http/ServerPostsService';
+import { PostService } from '../services/PostService';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { PostPagination } from '../presenters/Post';
 
-export const getServerSideProps: GetServerSideProps<{ postsData: PostsResponse }> = async (
+const postService = new PostService();
+
+export const getServerSideProps: GetServerSideProps<{ postsData: PostPagination }> = async (
   context: GetServerSidePropsContext,
 ) => {
   try {
-    const page = String(context.query?.page ?? '1');
-    const category = context.query?.category ? String(context.query.category) : 'all';
-    const limit = '8';
+    const { page = '1', limit = '8', category = 'all', query } = context.query;
 
-    let data: PostsResponse;
+    let data;
 
-    if (context.query.query) {
-      data = await ServerPostsService.searchPosts(String(context.query.query), page, limit);
+    if (query) {
+      data = await postService.searchPosts(String(query), String(page), String(limit));
     } else {
-      data = await ServerPostsService.getAllPosts(page, limit, category);
+      data = await postService.getAllPosts(String(page), String(limit), String(category));
     }
 
     return {

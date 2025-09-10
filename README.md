@@ -1,213 +1,140 @@
-<div align="center">
-  <img src="https://ik.imagekit.io/Victorliradev/github/react_64hQyXkw9.png?updatedAt=1752626856336" width="120" alt="React Logo" />
-  <h3>Blog desenvolvido seguindo os princípios da Clean Architecture</h3>
-</div>
+# Blog Frontend
 
-## 🎯 Sobre o Projeto
-
-Este é um blog pessoal desenvolvido com foco em **Clean Architecture** e **boas práticas de desenvolvimento**. O projeto demonstra como aplicar princípios de arquitetura limpa em uma aplicação React/Next.js, mantendo o código organizado, testável e escalável.
-
-### ✨ Características Principais
-
-- 🏗️ **Clean Architecture** implementada
-- 📱 **Responsivo** e otimizado para mobile
-- ⚡ **Performance** otimizada com Next.js
-- 🔍 **SEO** otimizado
-- 🎨 **UI/UX** moderna e intuitiva
-- 🔒 **Autenticação** com Google
-- 💾 **Favoritos** com persistência local
-- 📊 **Analytics** integrado
-
-## 🛠️ Tecnologias
-
-### Frontend
-
-- **React 18** - Biblioteca JavaScript para interfaces
-- **Next.js 15** - Framework React para produção
-- **TypeScript** - Superset JavaScript com tipagem
-- **Styled Components** - CSS-in-JS
-- **Framer Motion** - Animações
-- **React Query** - Gerenciamento de estado e cache
-
-### Arquitetura
-
-- **Clean Architecture** - Separação de responsabilidades
-- **Domain-Driven Design** - Organização por domínios
-- **SOLID Principles** - Princípios de design de software
-
-### Ferramentas
-
-- **ESLint** - Linting de código
-- **Prettier** - Formatação de código
-- **Jest** - Testes unitários
-- **Cypress** - Testes E2E
+Um blog moderno construído com Next.js, TypeScript e seguindo padrões de arquitetura limpa.
 
 ## 🏗️ Arquitetura
 
-O projeto segue os princípios da **Clean Architecture** com organização por domínios:
+O projeto segue o padrão **Service Layer + Data Mapper + Custom Hooks**, organizando o código em camadas bem definidas:
 
-```
-src/
-├── domain/           # 🎯 Regras de negócio
-│   └── posts/
-│       ├── entities/     # Entidades do domínio
-│       └── contracts/    # Contratos/Interfaces
-├── application/      # 🔧 Casos de uso
-│   └── posts/
-│       └── use-cases/    # Lógica de aplicação
-├── infrastructure/   # 🏗️ Implementações externas
-│   ├── http/            # Cliente HTTP
-│   └── memory/          # Repositórios em memória
-└── presentation/     # 🎨 Interface do usuário
-    ├── components/      # Componentes React
-    └── hooks/           # Hooks customizados
-```
+## Padrões Utilizados
 
-### 📚 Benefícios da Arquitetura
+### 1. **Service Layer Pattern**
 
-- **Testabilidade** - Fácil de testar cada camada
-- **Manutenibilidade** - Código organizado e legível
-- **Escalabilidade** - Fácil de adicionar novas funcionalidades
-- **Independência** - Camadas desacopladas
-- **Flexibilidade** - Fácil de trocar implementações
+- **Responsabilidade**: Encapsula toda a lógica de comunicação com a API
+- **Localização**: `src/services/`
+- **Exemplo**: `PostService.ts` - centraliza operações de posts
 
-## ✨ Funcionalidades
+### 2. **Data Mapper Pattern**
 
-### 📝 Blog
+- **Responsabilidade**: Transforma dados da API para o formato do frontend
+- **Localização**: `src/mappers/`
+- **Exemplo**: `post.mapper.ts` - converte resposta da API em entidades
 
-- **Listagem de posts** com paginação
-- **Busca por posts** com filtros
-- **Visualização de post** individual
-- **Categorização** de conteúdo
-- **SEO otimizado** para cada post
+### 3. **Custom Hooks Pattern**
 
-### 👤 Usuário
+- **Responsabilidade**: Gerencia estado e side effects com React Query
+- **Localização**: `src/hooks/`
+- **Exemplo**: `usePosts.ts` - hook para buscar posts com cache
 
-- **Autenticação** com Google
-- **Perfil do usuário** personalizado
-- **Sistema de favoritos** com persistência
-- **Logout** seguro
+### 4. **HTTP Client Pattern**
 
-### 🎨 Interface
+- **Responsabilidade**: Cliente HTTP reutilizável com tratamento de erros
+- **Localização**: `src/http/`
+- **Exemplo**: `HttpClient.ts` - abstrai requisições HTTP
 
-- **Design responsivo** para todos os dispositivos
-- **Animações suaves** com Framer Motion
-- **Tema escuro** moderno
-- **Loading states** e feedback visual
-- **Acessibilidade** implementada
+## 🚀 Tecnologias
 
-### 📊 Performance
+- **Next.js 15** - Framework React com SSR/SSG
+- **TypeScript** - Tipagem estática
+- **React Query** - Gerenciamento de estado e cache
+- **Styled Components** - CSS-in-JS
+- **Cypress** - Testes E2E
+- **Jest** - Testes unitários
 
-- **SSR/SSG** com Next.js
-- **Lazy loading** de imagens
-- **Code splitting** automático
-- **Cache inteligente** com React Query
-
-## 🚀 Instalação
-
-### Pré-requisitos
-
-- Node.js 18+
-- npm ou yarn
-- Git
-
-### Passos
-
-1. **Clone o repositório**
+## 📦 Instalação
 
 ```bash
-git clone https://github.com/victorlirafront/blog-frontend.git
-cd blog-frontend
-```
-
-2. **Instale as dependências**
-
-```bash
+# Instalar dependências
 npm install
 # ou
 yarn install
-```
 
-3. **Configure as variáveis de ambiente**
-
-```bash
-cp .env.example .env.local
-```
-
-4. **Execute o projeto**
-
-```bash
+# Executar em desenvolvimento
 npm run dev
 # ou
 yarn dev
+
+# Build para produção
+npm run build
+# ou
+yarn build
 ```
 
-Acesse [http://localhost:3000](http://localhost:3000)
+## 🔧 Configuração
 
-## 📖 Como Usar
+### Variáveis de Ambiente
 
-### Desenvolvimento
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+### Scripts Disponíveis
 
 ```bash
-# Servidor de desenvolvimento
-npm run dev
-
-# Build de produção
-npm run build
-
-# Build de desenvolvimento
-npm run build:dev
-
-# Servidor de produção
-npm start
+npm run dev          # Desenvolvimento
+npm run build        # Build de produção
+npm run start        # Servidor de produção
+npm run lint         # Linter
+npm run test         # Testes unitários
+npm run test:e2e     # Testes E2E
 ```
 
-## 📁 Estrutura do Projeto
+## Arquitetura Detalhada
 
+### Fluxo de Dados
+
+1. **Component** → Chama hook customizado
+2. **Hook** → Usa service para buscar dados
+3. **Service** → Usa HttpClient para requisições
+4. **Mapper** → Transforma dados da API
+5. **Entity** → Define tipos TypeScript
+
+### Exemplo de Uso
+
+```typescript
+// Hook
+const { data, loading, error } = usePosts('1', '8', 'all');
+
+// Service
+const postService = new PostService();
+const posts = await postService.getAllPosts('1', '8', 'all');
+
+// Mapper
+const mappedPost = mapPost(apiResponse);
 ```
-blog-frontend/
-├── src/
-│   ├── domain/              # 🎯 Regras de negócio
-│   │   └── posts/
-│   │       ├── entities/    # Entidades (Post, PostPagination)
-│   │       └── contracts/   # Contratos (PostRepository)
-│   ├── application/         # 🔧 Casos de uso
-│   │   └── posts/
-│   │       └── use-cases/   # GetPostsUseCase, SearchPostsUseCase
-│   ├── infrastructure/      # 🏗️ Implementações
-│   │   ├── http/           # HttpClient, PostHttpRepository
-│   │   └── memory/         # Repositórios em memória
-│   ├── presentation/       # 🎨 Interface
-│   │   ├── components/     # Componentes React
-│   │   └── hooks/          # Hooks customizados
-│   ├── pages/              # 📄 Páginas Next.js
-│   ├── data/               # 📁 Dados estáticos
-│   ├── constants/          # 🔧 Constantes
-│   ├── helper/             # 🛠️ Funções auxiliares
-│   └── Context/            # 🎭 Contextos React
-├── public/                 # 🌐 Arquivos públicos
-├── styles/                 # 🎨 Estilos globais
-└── cypress/                # 🧪 Testes E2E
+
+## 🧪 Testes
+
+```bash
+# Testes unitários
+npm run test
+
+# Testes E2E
+npm run test:e2e
+
+# Coverage
+npm run test:coverage
 ```
+
+## 📝 Padrões de Código
+
+- **Clean Architecture** - Separação clara de responsabilidades
+- **SOLID Principles** - Código maintível e extensível
+- **TypeScript** - Tipagem estática em todo o projeto
+- **ESLint + Prettier** - Formatação consistente
+
+## 📚 Documentação
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs)
+- [React Query Documentation](https://tanstack.com/query/latest)
 
 ## 🤝 Contribuição
 
-1. **Fork** o projeto
-2. **Crie** uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. **Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** para a branch (`git push origin feature/AmazingFeature`)
-5. **Abra** um Pull Request
-
-### 📋 Padrões de Commit
-
-- `feat:` Nova funcionalidade
-- `fix:` Correção de bug
-- `docs:` Documentação
-- `style:` Formatação
-- `refactor:` Refatoração
-- `test:` Testes
-- `chore:` Configurações
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
 ## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.

@@ -86,7 +86,6 @@ export default function Navbar(props: HeaderProps) {
                 const path = buildNavPath(item);
                 const isHovered = hovered === item.label;
 
-                // Verifica se o item está ativo baseado no pathname e query params
                 let isActive = false;
                 if (item.label === 'portfolio') {
                   isActive = router.pathname === '/portfolio';
@@ -481,4 +480,6 @@ const MobileSearchAndLogin = styled.div`
   gap: 20px;
   align-items: center;
   padding: 20px;
+  position: absolute;
+  top: 50px;
 `;

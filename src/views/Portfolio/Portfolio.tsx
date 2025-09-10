@@ -25,6 +25,7 @@ import {
   validateMessage,
 } from './functions/formValidation';
 import WorkExperience from './components/WorkExperience/WorkExperience';
+import TackStack from './components/TackStack/TackStack';
 
 const Portfolio = function () {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -175,6 +176,7 @@ const Portfolio = function () {
           </div>
 
           <WorkExperience />
+          <TackStack />
 
           <div className="item item-3">
             <div className="form-wrapper">
