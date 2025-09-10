@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import StyledPostNew from './Posts.styled';
-import MarkdownRenderer from '@/presentation/components/MarkdownRenderer';
 import dateFormatter from '@/helper/functions/dateFormatter';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -18,17 +17,15 @@ import {
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
-import LoginAlertModal from '@/presentation/components/LoginAlertModal';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { HttpClient } from '../../http/HttpClient';
 import { Post } from '../../entities/Post';
-import PostComponent from '@/presentation/components/Post';
+import PostComponent from '@/components/Post';
 import { GetStaticPropsContext } from 'next';
-import { GetPosts } from '@/use-cases/posts/GetPosts';
-import { GetPostBySlug } from '@/use-cases/posts/GetPostBySlug';
-import { PostApiRepository } from '@/http/PostApiRepository';
+import { PostService } from '../../services/PostService';
+import LoginAlertModal from '@/components/LoginAlertModal';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 type IProps = {
   post: Post;
@@ -227,12 +224,8 @@ function Posts(props: IProps) {
 
 export async function getStaticPaths() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-    const httpClient = new HttpClient(baseUrl);
-    const postRepository = new PostApiRepository(httpClient);
-    const getPosts = new GetPosts(postRepository);
-    
-    const data = await getPosts.execute('1', '50', 'all');
+    const postService = new PostService();
+    const data = await postService.getAllPosts('1', '50', 'all');
     const paths = data.results.map((post: Post) => ({
       params: { slug: post.slug },
     }));
@@ -254,15 +247,9 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   const { slug } = params!;
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-    const httpClient = new HttpClient(baseUrl);
-    const postRepository = new PostApiRepository(httpClient);
-    const getPostBySlug = new GetPostBySlug(postRepository);
-    
-    const post = await getPostBySlug.execute(slug as string);
-    
-    const getPosts = new GetPosts(postRepository);
-    const relatedPostsData = await getPosts.execute('1', '5', 'all');
+    const postService = new PostService();
+    const post = await postService.getPostBySlug(slug as string);
+    const relatedPostsData = await postService.getAllPosts('1', '5', 'all');
     const relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);
 
     return {

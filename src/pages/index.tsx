@@ -1,9 +1,8 @@
-import { PostApiRepository } from '../http/PostApiRepository';
-import { HttpClient } from '../http/HttpClient';  
+import { PostService } from '../services/PostService';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { PostPagination } from '../entities/Post';
-import { GetPosts } from '@/use-cases/posts/GetPosts';
-import { SearchPosts } from '@/use-cases/posts/SearchPosts';
+
+const postService = new PostService();
 
 export const getServerSideProps: GetServerSideProps<{ postsData: PostPagination }> = async (
   context: GetServerSidePropsContext,
@@ -11,18 +10,12 @@ export const getServerSideProps: GetServerSideProps<{ postsData: PostPagination 
   try {
     const { page = '1', limit = '8', category = 'all', query } = context.query;
 
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-    const httpClient = new HttpClient(baseUrl);
-    const postRepository = new PostApiRepository(httpClient);
-
     let data;
 
     if (query) {
-      const searchPosts = new SearchPosts(postRepository);
-      data = await searchPosts.execute(String(query), String(page), String(limit));
+      data = await postService.searchPosts(String(query), String(page), String(limit));
     } else {
-      const getPosts = new GetPosts(postRepository);
-      data = await getPosts.execute(String(page), String(limit), String(category));
+      data = await postService.getAllPosts(String(page), String(limit), String(category));
     }
 
     return {

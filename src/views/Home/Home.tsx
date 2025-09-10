@@ -1,19 +1,19 @@
 import Head from 'next/head';
-import PostComponent from '@/presentation/components/Post';
-import About from '@/presentation/components/About';
+import PostComponent from '@/components/Post';
 import { useContext, useState, useEffect } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { META_TAG_IMAGE, FAVICON } from '@/constants/images';
-import LoginAlertModal from '@/presentation/components/LoginAlertModal';
 import { useCurrentUser } from '@/Context/currentUser';
-import Pagination from '@/presentation/components/Pagination';
 import { GlobalContext } from '@/Context/pagination';
 import MainPage from '@/views/Home/components/MainPage';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
 import { useRouter } from 'next/router';
 import { Post, PostPagination } from '@/entities/Post';
+import Pagination from '@/components/Pagination';
+import LoginAlertModal from '@/components/LoginAlertModal';
+import About from '@/components/About';
 
 type Data = PostPagination;
 
