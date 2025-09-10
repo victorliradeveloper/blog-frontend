@@ -18,4 +18,4 @@ export interface PostPagination {
   results: Post[];
   next: { page: number; limit: number } | null;
   previous: { page: number; limit: number } | null;
-} 
+}

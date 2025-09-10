@@ -1,6 +1,6 @@
 import Image from 'next/image';
 // import { useEffect, useState } from 'react';
-import{ useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import StyledSearchPost from './SearchPost.styled';
 import { SearchPostProps } from './SearchPost.types';
 // import { useSearchContext } from '@/Context/searchContext';
@@ -46,8 +46,8 @@ function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }:
     const value = inputElement?.value.trim();
 
     if (value) {
-        // setQuery(value);
-        // setEnabled(true);
+      // setQuery(value);
+      // setEnabled(true);
       router.push(`?query=${encodeURIComponent(value)}`);
     }
     onCloseMobileMenu();

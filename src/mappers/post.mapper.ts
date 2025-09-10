@@ -46,4 +46,4 @@ export const mapPostPagination = (response: BlogResponse): PostPagination => {
     next: response.next ?? null,
     previous: response.previous ?? null,
   };
-}; 
+};

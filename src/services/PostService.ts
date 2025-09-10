@@ -37,7 +37,7 @@ export class PostService {
   async searchPosts(query: string, page: string, limit: string): Promise<PostPagination> {
     try {
       const data = await this.http.get<BlogResponse>('api/get/search', {
-        params: { query, page, limit }
+        params: { query, page, limit },
       });
       return mapPostPagination(data);
     } catch (error) {
@@ -55,4 +55,4 @@ export class PostService {
       throw error;
     }
   }
-} 
+}

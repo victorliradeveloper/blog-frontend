@@ -1,6 +1,5 @@
 [
-  
-    {
+  {
     "id": 3,
     "name": "TypeScript",
     "category": "Programming Language",
@@ -63,4 +62,4 @@
     "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/docker_ONVdOVYgV.svg?updatedAt=1757539322467",
     "description": "Cloud computing and infrastructure services"
   }
-] 
+]

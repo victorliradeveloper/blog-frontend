@@ -177,7 +177,7 @@ const Portfolio = function () {
 
           <WorkExperience />
           <TackStack />
-          
+
           <div className="item item-3">
             <div className="form-wrapper">
               <h1 className="title">Fale comigo</h1>

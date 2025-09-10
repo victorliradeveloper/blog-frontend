@@ -119,7 +119,13 @@ function Posts(props: IProps) {
 
       <div className="profile" data-aos="fade-down">
         <div className="background-image-container">
-          {/* <Image src={props.post.postBackground} alt="post background" className="background-image" /> */}
+          <Image
+            src={props.post.postBackground}
+            alt="post background"
+            className="background-image"
+            width={400}
+            height={300}
+          />
         </div>
 
         <div className="body-post" data-aos="fade-up">

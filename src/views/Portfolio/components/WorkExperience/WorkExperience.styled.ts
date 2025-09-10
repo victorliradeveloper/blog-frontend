@@ -38,7 +38,7 @@ const StyledWorkExperience = styled.div`
     height: 60px;
     border: 2px solid #2d2d2d;
 
-    button{
+    button {
       width: 100%;
       cursor: pointer;
       border-radius: 15px;
@@ -94,13 +94,13 @@ const StyledWorkExperience = styled.div`
 
   .work-header {
     margin-bottom: 15px;
-    
+
     p:first-child {
       font-size: 1.2rem;
       font-weight: 700;
       margin-bottom: 5px;
     }
-    
+
     p:last-child {
       font-size: 0.9rem;
       color: #ccc;
@@ -110,15 +110,15 @@ const StyledWorkExperience = styled.div`
   ul {
     list-style: none;
     padding: 0;
-    
+
     li {
       position: relative;
       padding-left: 20px;
       margin-bottom: 10px;
       line-height: 1.6;
-      
+
       &::before {
-        content: "•";
+        content: '•';
         color: #fff;
         position: absolute;
         left: 0;
@@ -162,13 +162,13 @@ const StyledWorkExperience = styled.div`
 
   .education-header {
     margin-bottom: 15px;
-    
+
     p:first-child {
       font-size: 1.2rem;
       font-weight: 700;
       margin-bottom: 5px;
     }
-    
+
     p:last-child {
       font-size: 0.9rem;
       color: #ccc;

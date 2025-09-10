@@ -1,5 +1,4 @@
-import { Post } from "@/presenters/Post";
-
+import { Post } from '@/presenters/Post';
 
 export interface IProps extends Post {
   aos_delay?: string;

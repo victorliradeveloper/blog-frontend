@@ -30,86 +30,90 @@ function WorkExperience() {
   }
 
   return (
-      <StyledWorkExperience>
-        <div className="experience-header">
-          <div className="line-left"></div>
-          <p>Experiência</p>
-          <div className="line-right"></div>
-        </div>
+    <StyledWorkExperience>
+      <div className="experience-header">
+        <div className="line-left"></div>
+        <p>Experiência</p>
+        <div className="line-right"></div>
+      </div>
 
-        <div className="tabs">
-          <button 
-            className={currentDisplay === 'work' ? 'active' : ''} 
-            onClick={() => toggleDisplay('work')}
-          >
-            Work
-          </button>
-          <button 
-            className={currentDisplay === 'education' ? 'active' : ''} 
-            onClick={() => toggleDisplay('education')}
-          >
-            Education
-          </button>
-        </div>
-        
-        <div className="content">
-          {currentDisplay === 'work' && (
-            <div className="work-experiences">
-              {workExperienceData.map((experience: WorkExperience) => (
-                <div key={experience.id} className="work-wrapper">
-                  <div className='work-logo'>
-                    <Image 
-                      src={experience.logo} 
-                      alt={`${experience.company} logo`} 
-                      width={64} 
-                      height={64} 
-                    />
-                  </div>
-                  <div className='work-content'>
-                    <div className='work-header'>
-                      <p>{experience.position} @ {experience.company}</p>
-                      <p>{experience.period}</p>
-                    </div>
-                    <ul>
-                      {experience.achievements.map((achievement, index) => (
-                        <li key={index}>{achievement}</li>
-                      ))}
-                    </ul>
-                  </div>
+      <div className="tabs">
+        <button
+          className={currentDisplay === 'work' ? 'active' : ''}
+          onClick={() => toggleDisplay('work')}
+        >
+          Work
+        </button>
+        <button
+          className={currentDisplay === 'education' ? 'active' : ''}
+          onClick={() => toggleDisplay('education')}
+        >
+          Education
+        </button>
+      </div>
+
+      <div className="content">
+        {currentDisplay === 'work' && (
+          <div className="work-experiences">
+            {workExperienceData.map((experience: WorkExperience) => (
+              <div key={experience.id} className="work-wrapper">
+                <div className="work-logo">
+                  <Image
+                    src={experience.logo}
+                    alt={`${experience.company} logo`}
+                    width={64}
+                    height={64}
+                  />
                 </div>
-              ))}
-            </div>
-          )}
-          
-          {currentDisplay === 'education' && (
-            <div className="education-experiences">
-              {educationData.map((education: Education) => (
-                <div key={education.id} className="education-wrapper">
-                  <div className='education-logo'>
-                    <Image 
-                      src={education.logo} 
-                      alt={`${education.institution} logo`} 
-                      width={64} 
-                      height={64} 
-                    />
+                <div className="work-content">
+                  <div className="work-header">
+                    <p>
+                      {experience.position} @ {experience.company}
+                    </p>
+                    <p>{experience.period}</p>
                   </div>
-                  <div className='education-content'>
-                    <div className='education-header'>
-                      <p>{education.degree} @ {education.institution}</p>
-                      <p>{education.period}</p>
-                    </div>
-                    <ul>
-                      {education.achievements.map((achievement, index) => (
-                        <li key={index}>{achievement}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  <ul>
+                    {experience.achievements.map((achievement, index) => (
+                      <li key={index}>{achievement}</li>
+                    ))}
+                  </ul>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </StyledWorkExperience>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {currentDisplay === 'education' && (
+          <div className="education-experiences">
+            {educationData.map((education: Education) => (
+              <div key={education.id} className="education-wrapper">
+                <div className="education-logo">
+                  <Image
+                    src={education.logo}
+                    alt={`${education.institution} logo`}
+                    width={64}
+                    height={64}
+                  />
+                </div>
+                <div className="education-content">
+                  <div className="education-header">
+                    <p>
+                      {education.degree} @ {education.institution}
+                    </p>
+                    <p>{education.period}</p>
+                  </div>
+                  <ul>
+                    {education.achievements.map((achievement, index) => (
+                      <li key={index}>{achievement}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </StyledWorkExperience>
   );
 }
 

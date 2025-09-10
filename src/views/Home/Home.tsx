@@ -34,7 +34,7 @@ export default function Home({ postsData }: { postsData: Data }) {
   useEffect(() => {
     AOS.init();
   }, []);
-  
+
   const hasPost = !!postsData.results;
   const postsToDisplay = postsData;
 

@@ -1,4 +1,3 @@
-
 // import Header from '@/presentation/components/Header';
 import { LayoutProps } from './Layout.types';
 import { useScrollContext } from '@/Context/scrollProvider';

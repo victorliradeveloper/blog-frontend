@@ -6,25 +6,28 @@ Um blog moderno construído com Next.js, TypeScript e seguindo padrões de arqui
 
 O projeto segue o padrão **Service Layer + Data Mapper + Custom Hooks**, organizando o código em camadas bem definidas:
 
-
 ## Padrões Utilizados
 
 ### 1. **Service Layer Pattern**
+
 - **Responsabilidade**: Encapsula toda a lógica de comunicação com a API
 - **Localização**: `src/services/`
 - **Exemplo**: `PostService.ts` - centraliza operações de posts
 
 ### 2. **Data Mapper Pattern**
+
 - **Responsabilidade**: Transforma dados da API para o formato do frontend
 - **Localização**: `src/mappers/`
 - **Exemplo**: `post.mapper.ts` - converte resposta da API em entidades
 
 ### 3. **Custom Hooks Pattern**
+
 - **Responsabilidade**: Gerencia estado e side effects com React Query
 - **Localização**: `src/hooks/`
 - **Exemplo**: `usePosts.ts` - hook para buscar posts com cache
 
 ### 4. **HTTP Client Pattern**
+
 - **Responsabilidade**: Cliente HTTP reutilizável com tratamento de erros
 - **Localização**: `src/http/`
 - **Exemplo**: `HttpClient.ts` - abstrai requisições HTTP

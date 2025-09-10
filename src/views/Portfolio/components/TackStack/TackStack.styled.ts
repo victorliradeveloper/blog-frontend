@@ -31,7 +31,7 @@ const StyledTackStack = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
-    
+
     .tech-stack-item {
       border: 2px solid #2d2d2d;
       border-radius: 10px;
@@ -41,7 +41,7 @@ const StyledTackStack = styled.div`
       gap: 15px;
       background: rgba(48, 44, 58, 0.3);
       transition: all 0.3s ease;
-      
+
       &:hover {
         border-color: #fff;
         transform: translateY(-2px);
@@ -55,14 +55,14 @@ const StyledTackStack = styled.div`
 
       div {
         flex: 1;
-        
+
         p:first-child {
           font-size: 1.1rem;
           font-weight: 700;
           margin-bottom: 5px;
           color: #fff;
         }
-        
+
         p:last-child {
           font-size: 0.9rem;
           color: #ccc;
@@ -76,11 +76,11 @@ const StyledTackStack = styled.div`
     .tech-stack-container {
       grid-template-columns: 1fr;
       gap: 0.8rem;
-      
+
       .tech-stack-item {
         padding: 12px;
         gap: 12px;
-        
+
         img {
           width: 48px;
           height: 48px;
@@ -95,7 +95,7 @@ const StyledTackStack = styled.div`
         flex-direction: column;
         text-align: center;
         gap: 10px;
-        
+
         img {
           width: 40px;
           height: 40px;

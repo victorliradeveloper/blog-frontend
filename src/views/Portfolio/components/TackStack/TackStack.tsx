@@ -21,16 +21,11 @@ function TackStack() {
       <div className="tech-stack-container">
         {techStackData.map((tech: TechStack) => (
           <div key={tech.id} className="tech-stack-item">
-            <Image 
-              src={tech.logo} 
-              alt={`${tech.name} logo`} 
-              width={64} 
-              height={64} 
-            />
+            <Image src={tech.logo} alt={`${tech.name} logo`} width={64} height={64} />
             <div>
               <p>{tech.name}</p>
               <p>{tech.category}</p>
-            </  div>
+            </div>
           </div>
         ))}
       </div>

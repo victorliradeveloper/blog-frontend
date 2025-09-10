@@ -27,4 +27,4 @@ export const usePostBySlug = (slug: string) => {
     queryFn: () => postService.getPostBySlug(slug),
     staleTime: 10 * 60 * 1000, // 10 minutos
   });
-}; 
+};
