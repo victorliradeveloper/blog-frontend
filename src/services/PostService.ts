@@ -1,5 +1,5 @@
 import { Post, PostPagination } from '../presenters/Post';
-import { mapPost, mapPostPagination } from '../mappers/post.mapper';
+import { mapPost, mapPostPagination, BlogResponse, BlogPostResponse } from '../mappers/post.mapper';
 import { HttpClient } from '../http/HttpClient';
 
 export class PostService {
@@ -26,7 +26,7 @@ export class PostService {
     }
 
     try {
-      const data = await this.http.get(endpoint, { params });
+      const data = await this.http.get<BlogResponse>(endpoint, { params });
       return mapPostPagination(data);
     } catch (error) {
       console.error('🔍 Error in getAllPosts:', error);
@@ -36,7 +36,7 @@ export class PostService {
 
   async searchPosts(query: string, page: string, limit: string): Promise<PostPagination> {
     try {
-      const data = await this.http.get('api/get/search', {
+      const data = await this.http.get<BlogResponse>('api/get/search', {
         params: { query, page, limit }
       });
       return mapPostPagination(data);
@@ -48,7 +48,7 @@ export class PostService {
 
   async getPostBySlug(slug: string): Promise<Post> {
     try {
-      const data = await this.http.get(`api/get/slug/${slug}`);
+      const data = await this.http.get<BlogPostResponse>(`api/get/slug/${slug}`);
       return mapPost(data);
     } catch (error) {
       console.error(' Error in getPostBySlug:', error);

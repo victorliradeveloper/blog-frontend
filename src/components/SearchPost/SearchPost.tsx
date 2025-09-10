@@ -1,15 +1,15 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+// import { useEffect, useState } from 'react';
+import{ useRouter } from 'next/router';
 import StyledSearchPost from './SearchPost.styled';
 import { SearchPostProps } from './SearchPost.types';
-import { useSearchContext } from '@/Context/searchContext';
+// import { useSearchContext } from '@/Context/searchContext';
 
 function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }: SearchPostProps) {
-  const [enabled, setEnabled] = useState(false);
+  // const [enabled, setEnabled] = useState(false);
   const router = useRouter();
 
-  const { query, setQuery, setSearchedPosts } = useSearchContext();
+  // const { query, setQuery, setSearchedPosts } = useSearchContext();
 
   // Removendo a importação do usePosts
   // import { usePosts } from '@/presentation/hooks/usePosts';
@@ -33,8 +33,8 @@ function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }:
     if (event.key === 'Enter') {
       const value = target.value.trim();
       if (value) {
-        setQuery(value);
-        setEnabled(true);
+        // setQuery(value);
+        // setEnabled(true);
         router.push(`/?query=${encodeURIComponent(value)}`);
       }
       onCloseSearch();
@@ -46,8 +46,8 @@ function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }:
     const value = inputElement?.value.trim();
 
     if (value) {
-      setQuery(value);
-      setEnabled(true);
+        // setQuery(value);
+        // setEnabled(true);
       router.push(`?query=${encodeURIComponent(value)}`);
     }
     onCloseMobileMenu();

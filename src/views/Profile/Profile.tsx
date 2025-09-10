@@ -19,12 +19,7 @@ function Profile() {
   const { currentUser, callSetCurrentUser } = useCurrentUser();
   const router = useRouter();
 
-  const { data: postsData } = usePosts({
-    page: '1',
-    limit: '9999',
-    category: 'all',
-    enabled: !!currentUser.email,
-  });
+  const { data: postsData } = usePosts('1', '9999', 'all');
 
   const redirect = async () => {
     try {
