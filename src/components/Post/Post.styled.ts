@@ -135,11 +135,12 @@ const StyledPost = styled.div`
       text-align: start;
       line-height: 26px;
       margin-bottom: 0px;
-      font-size: 19px;
+      font-size: 18px;
       vertical-align: middle;
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      color: #fff;
 
       @media screen and (max-width: 640px) {
         font-size: 18px;
@@ -150,6 +151,7 @@ const StyledPost = styled.div`
     .post-content {
       text-align: start;
       font-size: 14px;
+      color: #8f9ba8;
 
       @media screen and (max-width: 640px) {
         font-size: 14px;

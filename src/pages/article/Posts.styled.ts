@@ -100,7 +100,7 @@ const StyledPostNew = styled.div`
 
   //XML
   .profile {
-    color: #ccc;
+    color: #8f9ba8;
     margin-bottom: 60px;
     padding-top: 80px;
 
@@ -243,6 +243,8 @@ const StyledPostNew = styled.div`
         font-size: 2.625rem;
         margin-bottom: 20px;
         text-align: center;
+        color: #fff;
+        line-height: 48px;
 
         @media screen and (max-width: 700px) {
           font-size: 24px;
@@ -253,7 +255,7 @@ const StyledPostNew = styled.div`
       .date {
         text-align: center;
         font-weight: bolder;
-        /* color: #9ec0fa; */
+        color: #9ec0fa;
         @media screen and (max-width: 700px) {
           font-size: 14px;
         }
@@ -267,7 +269,7 @@ const StyledPostNew = styled.div`
       h6 {
         margin-bottom: 30px;
         margin-top: 30px;
-        /* margin-top: 30px; */
+        color: #fff;
 
         @media screen and (max-width: 700px) {
           margin-bottom: 20px;
