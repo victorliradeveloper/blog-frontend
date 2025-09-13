@@ -42,13 +42,13 @@ function WorkExperience() {
           className={currentDisplay === 'work' ? 'active' : ''}
           onClick={() => toggleDisplay('work')}
         >
-          Work
+          Carreira
         </button>
         <button
           className={currentDisplay === 'education' ? 'active' : ''}
           onClick={() => toggleDisplay('education')}
         >
-          Education
+          Educação
         </button>
       </div>
 
