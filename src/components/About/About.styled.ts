@@ -30,6 +30,7 @@ const StyledAbout = styled.div`
   }
 
   p {
+    color: #8f9ba8;
     @media screen and (max-width: 768px) {
       line-height: 25px;
     }
