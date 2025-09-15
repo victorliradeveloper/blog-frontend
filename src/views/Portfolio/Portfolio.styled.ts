@@ -112,6 +112,7 @@ const StyledPortfolio = styled.div`
           margin: 0 auto;
           margin: 50px auto 50px auto;
           color: #fff;
+          text-align: center;
 
           span:first-child {
             font-size: 18px;
@@ -120,8 +121,8 @@ const StyledPortfolio = styled.div`
           }
 
           span:last-child {
-            font-size: 80px;
-            line-height: 80px;
+            font-size: 70px;
+            line-height: 70px;
             font-weight: 700;
             background-size: 100%;
             background-image: linear-gradient(135deg, #80ffea 0%, #8aff80 100%);

@@ -10,11 +10,11 @@ const About = function () {
   return (
     <StyledAbout style={{ background: '#000' }}>
       <h1 data-aos="fade-down" data-aos-delay="100">
-        Artigos
+        Articles
       </h1>
       <p data-aos="fade-down" data-aos-delay="200">
-        Desenvolvimento WEB e Mobile e tecnologia em artigos! Conteúdo atualizado e relevante para
-        você! <span>{returnDevText()}</span>
+        Web and Mobile Development and technology in articles! Updated and relevant content for you!{' '}
+        <span>{returnDevText()}</span>
       </p>
     </StyledAbout>
   );
