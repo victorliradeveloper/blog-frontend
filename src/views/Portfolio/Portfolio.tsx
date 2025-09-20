@@ -110,10 +110,10 @@ const Portfolio = function () {
   return (
     <Fragment>
       <Head>
-        <title>Sobre mim | blog</title>
+        <title>About Me | Blog</title>
         <meta
           name="description"
-          content="Olá, sou Victor Lira, o criador de um blog dedicado a explorar os domínios do JavaScript, React, Next.js, TypeScript e outras tecnologias de front-end de ponta. Junte-se a mim nesta jornada enquanto compartilho insights, tutoriais e dicas para aprimorar suas habilidades e ficar por dentro das últimas tendências em desenvolvimento de front-end. Mergulhe no fascinante mundo do desenvolvimento web através do meu blog e capacite-se com conhecimento e experiência."
+          content="Hello, I'm Victor Lira, the creator of a blog dedicated to exploring the realms of JavaScript, React, Next.js, TypeScript, and other cutting-edge front-end technologies. Join me on this journey as I share insights, tutorials, and tips to enhance your skills and stay on top of the latest trends in front-end development. Dive into the fascinating world of web development through my blog and empower yourself with knowledge and experience."
         />
         <meta
           name="keywords"
@@ -169,7 +169,7 @@ const Portfolio = function () {
                 data-aos-delay="250"
                 data-aos-offset="0"
               >
-               <span>DEVELOPING SOLUTIONS FOR</span> <br />
+                <span>DEVELOPING SOLUTIONS FOR</span> <br />
                 <span>tomorrow</span>
               </h1>
             </div>
