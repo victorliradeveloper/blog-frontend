@@ -1,6 +1,6 @@
 'use client';
 import styled from 'styled-components';
-import { POST_CONTENT_WRITER, PROJECTS_SLIDER_ARROW } from '@/constants/images';
+import { POST_CONTENT_WRITER, POST_INITIAL_IMAGE, PROJECTS_SLIDER_ARROW } from '@/constants/images';
 
 const StyledPostNew = styled.div`
   .hljs {
@@ -98,52 +98,51 @@ const StyledPostNew = styled.div`
     color: #ae81ff;
   }
 
+  .container {
+    position: relative;
+
+    .parallax {
+      height: 100vh;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow: hidden;
+      opacity: 0.4;
+
+      &.image--1 {
+        background-image: url('${POST_INITIAL_IMAGE}');
+      }
+    }
+
+    .overlay {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+
+      h1 {
+        color: white;
+        font-size: 3rem;
+        font-weight: 900;
+        text-align: center;
+        @media screen and (max-width: 768px) {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+
   //XML
   .profile {
     color: #8f9ba8;
     margin-bottom: 60px;
-    padding-top: 80px;
-
-    .background-image-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #9156ec;
-      overflow: hidden;
-      height: 400px;
-      width: 100%;
-      @media screen and (max-width: 500px) {
-        height: 240px;
-      }
-
-      .background-image {
-        width: 100%;
-        background-size: cover;
-        background-position: center;
-        object-fit: contain;
-        background-repeat: no-repeat;
-        transition: 0.5s ease-in-out;
-        height: 300px;
-
-        &:hover {
-          scale: 1.1;
-          transition: 0.5s ease-in-out;
-        }
-
-        @media screen and (max-width: 700px) {
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 80%;
-          margin: 0 auto;
-        }
-
-        @media screen and (max-width: 500px) {
-          height: 240px;
-        }
-      }
-    }
 
     .body-post {
       max-width: 830px;
@@ -235,20 +234,6 @@ const StyledPostNew = styled.div`
               height: 25px;
             }
           }
-        }
-      }
-
-      .title {
-        letter-spacing: 0.7px;
-        font-size: 2.625rem;
-        margin-bottom: 20px;
-        text-align: center;
-        color: #fff;
-        line-height: 48px;
-
-        @media screen and (max-width: 700px) {
-          font-size: 24px;
-          line-height: 27px;
         }
       }
 

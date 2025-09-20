@@ -117,19 +117,19 @@ function Posts(props: IProps) {
         <LoginAlertModal onCloseLoginAlertModal={closeLoginAlertModal} />
       )}
 
-      <div className="profile" data-aos="fade-down">
-        <div className="background-image-container">
-          <Image
-            src={props.post.postBackground}
-            alt="post background"
-            className="background-image"
-            width={400}
-            height={300}
-          />
+     <div className="container">
+      <div className="parallax-container">
+          <div className="parallax image--1">
+          </div>
         </div>
 
+        <div className="overlay">
+          <h1>{props.post.title}</h1>
+        </div>
+     </div>
+
+      <div className="profile" data-aos="fade-down">
         <div className="body-post" data-aos="fade-up">
-          <h1 className="title">{props.post.title}</h1>
           <p className="date">{dateFormatter(props.post.date)}</p>
           <MarkdownRenderer> {props.post.content} </MarkdownRenderer>
           <div className="aside-absolute">
