@@ -46,14 +46,14 @@ export default function Home({ postsData }: { postsData: Data }) {
   return (
     <>
       <Head>
-        <title>Home | Tech Blog </title>
+        <title>Home | Tech Blog</title>
         <meta
           name="keywords"
           content="Victor Lira, JavaScript, React, Next.js, TypeScript, Frontend Development, Web Development, Technology Blog, Coding Tutorials"
         />
         <meta
           name="description"
-          content="Olá, sou Victor Lira, o criador de um blog dedicado a explorar os domínios do JavaScript, React, Next.js, TypeScript e outras tecnologias de front-end de ponta. Junte-se a mim nesta jornada enquanto compartilho insights, tutoriais e dicas para aprimorar suas habilidades e ficar por dentro das últimas tendências em desenvolvimento de front-end. Mergulhe no fascinante mundo do desenvolvimento web através do meu blog e capacite-se com conhecimento e experiência."
+          content="Hello, I'm Victor Lira, the creator of a blog dedicated to exploring the realms of JavaScript, React, Next.js, TypeScript, and other cutting-edge front-end technologies. Join me on this journey as I share insights, tutorials, and tips to enhance your skills and stay up to date with the latest trends in front-end development. Dive into the fascinating world of web development through my blog and empower yourself with knowledge and experience."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="author" content="Victor Lira" />
