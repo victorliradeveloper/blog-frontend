@@ -30,7 +30,6 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'home', path: '/', category: '' },
   { label: 'frontend', path: '/', category: 'frontend' },
   { label: 'backend', path: '/', category: 'backend' },
-  // { label: 'avançado', path: '/', category: 'avancado' },
   { label: 'portfolio', path: '/', category: 'portfolio' },
 ];
 

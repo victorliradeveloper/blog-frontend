@@ -169,8 +169,8 @@ const Portfolio = function () {
                 data-aos-delay="250"
                 data-aos-offset="0"
               >
-                <span>DESENVOLVENDO SOLUÇÕES PARA</span> <br />
-                <span>o amanhã</span>
+               <span>DEVELOPING SOLUTIONS FOR</span> <br />
+                <span>tomorrow</span>
               </h1>
             </div>
           </div>
