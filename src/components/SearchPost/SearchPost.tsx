@@ -59,12 +59,12 @@ function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }:
   return (
     <StyledSearchPost>
       <div className="search-wrapper">
-        <input className="search" type="search" placeholder="Pesquisar" onKeyDown={handleKeyDown} />
+        <input className="search" type="search" placeholder="Search" onKeyDown={handleKeyDown} />
         <div className="search-grey-icon">
-          <p>Aperte enter para buscar</p>
+          <p>Press enter to search</p>
           <Image
             src="/search-gray.png"
-            alt="Ícone de busca cinza"
+            alt="Gray search icon"
             onClick={handleIconClick}
             width={30}
             height={30}
