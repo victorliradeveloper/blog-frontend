@@ -133,9 +133,10 @@ export default function Navbar(props: HeaderProps) {
                   theme="filled_black"
                   size="medium"
                   shape="pill"
-                  type="standard"
+                  type="icon"
                   width="50"
                   text="signin"
+                  locale="en"
                   onSuccess={credentialResponse => {
                     try {
                       if (credentialResponse?.credential) {
@@ -161,6 +162,7 @@ export default function Navbar(props: HeaderProps) {
                       console.error('Error decoding JWT or handling Google login:', error);
                     }
                   }}
+
                 />
               ) : (
                 <ProfileLink href="/profile">Perfil</ProfileLink>

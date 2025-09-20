@@ -23,17 +23,18 @@ const LoginAlertModal = function (props: IProps) {
         width={30}
         height={30}
       />
-      <h1 className="txt-1">Faça login</h1>
-      <h1 className="txt-2">Para visualizar seus posts favoritos</h1>
+      <h1 className="txt-1">Sign in</h1>
+      <h1 className="txt-2">To view your favorite posts</h1>
 
       <GoogleLogin
         onError={() => console.log('Login failed')}
-        theme="outline"
-        size="large"
-        shape="square"
-        type="standard"
+        theme="filled_blue"
+        size="medium"
+        shape="pill"
+        type="icon"
         width="100"
         text="signin"
+        locale="en"
         onSuccess={credentialResponse => {
           try {
             if (credentialResponse?.credential) {
