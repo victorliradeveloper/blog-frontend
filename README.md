@@ -39,7 +39,7 @@ O projeto segue o padrão **Service Layer + Data Mapper + Custom Hooks**, organi
 - **React Query** - Gerenciamento de estado e cache
 - **Styled Components** - CSS-in-JS
 - **Cypress** - Testes E2E
-- **Jest** - Testes unitários
+- **Jest** - Testes unitários 
 
 ## 📦 Instalação
 
