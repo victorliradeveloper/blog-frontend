@@ -180,32 +180,28 @@ const Portfolio = function () {
 
           <div className="item item-3">
             <div className="form-wrapper">
-              <h1 className="title">Fale comigo</h1>
+              <h1 className="title">Reach out to me</h1>
               <p className="p-1">
-                Resta alguma dúvida? Preencha os campos abaixo com os seguintes dados que em breve
-                entraremos em contato.{' '}
+                Any questions? Fill out the fields below with your information and we’ll get in
+                touch soon.
               </p>
               <form id="form">
                 <div className="box-1">
                   <div className="form-control control-1">
-                    <label>Seu Nome</label>
+                    <label>Your Name</label>
                     <input
-                      className={`input name ${
-                        !validateName(formData.name) && formSubmitted ? 'error' : ''
-                      }`}
+                      className={`input name ${!validateName(formData.name) && formSubmitted ? 'error' : ''}`}
                       value={formData.name}
                       type="text"
-                      placeholder="Digite aqui"
+                      placeholder="Type here"
                       name="name"
                       onChange={handleChange}
                     />
                   </div>
                   <div className="form-control control-2">
-                    <label>e-mail</label>
+                    <label>Email</label>
                     <input
-                      className={`input email ${
-                        !validateEmail(formData.email) && formSubmitted ? 'error' : ''
-                      }`}
+                      className={`input email ${!validateEmail(formData.email) && formSubmitted ? 'error' : ''}`}
                       value={formData.email}
                       type="text"
                       placeholder="email@example.com"
@@ -217,11 +213,9 @@ const Portfolio = function () {
 
                 <div className="box-2">
                   <div className="form-control control-3">
-                    <label>Celular</label>
+                    <label>Phone</label>
                     <input
-                      className={`input cellphone ${
-                        !validatePhone(formData.cellphone) && formSubmitted ? 'error' : ''
-                      }`}
+                      className={`input cellphone ${!validatePhone(formData.cellphone) && formSubmitted ? 'error' : ''}`}
                       value={formData.cellphone}
                       type="text"
                       placeholder="( _ _ ) _ ____ ____"
@@ -230,14 +224,12 @@ const Portfolio = function () {
                     />
                   </div>
                   <div className="form-control control-4">
-                    <label>Assunto</label>
+                    <label>Subject</label>
                     <input
-                      className={`input cellphone ${
-                        !validateSubject(formData.subject) && formSubmitted ? 'error' : ''
-                      }`}
+                      className={`input cellphone ${!validateSubject(formData.subject) && formSubmitted ? 'error' : ''}`}
                       value={formData.subject}
                       type="text"
-                      placeholder="Digite aqui"
+                      placeholder="Type here"
                       name="subject"
                       onChange={handleChange}
                     />
@@ -246,13 +238,11 @@ const Portfolio = function () {
 
                 <div className="box-3">
                   <div className="form-control control-5">
-                    <label>Mensagem</label>
+                    <label>Message</label>
                     <textarea
-                      className={`input message ${
-                        !validateMessage(formData.message) && formSubmitted ? 'error' : ''
-                      }`}
+                      className={`input message ${!validateMessage(formData.message) && formSubmitted ? 'error' : ''}`}
                       value={formData.message}
-                      placeholder="Escreva aqui sua mensagem"
+                      placeholder="Write your message here"
                       name="message"
                       onChange={handleChange}
                     />
@@ -261,13 +251,13 @@ const Portfolio = function () {
 
                 {!isLoading && (
                   <button type="button" onClick={formSubmit} className="submit">
-                    Enviar contato
+                    Send Message
                   </button>
                 )}
 
                 {isLoading && (
                   <button type="button" className="loading">
-                    <p>Enviando </p>
+                    <p>Sending </p>
                     <Image
                       src={WHITE_LOADING_SPINNER}
                       width={30}

@@ -84,11 +84,11 @@ const Post: React.FC<IProps> = props => {
           </p>
 
           <ul className="post-author">
-            <li>Autor: {props.author}</li>
+            <li>Author: {props.author}</li>
           </ul>
 
           <div className="read-more-wrapper">
-            <p>Ler mais</p>
+            <p>Read more</p>
             <Image width={20} height={20} alt="arrow right" loading="lazy" src={PAGINATION_ARROW} />
           </div>
         </div>

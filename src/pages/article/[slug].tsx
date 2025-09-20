@@ -189,11 +189,11 @@ function Posts(props: IProps) {
           <div className="author"></div>
           <div className="name-container">
             <p className="text-1">Victor Lira &nbsp; 🚀</p>
-            <p className="text-2">Escrito por Victor Lira</p>
+            <p className="text-2">Written by Victor Lira</p>
           </div>
         </div>
       </div>
-      <h1 className="title">Últimas postagens</h1>
+      <h1 className="title">Latest posts</h1>
       <div className="last-posts">
         <Slider {...settings}>
           {props.relatedPosts &&

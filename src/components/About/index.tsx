@@ -13,7 +13,7 @@ const About = function () {
         Articles
       </h1>
       <p data-aos="fade-down" data-aos-delay="200">
-        Web and Mobile Development and technology in articles! Updated and relevant content for you!{' '}
+        Web and Mobile Development and technology in articles! Updated and relevant content for you! {' '}
         <span>{returnDevText()}</span>
       </p>
     </StyledAbout>

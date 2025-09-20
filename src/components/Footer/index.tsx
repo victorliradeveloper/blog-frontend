@@ -40,10 +40,10 @@ const Footer = () => {
 
       <div className="direitos-autorais">
         <p>
-          Todos os direitos reservados © {getCurrentYear()} <strong>Victor Lira</strong>
+          All rights reserved © {getCurrentYear()} <strong>Victor Lira</strong>
         </p>
         <p>
-          Blog criado com{' '}
+          Blog built with{' '}
           <a href={`${NEXT_LINK}`} target="_blank" rel="noopener noreferrer">
             <strong style={{ color: '#fff', textDecoration: 'underline' }}>Next.js</strong>
           </a>{' '}
@@ -51,9 +51,9 @@ const Footer = () => {
           <a href={`${NODE_LINK}`} target="_blank" rel="noopener noreferrer">
             <strong style={{ color: '#fff', textDecoration: 'underline' }}>Node</strong>
           </a>{' '}
-          e{' '}
+          and{' '}
           <a href={`${MYSQL_LINK}`} target="_blank" rel="noopener noreferrer">
-            <strong style={{ color: '#fff', textDecoration: 'underline' }}>MySql</strong>
+            <strong style={{ color: '#fff', textDecoration: 'underline' }}>MySQL</strong>
           </a>
         </p>
       </div>

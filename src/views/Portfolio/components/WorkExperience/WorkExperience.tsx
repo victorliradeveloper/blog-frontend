@@ -33,7 +33,7 @@ function WorkExperience() {
     <StyledWorkExperience>
       <div className="experience-header">
         <div className="line-left"></div>
-        <p>Experiência</p>
+        <p>Experience</p>
         <div className="line-right"></div>
       </div>
 
@@ -42,13 +42,13 @@ function WorkExperience() {
           className={currentDisplay === 'work' ? 'active' : ''}
           onClick={() => toggleDisplay('work')}
         >
-          Carreira
+          Carrer
         </button>
         <button
           className={currentDisplay === 'education' ? 'active' : ''}
           onClick={() => toggleDisplay('education')}
         >
-          Educação
+          Education
         </button>
       </div>
 
