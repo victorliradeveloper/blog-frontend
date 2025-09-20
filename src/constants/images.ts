@@ -35,3 +35,4 @@ export const JEST_ICON = '/jest.png';
 export const VERIFY_ICON = '/verify.png';
 export const CLOSE_MODAL_ICON = '/error.png';
 export const WHITE_LOADING_SPINNER = '/white-spinner.gif?v=3';
+export const POST_INITIAL_IMAGE = 'https://ik.imagekit.io/Victorliradev/blog_pessoal/post-images/resend-raises-3m_cn0OozAcP.jpg?updatedAt=1758402907604';
