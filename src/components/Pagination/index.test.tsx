@@ -1,5 +1,6 @@
 // __tests__/Pagination.test.tsx
 import { render, screen, fireEvent } from "@testing-library/react";
+import '@testing-library/jest-dom';
 import Pagination from "../Pagination";
 import { useRouter } from "next/router";
 import { GlobalContext } from "@/Context/pagination";
@@ -10,15 +11,36 @@ jest.mock("next/router", () => ({
 }));
 
 // Mock do Next.js Image para não quebrar os testes
-jest.mock("next/image", () => ({ src, alt }: any) => <img src={src} alt={alt} />);
+jest.mock("next/image", () => {
+  const MockedImage = ({ src, alt }: { src: string; alt: string }) => <img src={src} alt={alt} />;
+  MockedImage.displayName = 'MockedImage';
+  return MockedImage;
+});
+
+interface PaginationProps {
+  hasNextPage?: boolean;
+  hasPreviousPage?: boolean;
+  nextPage?: number;
+  previousPage?: number;
+  page?: number;
+  pageLength?: number;
+}
 
 describe("Pagination", () => {
   const pushMock = jest.fn();
   const setPageMock = jest.fn();
+  const setTotalPagesMock = jest.fn();
 
-  const renderComponent = (props: any) =>
+  const renderComponent = (props: PaginationProps) =>
     render(
-      <GlobalContext.Provider value={{ page: props.page || 1, setPage: setPageMock }}>
+      <GlobalContext.Provider 
+        value={{ 
+          page: props.page || 1, 
+          setPage: setPageMock,
+          totalPages: props.pageLength || 1,
+          setTotalPages: setTotalPagesMock
+        }}
+      >
         <Pagination {...props} />
       </GlobalContext.Provider>
     );
