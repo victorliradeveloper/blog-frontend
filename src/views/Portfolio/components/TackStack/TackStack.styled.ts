@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledTackStack = styled.div`
   color: #fff;
-  max-width: 880px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
   margin-bottom: 16rem;
@@ -29,18 +29,18 @@ const StyledTackStack = styled.div`
 
   .tech-stack-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 1rem;
 
     .tech-stack-item {
       border: 2px solid #2d2d2d;
       border-radius: 10px;
-      padding: 15px;
       display: flex;
       align-items: center;
       gap: 15px;
       background: rgba(48, 44, 58, 0.3);
       transition: all 0.3s ease;
+      padding: 0.5rem;
 
       &:hover {
         border-color: #fff;
