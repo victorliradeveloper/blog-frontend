@@ -54,7 +54,7 @@ const Post: React.FC<IProps> = props => {
     >
       <motion.div whileHover={{ y: props.hover_animation }} className="motion-box">
         <div className="post-image-wrapper">
-          <div className="add-to-favorits__wrapper favorits--trigger">
+          {/* <div className="add-to-favorits__wrapper favorits--trigger">
             <Image
               className="add-to-favorits favorits--trigger"
               width={40}
@@ -62,7 +62,7 @@ const Post: React.FC<IProps> = props => {
               alt="add to favorits"
               src={props.onUpdateFavoritSource}
             />
-          </div>
+          </div> */}
           <div className="post-image-wrapper">
             <div
               className="post-image"

@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { motion, LayoutGroup } from 'framer-motion';
 import Image from 'next/image';
-import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
-import { useCurrentUser } from '@/Context/currentUser';
+// import { GoogleLogin } from '@react-oauth/google';
+// import { jwtDecode } from 'jwt-decode';
+// import { useCurrentUser } from '@/Context/currentUser';
 import { CODE_ICON, CLOSE_MENU_ICON, MENU_HAMBURGUER } from '@/constants/images';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -47,7 +47,7 @@ const buildNavPath = (item: NavItem): string => {
 export default function Navbar(props: HeaderProps) {
   const router = useRouter();
   const [hovered, setHovered] = useState<string>('');
-  const { callSetCurrentUser, currentUser } = useCurrentUser();
+  // const { callSetCurrentUser, currentUser } = useCurrentUser();
   const [headerFadeDown, setHeaderFadeDown] = useState('fade-down');
 
   useEffect(() => {
@@ -126,7 +126,7 @@ export default function Navbar(props: HeaderProps) {
               <Image src="/search-icon.png" width={20} height={20} alt="search" />
             </SearchIcon>
 
-            <GoogleWrapper>
+            {/* <GoogleWrapper>
               {!currentUser.name ? (
                 <GoogleLogin
                   onError={() => console.log('Login failed')}
@@ -167,7 +167,7 @@ export default function Navbar(props: HeaderProps) {
               ) : (
                 <ProfileLink href="/profile">Perfil</ProfileLink>
               )}
-            </GoogleWrapper>
+            </GoogleWrapper> */}
           </SearchAndLogin>
 
           <HamburgerMenu onClick={showMobileMenu}>
@@ -217,7 +217,7 @@ export default function Navbar(props: HeaderProps) {
                 <Image src="/search-icon.png" width={20} height={20} alt="search" />
               </SearchIcon>
 
-              <GoogleWrapper>
+              {/* <GoogleWrapper>
                 {!currentUser.name ? (
                   <GoogleLogin
                     onError={() => console.log('Login failed')}
@@ -256,7 +256,7 @@ export default function Navbar(props: HeaderProps) {
                 ) : (
                   <ProfileLink href="/profile">Perfil</ProfileLink>
                 )}
-              </GoogleWrapper>
+              </GoogleWrapper> */}
             </MobileSearchAndLogin>
           </MobileMenuContent>
         </MobileMenu>
@@ -403,26 +403,26 @@ const SearchIcon = styled.div`
   }
 `;
 
-const GoogleWrapper = styled.div`
-  height: auto;
-  position: relative;
-  top: -2px;
-`;
+// const GoogleWrapper = styled.div`
+//   height: auto;
+//   position: relative;
+//   top: -2px;
+// `;
 
-const ProfileLink = styled(Link)`
-  border: 2px solid #fff;
-  padding: 5px 20px;
-  border-radius: 4px;
-  color: #fff;
-  text-decoration: none;
-  transition: 0.3s;
-  position: relative;
-  top: 8px;
+// const ProfileLink = styled(Link)`
+//   border: 2px solid #fff;
+//   padding: 5px 20px;
+//   border-radius: 4px;
+//   color: #fff;
+//   text-decoration: none;
+//   transition: 0.3s;
+//   position: relative;
+//   top: 8px;
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-`;
+//   &:hover {
+//     background-color: rgba(255, 255, 255, 0.4);
+//   }
+// `;
 
 const HamburgerMenu = styled.div`
   display: none;
