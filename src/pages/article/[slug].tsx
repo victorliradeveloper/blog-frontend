@@ -139,7 +139,7 @@ function Posts(props: IProps) {
                 url={`https://www.victorlirablog.com/article/${props.post.slug}`}
               >
                 <Image
-                  src="/twitter.png"
+                  src="/twitter.webp"
                   width={30}
                   height={30}
                   alt="twitter icon"
