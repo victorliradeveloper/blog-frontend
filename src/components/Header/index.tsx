@@ -30,14 +30,11 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'home', path: '/', category: '' },
   { label: 'frontend', path: '/', category: 'frontend' },
   { label: 'backend', path: '/', category: 'backend' },
-  { label: 'portfolio', path: '/', category: 'portfolio' },
+  { label: 'about me', path: '/portfolio' },
 ];
 
 // Utils
 const buildNavPath = (item: NavItem): string => {
-  if (item.label === 'portfolio') {
-    return '/portfolio';
-  }
   if (item.category) {
     return `${item.path}?page=1&category=${item.category}`;
   }
@@ -86,7 +83,7 @@ export default function Navbar(props: HeaderProps) {
                 const isHovered = hovered === item.label;
 
                 let isActive = false;
-                if (item.label === 'portfolio') {
+                if (item.path === '/portfolio') {
                   isActive = router.pathname === '/portfolio';
                 } else if (item.label === 'home') {
                   isActive = router.pathname === '/' && !router.query.category;
@@ -187,7 +184,7 @@ export default function Navbar(props: HeaderProps) {
 
                 // Verifica se o item está ativo baseado no pathname e query params
                 let isActive = false;
-                if (item.label === 'portfolio') {
+                if (item.path === '/portfolio') {
                   isActive = router.pathname === '/portfolio';
                 } else if (item.label === 'home') {
                   isActive = router.pathname === '/' && !router.query.category;
