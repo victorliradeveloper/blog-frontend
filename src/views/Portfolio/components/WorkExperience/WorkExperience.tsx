@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import StyledWorkExperience from './WorkExperience.styled';
 import Image from 'next/image';
 import workExperienceData from '@/data/work-experience.json';
 import educationData from '@/data/education.json';
+import AOS from 'aos';
 
 interface WorkExperience {
   id: number;
@@ -28,6 +29,10 @@ function WorkExperience() {
   function toggleDisplay(arg: string) {
     setCurrentDisplay(arg);
   }
+
+  useEffect(() => {
+    AOS.refreshHard();
+  }, [currentDisplay]);
 
   return (
     <StyledWorkExperience>

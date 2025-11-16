@@ -10,7 +10,7 @@ export const MENU_HAMBURGUER =
   'https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/hamburguer_1id8uhYeQ.png?updatedAt=1703307554746';
 export const PAGINATION_ARROW = '/left.png';
 export const PROFILE_PICTURE =
-  'https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/profile-1_feYey8V23.jpeg?updatedAt=1712709533286';
+  'https://ik.imagekit.io/Victorliradev/pessoal/WhatsApp%20Image%202025-11-14%20at%2012.20.47%20(1)%206%20(1)%202_nxEcdGb6A.png';
 export const PROFILE_CIRCLE = '/profile-circle.png';
 export const META_TAG_IMAGE =
   'https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/capa_Lt5CpWfSYm.png?updatedAt=1707230740618';

@@ -9,7 +9,7 @@ const getCurrentYear = () => new Date().getFullYear();
 
 const Footer = () => {
   return (
-    <StyledFooter>
+    <StyledFooter data-aos="fade-down" data-aos-delay="100" data-aos-offset="0">
       <div className="icons-wrapper">
         <Link href={GITHUB_LINk} target="_blank">
           <div className="icons-group">
