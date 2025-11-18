@@ -14,6 +14,7 @@ import { Post, PostPagination } from '@/presenters/Post';
 import Pagination from '@/components/Pagination';
 import LoginAlertModal from '@/components/LoginAlertModal';
 import About from '@/components/About';
+import EmptyState from '@/components/EmptyState';
 
 type Data = PostPagination;
 
@@ -71,15 +72,17 @@ export default function Home({ postsData }: { postsData: Data }) {
       {(!searchQuery || (searchQuery && postsData?.results?.length > 0)) && <About />}
 
       {!hasPost && !searchQuery && (
-        <h1 style={{ paddingTop: 200, textAlign: 'center', color: '#fff' }}>
-          Nenhum post encontrado
-        </h1>
+        <EmptyState
+          title="Nenhum post encontrado"
+          message="Não há posts disponíveis no momento. Tente novamente mais tarde."
+        />
       )}
 
       {postsData?.results?.length === 0 && searchQuery && (
-        <h1 style={{ paddingTop: 200, textAlign: 'center', color: '#fff' }}>
-          Nenhum post encontrado para sua busca
-        </h1>
+        <EmptyState
+          title="Nenhum post encontrado para sua busca"
+          message={`Não encontramos resultados para "${searchQuery}". Tente usar termos diferentes ou verifique a ortografia.`}
+        />
       )}
 
       <MainPage className="main-page">
