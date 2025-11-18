@@ -12,7 +12,6 @@ import { applyPhoneMask } from '@/helper/functions/applyPhoneMask';
 import {
   FAVICON,
   META_TAG_IMAGE,
-  PROFILE_CIRCLE,
   PROFILE_PICTURE,
   VERIFY_ICON,
   WHITE_LOADING_SPINNER,
@@ -144,13 +143,6 @@ const Portfolio = function () {
                   width={300}
                   height={300}
                   className="card-image"
-                />
-                <Image
-                  className="circle"
-                  src={PROFILE_CIRCLE}
-                  width={100}
-                  height={100}
-                  alt="circle"
                 />
               </div>
 

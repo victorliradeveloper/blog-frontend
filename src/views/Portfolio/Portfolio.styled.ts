@@ -68,28 +68,50 @@ const StyledPortfolio = styled.div`
           align-items: center;
           justify-content: center;
           border-radius: 100%;
+          background: rgba(7, 235, 176, 0.1);
 
           @media screen and (max-width: 767px) {
             width: 240px;
             height: 240px;
           }
 
+          &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(7, 235, 176, 0.3);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            z-index: 1;
+          }
+
           .card-image {
             width: 200px;
             height: 200px;
             border-radius: 100%;
+            position: relative;
+            z-index: 2;
 
             @media screen and (max-width: 767px) {
               width: 170px;
               height: 170px;
             }
           }
+        }
 
-          .circle {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.1);
+            opacity: 0.7;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
           }
         }
 
