@@ -68,9 +68,9 @@ export default function Home({ postsData }: { postsData: Data }) {
         <LoginAlertModal onCloseLoginAlertModal={closeLoginAlertModal} />
       )}
 
-      {(postsData?.results?.length === 0 || hasPost) && <About />}
+      {(!searchQuery || (searchQuery && postsData?.results?.length > 0)) && <About />}
 
-      {!hasPost && (
+      {!hasPost && !searchQuery && (
         <h1 style={{ paddingTop: 200, textAlign: 'center', color: '#fff' }}>
           Nenhum post encontrado
         </h1>
