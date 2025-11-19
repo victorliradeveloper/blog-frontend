@@ -1,5 +1,16 @@
 import Image from 'next/image';
-import StyledTackStack from './TackStack.styled';
+import {
+  StyledTackStack,
+  ExperienceHeader,
+  Line,
+  HeaderText,
+  TechStackContainer,
+  TechStackItem,
+  TechStackImage,
+  TechStackInfo,
+  TechStackName,
+  TechStackCategory,
+} from './TackStack.styled';
 import techStackData from '@/data/tech-stack.json';
 
 interface TechStack {
@@ -13,22 +24,24 @@ interface TechStack {
 function TackStack() {
   return (
     <StyledTackStack>
-      <div className="experience-header">
-        <div className="line-left"></div>
-        <p>Tech Stack</p>
-        <div className="line-right"></div>
-      </div>
-      <div className="tech-stack-container">
+      <ExperienceHeader>
+        <Line />
+        <HeaderText>Tech Stack</HeaderText>
+        <Line />
+      </ExperienceHeader>
+      <TechStackContainer>
         {techStackData.map((tech: TechStack) => (
-          <div key={tech.id} className="tech-stack-item">
-            <Image src={tech.logo} alt={`${tech.name} logo`} width={64} height={64} />
-            <div>
-              <p>{tech.name}</p>
-              <p>{tech.category}</p>
-            </div>
-          </div>
+          <TechStackItem key={tech.id}>
+            <TechStackImage>
+              <Image src={tech.logo} alt={`${tech.name} logo`} width={64} height={64} />
+            </TechStackImage>
+            <TechStackInfo>
+              <TechStackName>{tech.name}</TechStackName>
+              <TechStackCategory>{tech.category}</TechStackCategory>
+            </TechStackInfo>
+          </TechStackItem>
         ))}
-      </div>
+      </TechStackContainer>
     </StyledTackStack>
   );
 }
