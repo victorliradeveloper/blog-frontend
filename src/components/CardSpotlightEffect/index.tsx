@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import styled from 'styled-components';
+import { SpotlightContainer, SpotlightEffect } from './CardSpotlightEffect.styled';
 
-export const CardSpotlightEffect = ({
-  children,
-}: Readonly<{
+interface CardSpotlightEffectProps {
   children: React.ReactNode;
-}>) => {
+}
+
+export const CardSpotlightEffect = ({ children }: CardSpotlightEffectProps) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -48,32 +48,11 @@ export const CardSpotlightEffect = ({
       onMouseLeave={handleMouseLeave}
     >
       <SpotlightEffect
-        style={{
-          opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,.15), transparent 40%)`,
-        }}
+        $opacity={opacity}
+        $positionX={position.x}
+        $positionY={position.y}
       />
       {children}
     </SpotlightContainer>
   );
 };
-
-const SpotlightContainer = styled.div`
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  width: 100%;
-  height: 100%;
-`;
-
-const SpotlightEffect = styled.div`
-  pointer-events: none;
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  bottom: -1px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-`;
