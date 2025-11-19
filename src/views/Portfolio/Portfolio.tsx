@@ -4,7 +4,33 @@ import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { useEffect } from 'react';
 import { FormData } from './Portfolio.types';
-import StyledPortfolio from './Portfolio.styled';
+import {
+  StyledPortfolio,
+  ContainerVh,
+  MainItem,
+  Item3,
+  ProfileWrapper,
+  CardWrapper,
+  CardImage,
+  NameBox,
+  Name,
+  ProfileH1,
+  ProfileSpan1,
+  ProfileSpan2,
+  FormWrapper,
+  FormTitle,
+  FormDescription,
+  Form,
+  FormBox1,
+  FormBox2,
+  FormBox3,
+  FormControl,
+  Input,
+  TextArea,
+  Label,
+  SubmitButton,
+  LoadingButton,
+} from './Portfolio.styled';
 import Image from 'next/image';
 import Axios from 'axios';
 import FormModal from '@/views/Portfolio/components/FormModal';
@@ -127,128 +153,114 @@ const Portfolio = function () {
 
       <FormModal onCloseFormModal={closeFormModal} className={showFormModal ? 'active' : ''} />
 
-      <StyledPortfolio className="profile">
-        <div className="container-vh">
-          <div className="item main-item">
-            <div className="profile-wrapper">
-              <div
-                className="card-wrapper"
-                data-aos="fade-down"
-                data-aos-delay="100"
-                data-aos-offset="0"
-              >
-                <Image
-                  src={PROFILE_PICTURE}
-                  alt="Profile Picture"
-                  width={300}
-                  height={300}
-                  className="card-image"
-                />
-              </div>
+      <StyledPortfolio>
+        <ContainerVh>
+          <MainItem>
+            <ProfileWrapper>
+              <CardWrapper data-aos="fade-down" data-aos-delay="100" data-aos-offset="0">
+                <CardImage>
+                  <Image
+                    src={PROFILE_PICTURE}
+                    alt="Profile Picture"
+                    width={300}
+                    height={300}
+                  />
+                </CardImage>
+              </CardWrapper>
 
-              <div
-                className="name-box"
-                data-aos="fade-down"
-                data-aos-delay="200"
-                data-aos-offset="0"
-              >
-                <h1 className="name">Victor Lira</h1>
+              <NameBox data-aos="fade-down" data-aos-delay="200" data-aos-offset="0">
+                <Name>Victor Lira</Name>
                 <Image src={VERIFY_ICON} width={20} height={20} alt="verify icon" />
-              </div>
-              <h1
-                className="profile-h1"
-                data-aos="fade-down"
-                data-aos-delay="250"
-                data-aos-offset="0"
-              >
-                <span>DEVELOPING SOLUTIONS FOR</span> <br />
-                <span>tomorrow</span>
-              </h1>
-            </div>
-          </div>
+              </NameBox>
+              <ProfileH1 data-aos="fade-down" data-aos-delay="250" data-aos-offset="0">
+                <ProfileSpan1>DEVELOPING SOLUTIONS FOR</ProfileSpan1>
+                <ProfileSpan2>tomorrow</ProfileSpan2>
+              </ProfileH1>
+            </ProfileWrapper>
+          </MainItem>
 
           <WorkExperience />
           <TackStack />
 
-          <div className="item item-3">
-            <div className="form-wrapper">
-              <h1 className="title">Reach out to me</h1>
-              <p className="p-1">
-                Any questions? Fill out the fields below with your information and we’ll get in
+          <Item3>
+            <FormWrapper>
+              <FormTitle>Reach out to me</FormTitle>
+              <FormDescription>
+                Any questions? Fill out the fields below with your information and we'll get in
                 touch soon.
-              </p>
-              <form id="form">
-                <div className="box-1">
-                  <div className="form-control control-1">
-                    <label>Your Name</label>
-                    <input
-                      className={`input name ${!validateName(formData.name) && formSubmitted ? 'error' : ''}`}
+              </FormDescription>
+              <Form id="form">
+                <FormBox1>
+                  <FormControl $width="480px">
+                    <Label>Your Name</Label>
+                    <Input
+                      $hasError={!validateName(formData.name) && formSubmitted}
                       value={formData.name}
                       type="text"
                       placeholder="Type here"
                       name="name"
                       onChange={handleChange}
                     />
-                  </div>
-                  <div className="form-control control-2">
-                    <label>Email</label>
-                    <input
-                      className={`input email ${!validateEmail(formData.email) && formSubmitted ? 'error' : ''}`}
+                  </FormControl>
+                  <FormControl $width="480px">
+                    <Label>Email</Label>
+                    <Input
+                      $hasError={!validateEmail(formData.email) && formSubmitted}
                       value={formData.email}
                       type="text"
                       placeholder="email@example.com"
                       name="email"
                       onChange={handleChange}
                     />
-                  </div>
-                </div>
+                  </FormControl>
+                </FormBox1>
 
-                <div className="box-2">
-                  <div className="form-control control-3">
-                    <label>Phone</label>
-                    <input
-                      className={`input cellphone ${!validatePhone(formData.cellphone) && formSubmitted ? 'error' : ''}`}
+                <FormBox2>
+                  <FormControl $width="500px">
+                    <Label>Phone</Label>
+                    <Input
+                      $hasError={!validatePhone(formData.cellphone) && formSubmitted}
                       value={formData.cellphone}
                       type="text"
                       placeholder="( _ _ ) _ ____ ____"
                       name="cellphone"
                       onChange={handleChange}
                     />
-                  </div>
-                  <div className="form-control control-4">
-                    <label>Subject</label>
-                    <input
-                      className={`input cellphone ${!validateSubject(formData.subject) && formSubmitted ? 'error' : ''}`}
+                  </FormControl>
+                  <FormControl $width="100%">
+                    <Label>Subject</Label>
+                    <Input
+                      $hasError={!validateSubject(formData.subject) && formSubmitted}
                       value={formData.subject}
                       type="text"
                       placeholder="Type here"
                       name="subject"
                       onChange={handleChange}
                     />
-                  </div>
-                </div>
+                  </FormControl>
+                </FormBox2>
 
-                <div className="box-3">
-                  <div className="form-control control-5">
-                    <label>Message</label>
-                    <textarea
-                      className={`input message ${!validateMessage(formData.message) && formSubmitted ? 'error' : ''}`}
+                <FormBox3>
+                  <FormControl $width="100%">
+                    <Label>Message</Label>
+                    <TextArea
+                      $hasError={!validateMessage(formData.message) && formSubmitted}
                       value={formData.message}
                       placeholder="Write your message here"
                       name="message"
                       onChange={handleChange}
                     />
-                  </div>
-                </div>
+                  </FormControl>
+                </FormBox3>
 
                 {!isLoading && (
-                  <button type="button" onClick={formSubmit} className="submit">
+                  <SubmitButton type="button" onClick={formSubmit}>
                     Send Message
-                  </button>
+                  </SubmitButton>
                 )}
 
                 {isLoading && (
-                  <button type="button" className="loading">
+                  <LoadingButton type="button">
                     <p>Sending </p>
                     <Image
                       src={WHITE_LOADING_SPINNER}
@@ -256,12 +268,12 @@ const Portfolio = function () {
                       height={30}
                       alt="loading spinner"
                     />
-                  </button>
+                  </LoadingButton>
                 )}
-              </form>
-            </div>
-          </div>
-        </div>
+              </Form>
+            </FormWrapper>
+          </Item3>
+        </ContainerVh>
       </StyledPortfolio>
     </Fragment>
   );
