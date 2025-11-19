@@ -21,7 +21,7 @@ import {
   Title,
   LastPosts,
   SliderContent,
-} from './Posts.styled';
+} from '@/components/Article/Posts.styled';
 import dateFormatter from '@/helper/functions/dateFormatter';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
