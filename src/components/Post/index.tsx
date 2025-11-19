@@ -1,7 +1,22 @@
-import StyledPost from './Post.styled';
+import {
+  StyledPost,
+  MotionBox,
+  PostImageWrapper,
+  PostImage,
+  PostBody,
+  CategoryWrapper,
+  PostDate,
+  PostCategory,
+  PostTitle,
+  PostContent,
+  PostAuthor,
+  AuthorItem,
+  ReadMoreWrapper,
+  ReadMoreText,
+  ReadMoreArrowWrapper,
+} from './Post.styled';
 import dateFormatter from '@/helper/functions/dateFormatter';
 import 'aos/dist/aos.css';
-import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Image from 'next/image';
@@ -52,47 +67,35 @@ const Post: React.FC<IProps> = props => {
       onMouseMove={handleMouseMove}
       data-id={props.id}
     >
-      <motion.div whileHover={{ y: props.hover_animation }} className="motion-box">
-        <div className="post-image-wrapper">
-          {/* <div className="add-to-favorits__wrapper favorits--trigger">
-            <Image
-              className="add-to-favorits favorits--trigger"
-              width={40}
-              height={40}
-              alt="add to favorits"
-              src={props.onUpdateFavoritSource}
-            />
-          </div> */}
-          <div className="post-image-wrapper">
-            <div
-              className="post-image"
-              style={{ backgroundImage: `url(${props.postImage})` }}
-            ></div>
-          </div>
-        </div>
-        <div className="post-body">
-          <div className="category-wrapper">
-            <p className="post-date">{formattedDate}</p>
-            <p className="post-category">{props.category}</p>
-          </div>
+      <MotionBox whileHover={{ y: props.hover_animation }}>
+        <PostImageWrapper>
+          <PostImage $backgroundImage={props.postImage} />
+        </PostImageWrapper>
+        <PostBody>
+          <CategoryWrapper>
+            <PostDate>{formattedDate}</PostDate>
+            <PostCategory>{props.category}</PostCategory>
+          </CategoryWrapper>
 
-          <h1 className="post-title">{props.title}</h1>
-          <p className="post-content">
+          <PostTitle>{props.title}</PostTitle>
+          <PostContent>
             {props.content.length > 100
               ? removeSpecialChars(props.content.substring(0, 100)) + ' ...'
               : removeSpecialChars(props.content)}
-          </p>
+          </PostContent>
 
-          <ul className="post-author">
-            <li>Author: {props.author}</li>
-          </ul>
+          <PostAuthor>
+            <AuthorItem>Author: {props.author}</AuthorItem>
+          </PostAuthor>
 
-          <div className="read-more-wrapper">
-            <p>Read more</p>
-            <Image width={20} height={20} alt="arrow right" loading="lazy" src={PAGINATION_ARROW} />
-          </div>
-        </div>
-      </motion.div>
+          <ReadMoreWrapper>
+            <ReadMoreText>Read more</ReadMoreText>
+            <ReadMoreArrowWrapper>
+              <Image width={20} height={20} alt="arrow right" loading="lazy" src={PAGINATION_ARROW} />
+            </ReadMoreArrowWrapper>
+          </ReadMoreWrapper>
+        </PostBody>
+      </MotionBox>
     </StyledPost>
   );
 };

@@ -27,14 +27,6 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
-      {/* <Header
-        className="header"
-        scrollIntoView={() => scrollIntoViewHandler()}
-        onOpenSearchModal={onOpenSearchModal}
-        onResetSearch={resetSearch}
-        openMobileMenu={openMobileMenu}
-        setOpenMobileMenu={handleMobileMenu}
-      /> */}
       <Header
         onOpenSearchModal={onOpenSearchModal}
         onResetSearch={resetSearch}

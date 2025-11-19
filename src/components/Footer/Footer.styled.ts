@@ -1,44 +1,61 @@
 'use client';
 import styled from 'styled-components';
 
-const StyledFooter = styled.footer`
+export const StyledFooter = styled.footer`
   padding: 75px 0;
-  margin: 0 auto;
-  margin-top: 20px;
+  margin: 20px auto 0;
   background: #000;
+`;
 
-  .icons-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 80px;
-    margin: 0 auto;
+export const IconsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 80px;
+  margin: 0 auto;
+`;
 
-    .icons-group {
-      background: white;
-      border: 1px solid #fff;
-      border-radius: 50%;
-      max-width: 30px;
-      height: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .icon {
-        width: 30px;
-        border: 1px solid #fff;
-        border-radius: 100%;
-      }
-    }
-  }
+export const IconGroup = styled.div`
+  background: white;
+  border-radius: 100%;
+  max-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-  .direitos-autorais {
-    margin: 0 auto;
-    color: #ccc;
-    font-size: 12px;
-    margin-top: 20px;
-    width: 375px;
-    text-align: center;
+export const IconWrapper = styled.div`
+  width: 30px;
+  height: 30px;
+  border: 1px solid #fff;
+  border-radius: 100%;
+  overflow: hidden;
+`;
+
+export const Copyright = styled.div`
+  margin: 20px auto 0;
+  color: #ccc;
+  font-size: 12px;
+  width: 375px;
+  text-align: center;
+`;
+
+export const CopyrightText = styled.p`
+  margin: 0;
+  padding: 0;
+`;
+
+export const TechLink = styled.a`
+  color: #fff;
+  text-decoration: underline;
+  font-weight: bold;
+
+  &:hover {
+    opacity: 0.8;
   }
 `;
 
-export default StyledFooter;
+export const Strong = styled.strong`
+  font-weight: bold;
+`;

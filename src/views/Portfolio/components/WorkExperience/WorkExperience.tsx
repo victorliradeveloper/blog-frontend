@@ -1,5 +1,22 @@
 import { useEffect, useState } from 'react';
-import StyledWorkExperience from './WorkExperience.styled';
+import {
+  StyledWorkExperience,
+  ExperienceHeader,
+  Line,
+  HeaderText,
+  Tabs,
+  TabButton,
+  Content,
+  ExperiencesContainer,
+  ExperienceWrapper,
+  LogoWrapper,
+  ExperienceContent,
+  ExperienceHeaderInfo,
+  ExperienceTitle,
+  ExperiencePeriod,
+  AchievementsList,
+  AchievementItem,
+} from './WorkExperience.styled';
 import Image from 'next/image';
 import workExperienceData from '@/data/work-experience.json';
 import educationData from '@/data/education.json';
@@ -36,88 +53,85 @@ function WorkExperience() {
 
   return (
     <StyledWorkExperience>
-      <div className="experience-header">
-        <div className="line-left"></div>
-        <p>Experience</p>
-        <div className="line-right"></div>
-      </div>
+      <ExperienceHeader>
+        <Line />
+        <HeaderText>Experience</HeaderText>
+        <Line />
+      </ExperienceHeader>
 
-      <div className="tabs">
-        <button
-          className={currentDisplay === 'work' ? 'active' : ''}
-          onClick={() => toggleDisplay('work')}
-        >
+      <Tabs>
+        <TabButton $isActive={currentDisplay === 'work'} onClick={() => toggleDisplay('work')}>
           Carrer
-        </button>
-        <button
-          className={currentDisplay === 'education' ? 'active' : ''}
+        </TabButton>
+        <TabButton
+          $isActive={currentDisplay === 'education'}
           onClick={() => toggleDisplay('education')}
         >
           Education
-        </button>
-      </div>
+        </TabButton>
+      </Tabs>
 
-      <div className="content">
+      <Content>
         {currentDisplay === 'work' && (
-          <div className="work-experiences">
+          <ExperiencesContainer>
             {workExperienceData.map((experience: WorkExperience) => (
-              <div key={experience.id} className="work-wrapper">
-                <div className="work-logo">
+              <ExperienceWrapper key={experience.id}>
+                <LogoWrapper>
                   <Image
                     src={experience.logo}
                     alt={`${experience.company} logo`}
                     width={64}
                     height={64}
                   />
-                </div>
-                <div className="work-content">
-                  <div className="work-header">
-                    <p>
+                </LogoWrapper>
+                <ExperienceContent>
+                  <ExperienceHeaderInfo>
+                    <ExperienceTitle>
                       {experience.position} @ {experience.company}
-                    </p>
-                    <p>{experience.period}</p>
-                  </div>
-                  <ul>
+                    </ExperienceTitle>
+                    <ExperiencePeriod>{experience.period}</ExperiencePeriod>
+                  </ExperienceHeaderInfo>
+                  <AchievementsList>
                     {experience.achievements.map((achievement, index) => (
-                      <li key={index}>{achievement}</li>
+                      <AchievementItem key={index}>{achievement}</AchievementItem>
                     ))}
-                  </ul>
-                </div>
-              </div>
+                  </AchievementsList>
+                </ExperienceContent>
+              </ExperienceWrapper>
             ))}
-          </div>
+          </ExperiencesContainer>
         )}
 
         {currentDisplay === 'education' && (
-          <div className="education-experiences">
+          <ExperiencesContainer>
             {educationData.map((education: Education) => (
-              <div key={education.id} className="education-wrapper">
-                <div className="education-logo">
+              <ExperienceWrapper key={education.id}>
+                <LogoWrapper>
                   <Image
                     src={education.logo}
                     alt={`${education.institution} logo`}
                     width={64}
                     height={64}
                   />
-                </div>
-                <div className="education-content">
-                  <div className="education-header">
-                    <p>
+                </LogoWrapper>
+                <ExperienceContent>
+                  <ExperienceHeaderInfo>
+                    <ExperienceTitle>
                       {education.degree} @ {education.institution}
-                    </p>
-                    <p>{education.period}</p>
-                  </div>
-                  <ul>
+                    </ExperienceTitle>
+                    <ExperiencePeriod>{education.period}</ExperiencePeriod>
+                  </ExperienceHeaderInfo>
+                  <AchievementsList>
                     {education.achievements.map((achievement, index) => (
-                      <li key={index}>{achievement}</li>
+                      <AchievementItem key={index}>{achievement}</AchievementItem>
                     ))}
-                  </ul>
-                </div>
-              </div>
+                  </AchievementsList>
+                </ExperienceContent>
+              </ExperienceWrapper>
             ))}
-          </div>
+          </ExperiencesContainer>
         )}
-      </div>
+      </Content>
     </StyledWorkExperience>
   );
 }

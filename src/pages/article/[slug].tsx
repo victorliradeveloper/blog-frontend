@@ -1,19 +1,45 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import StyledPostNew from './Posts.styled';
+import {
+  StyledPostNew,
+  Container,
+  ParallaxContainer,
+  ParallaxImage,
+  Overlay,
+  OverlayTitle,
+  Profile,
+  BodyPost,
+  PostDate,
+  AsideAbsolute,
+  ShareContent,
+  ShareButtonWrapper,
+  Writer,
+  Author,
+  NameContainer,
+  Text1,
+  Text2,
+  Title,
+  LastPosts,
+  SliderContent,
+} from '@/components/Article/Posts.styled';
 import dateFormatter from '@/helper/functions/dateFormatter';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Image from 'next/image';
 import {
   FacebookShareButton,
   TwitterShareButton,
   RedditShareButton,
   TelegramShareButton,
-} from 'react-share';
+  LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  RedditIcon,
+  TelegramIcon,
+  LinkedinIcon,
+} from 'next-share';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
@@ -117,89 +143,81 @@ function Posts(props: IProps) {
         <LoginAlertModal onCloseLoginAlertModal={closeLoginAlertModal} />
       )}
 
-     <div className="container">
-      <div className="parallax-container">
-          <div className="parallax image--1">
-          </div>
-        </div>
+      <Container>
+        <ParallaxContainer>
+          <ParallaxImage />
+        </ParallaxContainer>
 
-        <div className="overlay">
-          <h1>{props.post.title}</h1>
-        </div>
-     </div>
+        <Overlay>
+          <OverlayTitle>{props.post.title}</OverlayTitle>
+        </Overlay>
+      </Container>
 
-      <div className="profile" data-aos="fade-down">
-        <div className="body-post" data-aos="fade-up">
-          <p className="date">{dateFormatter(props.post.date)}</p>
+      <Profile data-aos="fade-down">
+        <BodyPost data-aos="fade-up">
+          <PostDate>{dateFormatter(props.post.date)}</PostDate>
           <MarkdownRenderer> {props.post.content} </MarkdownRenderer>
-          <div className="aside-absolute">
-            <div className="content">
+          <AsideAbsolute>
+            <ShareContent>
               <TwitterShareButton
-                title={props.post.metaTagTitle}
                 url={`https://www.victorlirablog.com/article/${props.post.slug}`}
+                title={props.post.metaTagTitle}
               >
-                <Image
-                  src="/twitter.webp"
-                  width={30}
-                  height={30}
-                  alt="twitter icon"
-                  className="img-twitter"
-                />
+                <ShareButtonWrapper>
+                  <TwitterIcon size={30} round />
+                </ShareButtonWrapper>
               </TwitterShareButton>
               <RedditShareButton
-                title={props.post.metaTagTitle}
                 url={`https://www.victorlirablog.com/article/${props.post.slug}`}
+                title={props.post.metaTagTitle}
               >
-                <Image
-                  src="/reddit.png"
-                  width={30}
-                  height={30}
-                  alt="reddit icon"
-                  className="img-reddit"
-                />
+                <ShareButtonWrapper>
+                  <RedditIcon size={30} round />
+                </ShareButtonWrapper>
               </RedditShareButton>
               <TelegramShareButton
                 url={`https://www.victorlirablog.com/article/${props.post.slug}`}
                 title={props.post.metaTagTitle}
               >
-                <Image
-                  src="/telegram.png"
-                  width={30}
-                  height={30}
-                  alt="telegram icon"
-                  className="img-telegram"
-                />
+                <ShareButtonWrapper>
+                  <TelegramIcon size={30} round />
+                </ShareButtonWrapper>
               </TelegramShareButton>
               <FacebookShareButton
-                title={props.post.metaTagTitle}
                 url={`https://www.victorlirablog.com/article/${props.post.slug}`}
+                quote={props.post.metaTagTitle}
               >
-                <Image
-                  src="/facebook.png"
-                  width={30}
-                  height={30}
-                  alt="facebook icon"
-                  className="img-facebook"
-                />
+                <ShareButtonWrapper>
+                  <FacebookIcon size={30} round />
+                </ShareButtonWrapper>
               </FacebookShareButton>
-            </div>
-          </div>
-        </div>
-        <div className="writter">
-          <div className="author"></div>
-          <div className="name-container">
-            <p className="text-1">Victor Lira &nbsp; 🚀</p>
-            <p className="text-2">Written by Victor Lira</p>
-          </div>
-        </div>
-      </div>
-      <h1 className="title">Latest posts</h1>
-      <div className="last-posts">
+              <LinkedinShareButton
+                url={`https://www.victorlirablog.com/article/${props.post.slug}`}
+                title={props.post.metaTagTitle}
+                summary={props.post.metaTagDescription}
+              >
+                <ShareButtonWrapper>
+                  <LinkedinIcon size={30} round />
+                </ShareButtonWrapper>
+              </LinkedinShareButton>
+            </ShareContent>
+          </AsideAbsolute>
+        </BodyPost>
+        <Writer>
+          <Author />
+          <NameContainer>
+            <Text1>Victor Lira &nbsp; 🚀</Text1>
+            <Text2>Written by Victor Lira</Text2>
+          </NameContainer>
+        </Writer>
+      </Profile>
+      <Title>Latest posts</Title>
+      <LastPosts>
         <Slider {...settings}>
           {props.relatedPosts &&
             props.relatedPosts.map((post: Post) => {
               return (
-                <div className="slider-content" key={post.id}>
+                <SliderContent key={post.id}>
                   <PostComponent
                     onDisplayLoginAlert={displayLoginAlert}
                     id={post.id}
@@ -219,11 +237,11 @@ function Posts(props: IProps) {
                     hover_animation={-7}
                     onUpdateFavoritSource={updateFavoritSource(favoritPosts, post)}
                   />
-                </div>
+                </SliderContent>
               );
             })}
         </Slider>
-      </div>
+      </LastPosts>
     </StyledPostNew>
   );
 }

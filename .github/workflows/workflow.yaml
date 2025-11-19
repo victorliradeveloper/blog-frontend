@@ -11,8 +11,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 20
-      - name: Run install, build and test
+      - name: Run install, lint, build and test
         run: |
           npm install
+          npm run lint
           npm run build
           npm run test:ci

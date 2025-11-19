@@ -1,4 +1,13 @@
-import StyledFooter from './Footer.styled';
+import {
+  StyledFooter,
+  IconsWrapper,
+  IconGroup,
+  IconWrapper,
+  Copyright,
+  CopyrightText,
+  TechLink,
+  Strong,
+} from './Footer.styled';
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
@@ -10,53 +19,55 @@ const getCurrentYear = () => new Date().getFullYear();
 const Footer = () => {
   return (
     <StyledFooter data-aos="fade-down" data-aos-delay="100" data-aos-offset="0">
-      <div className="icons-wrapper">
+      <IconsWrapper>
         <Link href={GITHUB_LINk} target="_blank">
-          <div className="icons-group">
-            <Image
-              loading="lazy"
-              width={30}
-              height={30}
-              alt="GitHub"
-              className="icon"
-              src={GITHUB_ICON}
-            />
-          </div>
+          <IconGroup>
+            <IconWrapper>
+              <Image
+                loading="lazy"
+                width={30}
+                height={30}
+                alt="GitHub"
+                src={GITHUB_ICON}
+              />
+            </IconWrapper>
+          </IconGroup>
         </Link>
 
         <Link href={LINKEDIN_LINK} target="_blank">
-          <div className="icons-group">
-            <Image
-              loading="lazy"
-              width={30}
-              height={30}
-              alt="LinkedIn"
-              className="icon"
-              src={LINKEDIN_ICON}
-            />
-          </div>
+          <IconGroup>
+            <IconWrapper>
+              <Image
+                loading="lazy"
+                width={30}
+                height={30}
+                alt="LinkedIn"
+                src={LINKEDIN_ICON}
+              />
+            </IconWrapper>
+          </IconGroup>
         </Link>
-      </div>
+      </IconsWrapper>
 
-      <div className="direitos-autorais">
-        <p>
-          All rights reserved © {getCurrentYear()} <strong>Victor Lira</strong>
-        </p>
-        <p>
+      <Copyright>
+        <CopyrightText>
+          All rights reserved © {getCurrentYear()} <Strong>Victor Lira</Strong>
+        </CopyrightText>
+        <CopyrightText>
           Blog built with{' '}
-          <a href={`${NEXT_LINK}`} target="_blank" rel="noopener noreferrer">
-            <strong style={{ color: '#fff', textDecoration: 'underline' }}>Next.js</strong>
-          </a>{' '}
+          <TechLink href={NEXT_LINK} target="_blank" rel="noopener noreferrer">
+            <Strong>Next.js</Strong>
+          </TechLink>
           ,{' '}
-          <a href={`${NODE_LINK}`} target="_blank" rel="noopener noreferrer">
-            <strong style={{ color: '#fff', textDecoration: 'underline' }}>Node</strong>
-          </a>{' '}
-          and{' '}
-          <a href={`${MYSQL_LINK}`} target="_blank" rel="noopener noreferrer">
-            <strong style={{ color: '#fff', textDecoration: 'underline' }}>MySQL</strong>
-          </a>
-        </p>
-      </div>
+          <TechLink href={NODE_LINK} target="_blank" rel="noopener noreferrer">
+            <Strong>Node</Strong>
+          </TechLink>
+          {' '}and{' '}
+          <TechLink href={MYSQL_LINK} target="_blank" rel="noopener noreferrer">
+            <Strong>MySQL</Strong>
+          </TechLink>
+        </CopyrightText>
+      </Copyright>
     </StyledFooter>
   );
 };

@@ -8,6 +8,7 @@ import { META_TAG_IMAGE, FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
 import { GlobalContext } from '@/Context/pagination';
 import MainPage from '@/views/Home/components/MainPage';
+import { Container } from '@/views/Home/components/MainPage/MainPage.styled';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
 import { useRouter } from 'next/router';
 import { Post, PostPagination } from '@/presenters/Post';
@@ -85,8 +86,8 @@ export default function Home({ postsData }: { postsData: Data }) {
         />
       )}
 
-      <MainPage className="main-page">
-        <div className="container">
+      <MainPage>
+        <Container>
           {postsToDisplay.results?.map((post: Post, index: number) => {
             const costumizeFirstPost = index === 0;
             const styled = {
@@ -118,7 +119,7 @@ export default function Home({ postsData }: { postsData: Data }) {
               />
             );
           })}
-        </div>
+        </Container>
       </MainPage>
 
       <Pagination
