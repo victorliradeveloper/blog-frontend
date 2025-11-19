@@ -186,7 +186,7 @@ const Portfolio = function () {
             <FormWrapper>
               <FormTitle>Reach out to me</FormTitle>
               <FormDescription>
-                Any questions? Fill out the fields below with your information and we'll get in
+                Any questions? Fill out the fields below with your information and we&apos;ll get in
                 touch soon.
               </FormDescription>
               <Form id="form">
