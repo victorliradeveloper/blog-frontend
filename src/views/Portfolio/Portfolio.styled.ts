@@ -62,8 +62,8 @@ const StyledPortfolio = styled.div`
 
         .card-wrapper {
           position: relative;
-          width: 270px;
-          height: 270px;
+          width: 240px;
+          height: 240px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -106,8 +106,8 @@ const StyledPortfolio = styled.div`
             opacity: 1;
           }
           50% {
-            transform: scale(1.1);
-            opacity: 0.7;
+            transform: scale(1.05);
+            opacity: 0.5;
           }
           100% {
             transform: scale(1);
