@@ -6,7 +6,19 @@ import 'slick-carousel/slick/slick-theme.css';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import PostComponent from '@/components/Post';
 import Image from 'next/image';
-import StyledProfile from './Profile.styled';
+import {
+  StyledProfile,
+  ProfileSection,
+  ProfileInformation,
+  ProfileBox,
+  ProfileName,
+  ProfileEmail,
+  LogoutBox,
+  LogoutButton,
+  FavoritPostTitle,
+  Container,
+  LoadingWrapper,
+} from './Profile.styled';
 import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
 import { useRouter } from 'next/router';
@@ -78,22 +90,22 @@ function Profile() {
 
       {currentUser.email && (
         <StyledProfile data-aos="fade-down" data-aos-delay="200">
-          <div className="profile">
-            <div className="profile-information">
+          <ProfileSection>
+            <ProfileInformation>
               <Image src={currentUser.picture} width={100} height={100} alt="profile picture" />
-              <div className="box">
-                <p className="name">{currentUser.name}</p>
-                <p>{currentUser.email}</p>
-              </div>
-            </div>
+              <ProfileBox>
+                <ProfileName>{currentUser.name}</ProfileName>
+                <ProfileEmail>{currentUser.email}</ProfileEmail>
+              </ProfileBox>
+            </ProfileInformation>
 
-            <div className="logout-box">
-              <button onClick={logout}>Sair</button>
-            </div>
-          </div>
+            <LogoutBox>
+              <LogoutButton onClick={logout}>Sair</LogoutButton>
+            </LogoutBox>
+          </ProfileSection>
 
-          <h1 className="favorit-post-title">Postagens favoritas</h1>
-          <div className="container">
+          <FavoritPostTitle>Postagens favoritas</FavoritPostTitle>
+          <Container>
             {currentPostArray ? (
               currentPostArray.map(post => {
                 return (
@@ -120,11 +132,11 @@ function Profile() {
                 );
               })
             ) : (
-              <div>
+              <LoadingWrapper>
                 <Image src="/loading.gif" width={100} height={100} alt="loading icon" />
-              </div>
+              </LoadingWrapper>
             )}
-          </div>
+          </Container>
         </StyledProfile>
       )}
     </div>
