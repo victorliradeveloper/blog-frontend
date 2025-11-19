@@ -1,4 +1,11 @@
-import StyledPagination from './Pagination.styled';
+import {
+  StyledPagination,
+  PaginationWrapper,
+  PaginationContainer,
+  ArrowListItem,
+  ArrowIcon,
+  PageInfo,
+} from './Pagination.styled';
 import { GlobalContext } from '@/Context/pagination';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
@@ -65,11 +72,11 @@ const Pagination = function (props: IpropsPagination) {
   const createNextPageArrow = function () {
     if (props.hasNextPage) {
       return (
-        <li onClick={() => setNextPage(props.nextPage)}>
-          <div className="icon-arrow icon-arrow-right">
+        <ArrowListItem onClick={() => setNextPage(props.nextPage)}>
+          <ArrowIcon $direction="right">
             <Image width={20} height={20} loading="lazy" src={PAGINATION_ARROW} alt="arrow right" />
-          </div>
-        </li>
+          </ArrowIcon>
+        </ArrowListItem>
       );
     }
   };
@@ -77,11 +84,11 @@ const Pagination = function (props: IpropsPagination) {
   const createPreviousPageArrow = function () {
     if (props.hasPreviousPage) {
       return (
-        <li onClick={() => setPreviowPage(props.previousPage)}>
-          <div className="icon-arrow icon-arrow-left">
+        <ArrowListItem onClick={() => setPreviowPage(props.previousPage)}>
+          <ArrowIcon $direction="left">
             <Image width={20} height={20} loading="lazy" src={PAGINATION_ARROW} alt="arrow left" />
-          </div>
-        </li>
+          </ArrowIcon>
+        </ArrowListItem>
       );
     }
   };
@@ -89,24 +96,22 @@ const Pagination = function (props: IpropsPagination) {
   const displayPagesCount = function () {
     if (props.hasNextPage || props.hasPreviousPage) {
       return (
-        <div className="pagination">
+        <PaginationContainer>
           {createPreviousPageArrow()}
-          &nbsp;
-          <p>
+          <PageInfo>
             {props.page} / {props.pageLength} Pages
-          </p>
-          &nbsp;
+          </PageInfo>
           {createNextPageArrow()}
-        </div>
+        </PaginationContainer>
       );
     } else {
-      return '';
+      return null;
     }
   };
 
   return (
     <StyledPagination>
-      <div className="pagination-wrapper">{displayPagesCount()}</div>
+      <PaginationWrapper>{displayPagesCount()}</PaginationWrapper>
     </StyledPagination>
   );
 };
