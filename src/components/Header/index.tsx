@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup } from 'framer-motion';
 import Image from 'next/image';
 // import { GoogleLogin } from '@react-oauth/google';
 // import { jwtDecode } from 'jwt-decode';
@@ -27,7 +27,6 @@ import {
   MobileMenuContent,
   MobileSearchAndLogin,
 } from './Header.styled';
-import styled from 'styled-components';
 
 // Types
 interface NavItem {
