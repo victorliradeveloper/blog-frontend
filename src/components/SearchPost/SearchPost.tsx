@@ -1,40 +1,25 @@
 import Image from 'next/image';
-// import { useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { useRouter } from 'next/router';
-import StyledSearchPost from './SearchPost.styled';
+import {
+  StyledSearchPost,
+  SearchWrapper,
+  SearchInput,
+  SearchGreyIcon,
+  SearchHint,
+  SearchIconWrapper,
+  Overlay,
+} from './SearchPost.styled';
 import { SearchPostProps } from './SearchPost.types';
-// import { useSearchContext } from '@/Context/searchContext';
 
 function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }: SearchPostProps) {
-  // const [enabled, setEnabled] = useState(false);
   const router = useRouter();
-
-  // const { query, setQuery, setSearchedPosts } = useSearchContext();
-
-  // Removendo a importação do usePosts
-  // import { usePosts } from '@/presentation/hooks/usePosts';
-
-  // Removendo o hook usePosts e suas dependências
-  // const { data } = usePosts({
-  //   query,
-  //   page: '1',
-  //   limit: '8',
-  // });
-
-  // Removendo o useEffect que dependia do data
-  // useEffect(() => {
-  //   if (data) {
-  //     setSearchedPosts(data.results);
-  //   }
-  // }, [data, setSearchedPosts]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement;
     if (event.key === 'Enter') {
-      const value = target.value.trim();
+      const value = event.currentTarget.value.trim();
       if (value) {
-        // setQuery(value);
-        // setEnabled(true);
         router.push(`/?query=${encodeURIComponent(value)}`);
       }
       onCloseSearch();
@@ -42,12 +27,9 @@ function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }:
   };
 
   const handleIconClick = () => {
-    const inputElement = document.querySelector('.search') as HTMLInputElement;
-    const value = inputElement?.value.trim();
+    const value = inputRef.current?.value.trim();
 
     if (value) {
-      // setQuery(value);
-      // setEnabled(true);
       router.push(`?query=${encodeURIComponent(value)}`);
     }
     onCloseMobileMenu();
@@ -58,20 +40,26 @@ function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }:
 
   return (
     <StyledSearchPost>
-      <div className="search-wrapper">
-        <input className="search" type="search" placeholder="Search" onKeyDown={handleKeyDown} />
-        <div className="search-grey-icon">
-          <p>Press enter to search</p>
-          <Image
-            src="/search-gray.png"
-            alt="Gray search icon"
-            onClick={handleIconClick}
-            width={30}
-            height={30}
-          />
-        </div>
-      </div>
-      <div className="overlay" onClick={onCloseSearch}></div>
+      <SearchWrapper>
+        <SearchInput
+          ref={inputRef}
+          type="search"
+          placeholder="Search"
+          onKeyDown={handleKeyDown}
+        />
+        <SearchGreyIcon>
+          <SearchHint>Press enter to search</SearchHint>
+          <SearchIconWrapper onClick={handleIconClick}>
+            <Image
+              src="/search-gray.png"
+              alt="Gray search icon"
+              width={30}
+              height={30}
+            />
+          </SearchIconWrapper>
+        </SearchGreyIcon>
+      </SearchWrapper>
+      <Overlay onClick={onCloseSearch} />
     </StyledSearchPost>
   );
 }
