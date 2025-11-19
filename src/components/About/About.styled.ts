@@ -1,7 +1,7 @@
 'use client';
 import styled from 'styled-components';
 
-const StyledAbout = styled.div`
+export const StyledAbout = styled.section`
   @font-face {
     font-family: 'bolder-font';
     src:
@@ -13,36 +13,34 @@ const StyledAbout = styled.div`
   }
 
   position: relative;
-  background: '#08070b';
-  padding: 0 20px;
+  background: #000;
+  padding: 186px 20px 0;
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 186px;
   color: #fff;
-  max-width: 1200px;
+`;
 
-  h1 {
-    font-size: 50px;
-
-    @media screen and (max-width: 768px) {
-      font-size: 35px;
-    }
-  }
-
-  p {
-    color: #8f9ba8;
-    @media screen and (max-width: 768px) {
-      line-height: 25px;
-    }
-  }
-
-  span {
-    color: #06ebb0;
-    font-size: 20px;
-  }
+export const Title = styled.h1`
+  font-size: 50px;
+  margin: 0;
+  padding: 0;
 
   @media screen and (max-width: 768px) {
+    font-size: 35px;
   }
 `;
 
-export default StyledAbout;
+export const Description = styled.p`
+  color: #8f9ba8;
+  margin: 0;
+  padding: 0;
+
+  @media screen and (max-width: 768px) {
+    line-height: 25px;
+  }
+`;
+
+export const DevTag = styled.span`
+  color: #06ebb0;
+  font-size: 20px;
+`;
