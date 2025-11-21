@@ -10,7 +10,8 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: black;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
   color: white;
   font-size: 12px;
   position: fixed;
