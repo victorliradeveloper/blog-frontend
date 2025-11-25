@@ -246,10 +246,16 @@ function Posts(props: IProps) {
   );
 }
 
+// Cache por 1 hora (3600 segundos) para getStaticPaths
+// Isso melhora a performance do build e regeneração
+const PATHS_CACHE_REVALIDATE_TIME = 3600;
+
 export async function getStaticPaths() {
   try {
     const postService = new PostService();
-    const data = await postService.getAllPosts('1', '50', 'all');
+    const data = await postService.getAllPosts('1', '50', 'all', {
+      revalidate: PATHS_CACHE_REVALIDATE_TIME,
+    });
     const paths = data.results.map((post: Post) => ({
       params: { slug: post.slug },
     }));
@@ -267,13 +273,21 @@ export async function getStaticPaths() {
   }
 }
 
+// Cache por 1 hora (3600 segundos) para melhorar performance
+// Isso reduz significativamente o tempo de carregamento
+const POST_CACHE_REVALIDATE_TIME = 3600;
+
 export async function getStaticProps({ params }: GetStaticPropsContext) {
   const { slug } = params!;
 
   try {
     const postService = new PostService();
-    const post = await postService.getPostBySlug(slug as string);
-    const relatedPostsData = await postService.getAllPosts('1', '5', 'all');
+    const post = await postService.getPostBySlug(slug as string, {
+      revalidate: POST_CACHE_REVALIDATE_TIME,
+    });
+    const relatedPostsData = await postService.getAllPosts('1', '5', 'all', {
+      revalidate: POST_CACHE_REVALIDATE_TIME,
+    });
     const relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);
 
     return {
@@ -281,7 +295,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
         post,
         relatedPosts,
       },
-      revalidate: 3600,
+      revalidate: POST_CACHE_REVALIDATE_TIME,
     };
   } catch (error) {
     console.error('Error fetching post:', error);

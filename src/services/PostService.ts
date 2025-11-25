@@ -10,7 +10,12 @@ export class PostService {
     this.http = new HttpClient(baseUrl);
   }
 
-  async getAllPosts(page: string, limit: string, category: string): Promise<PostPagination> {
+  async getAllPosts(
+    page: string,
+    limit: string,
+    category: string,
+    options?: { revalidate?: number },
+  ): Promise<PostPagination> {
     const pageParam = Array.isArray(page) ? page[0] : page;
     const categoryParam = Array.isArray(category) ? category[0] : category;
 
@@ -26,7 +31,10 @@ export class PostService {
     }
 
     try {
-      const data = await this.http.get<BlogResponse>(endpoint, { params });
+      const data = await this.http.get<BlogResponse>(endpoint, {
+        params,
+        ...(options?.revalidate !== undefined ? { next: { revalidate: options.revalidate } } : {}),
+      });
       return mapPostPagination(data);
     } catch (error) {
       console.error('🔍 Error in getAllPosts:', error);
@@ -34,10 +42,16 @@ export class PostService {
     }
   }
 
-  async searchPosts(query: string, page: string, limit: string): Promise<PostPagination> {
+  async searchPosts(
+    query: string,
+    page: string,
+    limit: string,
+    options?: { revalidate?: number },
+  ): Promise<PostPagination> {
     try {
       const data = await this.http.get<BlogResponse>('api/get/search', {
         params: { query, page, limit },
+        ...(options?.revalidate !== undefined ? { next: { revalidate: options.revalidate } } : {}),
       });
       return mapPostPagination(data);
     } catch (error) {
@@ -46,9 +60,11 @@ export class PostService {
     }
   }
 
-  async getPostBySlug(slug: string): Promise<Post> {
+  async getPostBySlug(slug: string, options?: { revalidate?: number }): Promise<Post> {
     try {
-      const data = await this.http.get<BlogPostResponse>(`api/get/slug/${slug}`);
+      const data = await this.http.get<BlogPostResponse>(`api/get/slug/${slug}`, {
+        ...(options?.revalidate !== undefined ? { next: { revalidate: options.revalidate } } : {}),
+      });
       return mapPost(data);
     } catch (error) {
       console.error(' Error in getPostBySlug:', error);
