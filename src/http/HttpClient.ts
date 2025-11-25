@@ -18,13 +18,18 @@ export class HttpClient {
 
   async get<T>(
     path: string,
-    init?: RequestInit & { params?: Record<string, string | string[]> },
+    init?: RequestInit & {
+      params?: Record<string, string | string[]>;
+      next?: { revalidate?: number | false };
+    },
   ): Promise<T> {
     const url = this.buildUrl(path, init?.params);
+    const { next, ...fetchInit } = init || {};
     const res = await fetch(url, {
       method: 'GET',
-      headers: { Accept: 'application/json', ...(init?.headers ?? {}) },
-      ...init,
+      headers: { Accept: 'application/json', ...(fetchInit?.headers ?? {}) },
+      ...(next ? { next } : {}),
+      ...fetchInit,
     });
     return this.handle<T>(res);
   }
