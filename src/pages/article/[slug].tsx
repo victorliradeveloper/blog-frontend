@@ -246,8 +246,6 @@ function Posts(props: IProps) {
   );
 }
 
-// Cache por 1 hora (3600 segundos) para getStaticPaths
-// Isso melhora a performance do build e regeneração
 const PATHS_CACHE_REVALIDATE_TIME = 3600;
 
 export async function getStaticPaths() {
@@ -273,8 +271,6 @@ export async function getStaticPaths() {
   }
 }
 
-// Cache por 1 hora (3600 segundos) para melhorar performance
-// Isso reduz significativamente o tempo de carregamento
 const POST_CACHE_REVALIDATE_TIME = 3600;
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
