@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import PostComponent from '@/components/Post';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
@@ -16,34 +16,179 @@ import Pagination from '@/components/Pagination';
 import LoginAlertModal from '@/components/LoginAlertModal';
 import About from '@/components/About';
 import EmptyState from '@/components/EmptyState';
+import { usePosts, useSearchPosts } from '@/hooks/usePosts';
+import { DEFAULT_CATEGORY, DEFAULT_LIMIT, DEFAULT_PAGE, EMPTY_POSTS_DATA } from '@/constants/pagination';
 
-type Data = PostPagination;
+type HomeProps = {
+  postsData: PostPagination;
+};
 
-export default function Home({ postsData }: { postsData: Data }) {
+const getQueryParam = (query: string | string[] | undefined, defaultValue: string): string => {
+  if (Array.isArray(query)) return query[0] || defaultValue;
+  return (query as string) || defaultValue;
+};
+
+const hasDynamicQueryParams = (
+  searchQuery: string | undefined,
+  page: string,
+  category: string,
+): boolean => {
+  return !!searchQuery || page !== DEFAULT_PAGE || category !== DEFAULT_CATEGORY;
+};
+
+const getLoadingMessage = (isSearching: boolean): string => {
+  return isSearching ? 'Buscando posts...' : 'Carregando...';
+};
+
+export default function Home({ postsData }: HomeProps) {
   const { setPage } = useContext(GlobalContext);
   const { favoritPosts } = useAddToFavoritsContext();
   const { currentUser } = useCurrentUser();
   const [displayLoginModal, setDisplayLoginModal] = useState(false);
   const router = useRouter();
-  const searchQuery = router.query.query as string;
+
+  const searchQuery = getQueryParam(router.query.query, '');
+  const page = getQueryParam(router.query.page, DEFAULT_PAGE);
+  const limit = getQueryParam(router.query.limit, DEFAULT_LIMIT);
+  const category = getQueryParam(router.query.category, DEFAULT_CATEGORY);
+
+  const hasDynamicParams = hasDynamicQueryParams(searchQuery, page, category);
+  const isSearchMode = !!searchQuery;
+
+  const { data: searchData, isLoading: isSearchLoading } = useSearchPosts(
+    searchQuery,
+    page,
+    limit,
+  );
+
+  const { data: postsDataQuery, isLoading: isPostsLoading } = usePosts(page, limit, category);
+
+  const postsToDisplay = useMemo(() => {
+    if (!hasDynamicParams) {
+      return postsData;
+    }
+
+    if (isSearchMode) {
+      if (isSearchLoading) {
+        return EMPTY_POSTS_DATA;
+      }
+      return searchData || EMPTY_POSTS_DATA;
+    }
+
+    return postsDataQuery || postsData;
+  }, [
+    hasDynamicParams,
+    isSearchMode,
+    isSearchLoading,
+    searchData,
+    postsDataQuery,
+    postsData,
+  ]);
+
+  const isLoadingPosts = hasDynamicParams && !isSearchMode && isPostsLoading;
+  const isLoading = (isSearchMode && isSearchLoading) || isLoadingPosts;
+
+  const handleDisplayLoginAlert = useCallback(() => {
+    setDisplayLoginModal(true);
+  }, []);
+
+  const handleCloseLoginAlert = useCallback(() => {
+    setDisplayLoginModal(false);
+  }, []);
 
   useEffect(() => {
-    if (postsData?.next?.page) {
-      setPage(postsData.next.page);
+    if (postsToDisplay?.next?.page) {
+      setPage(postsToDisplay.next.page);
     }
-  }, [postsData?.next?.page, setPage]);
+  }, [postsToDisplay?.next?.page, setPage]);
 
   useEffect(() => {
     AOS.init();
   }, []);
 
-  const hasPost = !!postsData.results;
-  const postsToDisplay = postsData;
+  const hasPosts = !!postsToDisplay?.results?.length;
+  const hasNextPage = !!postsToDisplay?.next;
+  const hasPreviousPage = !!postsToDisplay?.previous;
+  const currentPage = postsToDisplay?.previous?.page ? postsToDisplay.previous.page + 1 : 1;
+  const previousPage = postsToDisplay?.previous?.page || 1;
+  const nextPage = postsToDisplay?.next?.page || 1;
+  const totalPages = Math.ceil(postsToDisplay?.totalPages || 0);
 
-  const checkNextPage = () => !!postsToDisplay?.next;
-  const checkPreviousPage = () => !!postsToDisplay?.previous;
-  const displayLoginAlert = () => setDisplayLoginModal(true);
-  const closeLoginAlertModal = () => setDisplayLoginModal(false);
+  const shouldShowAbout = !isSearchMode || (!isLoading && hasPosts);
+  const shouldShowEmptyState = !isLoading && !hasPosts;
+  const shouldShowPosts = !isLoading && hasPosts;
+
+  const renderLoadingState = () => (
+    <MainPage>
+      <Container
+        style={{
+          minHeight: '400px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div style={{ fontSize: '18px', color: '#fff' }}>
+          {getLoadingMessage(isSearchMode)}
+        </div>
+      </Container>
+    </MainPage>
+  );
+
+  const renderEmptyState = () => {
+    if (isSearchMode) {
+      return (
+        <EmptyState
+          title="Nenhum post encontrado para sua busca"
+          message={`Não encontramos resultados para "${searchQuery}". Tente usar termos diferentes ou verifique a ortografia.`}
+        />
+      );
+    }
+
+    return (
+      <EmptyState
+        title="Nenhum post encontrado"
+        message="Não há posts disponíveis no momento. Tente novamente mais tarde."
+      />
+    );
+  };
+
+  const renderPostList = () => {
+    const firstPostStyle = {
+      width: 'calc(66.66667% - 40px)',
+      minWidth: '300px',
+    };
+
+    return (
+      <MainPage>
+        <Container>
+          {postsToDisplay.results.map((post: Post, index: number) => (
+            <PostComponent
+              key={post.id}
+              onDisplayLoginAlert={handleDisplayLoginAlert}
+              style={index === 0 ? firstPostStyle : {}}
+              id={post.id}
+              title={post.title}
+              slug={post.slug}
+              content={post.content}
+              author={post.author}
+              metaTagTitle={post.metaTagTitle}
+              metaTagDescription={post.metaTagDescription}
+              postImage={post.postImage}
+              postBackground={post.postBackground}
+              date={post.date}
+              category={post.category}
+              keywords={post.keywords}
+              aos_delay="100"
+              aos_type="fade-up"
+              hover_animation={-7}
+              onUpdateFavoritSource={updateFavoritSource(favoritPosts, post)}
+            />
+          ))}
+        </Container>
+      </MainPage>
+    );
+  };
 
   return (
     <>
@@ -67,70 +212,28 @@ export default function Home({ postsData }: { postsData: Data }) {
       </Head>
 
       {!currentUser.email && displayLoginModal && (
-        <LoginAlertModal onCloseLoginAlertModal={closeLoginAlertModal} />
+        <LoginAlertModal onCloseLoginAlertModal={handleCloseLoginAlert} />
       )}
 
-      {(!searchQuery || (searchQuery && postsData?.results?.length > 0)) && <About />}
+      {shouldShowAbout && <About />}
 
-      {!hasPost && !searchQuery && (
-        <EmptyState
-          title="Nenhum post encontrado"
-          message="Não há posts disponíveis no momento. Tente novamente mais tarde."
+      {isLoading && renderLoadingState()}
+
+      {shouldShowEmptyState && renderEmptyState()}
+
+      {shouldShowPosts && renderPostList()}
+
+      {!isLoading && (
+        <Pagination
+          pageLength={totalPages}
+          page={currentPage}
+          hasNextPage={hasNextPage}
+          hasPreviousPage={hasPreviousPage}
+          previousPage={previousPage}
+          nextPage={nextPage}
+          queryParam={searchQuery}
         />
       )}
-
-      {postsData?.results?.length === 0 && searchQuery && (
-        <EmptyState
-          title="Nenhum post encontrado para sua busca"
-          message={`Não encontramos resultados para "${searchQuery}". Tente usar termos diferentes ou verifique a ortografia.`}
-        />
-      )}
-
-      <MainPage>
-        <Container>
-          {postsToDisplay.results?.map((post: Post, index: number) => {
-            const costumizeFirstPost = index === 0;
-            const styled = {
-              width: 'calc(66.66667% - 40px)',
-              minWidth: '300px',
-            };
-
-            return (
-              <PostComponent
-                onDisplayLoginAlert={displayLoginAlert}
-                style={costumizeFirstPost ? styled : {}}
-                id={post.id}
-                key={post.id}
-                title={post.title}
-                slug={post.slug}
-                content={post.content}
-                author={post.author}
-                metaTagTitle={post.metaTagTitle}
-                metaTagDescription={post.metaTagDescription}
-                postImage={post.postImage}
-                postBackground={post.postBackground}
-                date={post.date}
-                category={post.category}
-                keywords={post.keywords}
-                aos_delay="100"
-                aos_type="fade-up"
-                hover_animation={-7}
-                onUpdateFavoritSource={updateFavoritSource(favoritPosts, post)}
-              />
-            );
-          })}
-        </Container>
-      </MainPage>
-
-      <Pagination
-        pageLength={Math.ceil(postsToDisplay.totalPages)}
-        page={postsToDisplay?.previous?.page ? postsToDisplay.previous.page + 1 : 1}
-        hasNextPage={checkNextPage()}
-        hasPreviousPage={checkPreviousPage()}
-        previousPage={postsToDisplay?.previous?.page || 1}
-        nextPage={postsToDisplay?.next?.page || 1}
-        queryParam={searchQuery}
-      />
     </>
   );
 }
