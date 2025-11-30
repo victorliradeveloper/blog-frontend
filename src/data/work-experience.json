@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "company": "Wine",
+    "position": "Software Developer",
+    "period": "April 2022 - Present",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/wine-logo_Q3HesxJDRU.webp?updatedAt=1757256901949",
+    "achievements": [
+      "Worked at Wine (via GlobalSys), the largest wine e-commerce in Latin America and the world leader in wine subscription clubs, contributing to platform modernization and scalability initiatives.",
+      "Migrated legacy projects from Vanilla JavaScript to Next.js with TypeScript, applying Clean Architecture principles to improve performance, organization, and maintainability of the codebase.",
+      "Developed internal tools in JavaScript and TypeScript, optimizing processes and significantly increasing the marketing team’s productivity by reducing manual and repetitive tasks.",
+      "Implemented automated testing with Jest using TDD, achieving an 80% increase in code coverage and providing greater system reliability and stability.",
+      "Conducted code reviews, promoting best practices, ensuring adherence to quality standards, and reinforcing the use of Clean Architecture to facilitate software evolution."
+    ]
+  },
+  {
+    "id": 2,
+    "company": "Gerente Max Softwares",
+    "position": "Software Developer",
+    "period": "Jan 2021 - Sep 2022",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/assets/1631372546006_Jv378w13R.jpeg?updatedAt=1757538010144",
+    "achievements": [
+      "Developed the MedCenter project, a solution designed to optimize healthcare clinic services by automating registration processes and patient flow, making them faster, more efficient, and organized.",
+      "Structured the project foundation using Vite, React, and TypeScript, while adopting Tailwind CSS to style components consistently and at scale.",
+      "Implemented OCR (Optical Character Recognition) with Azure Vision for text extraction from images and scanned documents, reducing errors and eliminating the need for manual data entry.",
+      "Adopted the Data Mapper pattern to separate persistence logic from business logic, facilitating maintenance, increasing testability, and providing a clearer, more organized object-to-database mapping.",
+      "Developed unit tests with Vitest and React Testing Library, ensuring greater reliability of implemented features, expanding test coverage, and minimizing regression risks."
+    ]
+  }
+]

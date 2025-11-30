@@ -1,0 +1,65 @@
+[
+  {
+    "id": 3,
+    "name": "TypeScript",
+    "category": "Programming Language",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/typescript_ruD8ZiwzF.svg?updatedAt=1757538868750",
+    "description": "Type-safe JavaScript development"
+  },
+  {
+    "id": 1,
+    "name": "Java",
+    "category": "Programming Language",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/java_EhxIvBdpg.svg?updatedAt=1757538999419",
+    "description": "Backend development and enterprise-grade applications"
+  },
+  {
+    "id": 2,
+    "name": "Spring Boot",
+    "category": "Java Framework",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/spring_H2lDMkabd.svg?updatedAt=1757538999486",
+    "description": "Java framework for building scalable backend applications"
+  },
+  {
+    "id": 3,
+    "name": "React",
+    "category": "Frontend Framework",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/react_o03zEUz4a.svg?updatedAt=1757538999507",
+    "description": "Modern UI development with component-based architecture"
+  },
+  {
+    "id": 4,
+    "name": "Node.js",
+    "category": "Runtime Environment",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/node_GYIj5K1R8.svg?updatedAt=1757539131924",
+    "description": "Server-side JavaScript runtime for scalable applications"
+  },
+  {
+    "id": 5,
+    "name": "Next.js",
+    "category": "React Framework",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/nextjs_SL3pu5LXi.svg?updatedAt=1757539322449",
+    "description": "Full-stack React framework with SSR and SSG support"
+  },
+  {
+    "id": 6,
+    "name": "PostgreSQL",
+    "category": "Database",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/icons_9JwY2T9QB.svg?updatedAt=1757539322422",
+    "description": "Relational database management system (RDBMS)"
+  },
+  {
+    "id": 7,
+    "name": "NestJS",
+    "category": "Node.js Framework",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/icons__tJzVb716.svg?updatedAt=1757539131969",
+    "description": "Progressive Node.js framework for backend development"
+  },
+  {
+    "id": 8,
+    "name": "Docker",
+    "category": "Containerization Platform",
+    "logo": "https://ik.imagekit.io/Victorliradev/blog_pessoal/tech-stack/docker_ONVdOVYgV.svg?updatedAt=1757539322467",
+    "description": "Containerization for cloud and infrastructure services"
+  }
+]

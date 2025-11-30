@@ -4,27 +4,34 @@ import 'aos/dist/aos.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
-import PostComponent from '@/presentation/components/Post';
+import PostComponent from '@/components/Post';
 import Image from 'next/image';
-import StyledProfile from './Profile.styled';
+import {
+  StyledProfile,
+  ProfileSection,
+  ProfileInformation,
+  ProfileBox,
+  ProfileName,
+  ProfileEmail,
+  LogoutBox,
+  LogoutButton,
+  FavoritPostTitle,
+  Container,
+  LoadingWrapper,
+} from './Profile.styled';
 import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
 import { useRouter } from 'next/router';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { usePosts } from '@/presentation/hooks/usePosts';
-import { Post } from '@/domain/posts/entities/Post';
+import { usePosts } from '@/hooks/usePosts';
+import { Post } from '@/presenters/Post';
 
 function Profile() {
   const { favoritPosts } = useAddToFavoritsContext();
   const { currentUser, callSetCurrentUser } = useCurrentUser();
   const router = useRouter();
 
-  const { data: postsData } = usePosts({
-    page: '1',
-    limit: '9999',
-    category: 'all',
-    enabled: !!currentUser.email
-  });
+  const { data: postsData } = usePosts('1', '9999', 'all');
 
   const redirect = async () => {
     try {
@@ -75,35 +82,35 @@ function Profile() {
         ></meta>
         <meta
           name="description"
-          content="Olá, sou Victor Lira, o criador de um blog dedicado a explorar os domínios do JavaScript, React, Next.js, TypeScript e outras tecnologias de front-end de ponta. Junte-se a mim nesta jornada enquanto compartilho insights, tutoriais e dicas para aprimorar suas habilidades e ficar por dentro das últimas tendências em desenvolvimento de front-end. Mergulhe no fascinante mundo do desenvolvimento web através do meu blog e capacite-se com conhecimento e experiência."
+          content="Hello, I'm Victor Lira, the creator of a blog dedicated to exploring the realms of JavaScript, React, Next.js, TypeScript, and other cutting-edge front-end technologies. Join me on this journey as I share insights, tutorials, and tips to enhance your skills and stay up to date with the latest trends in front-end development. Dive into the fascinating world of web development through my blog and empower yourself with knowledge and experience."
         />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href={FAVICON} />
-
       </Head>
 
       {currentUser.email && (
         <StyledProfile data-aos="fade-down" data-aos-delay="200">
-          <div className="profile">
-            <div className="profile-information">
+          <ProfileSection>
+            <ProfileInformation>
               <Image src={currentUser.picture} width={100} height={100} alt="profile picture" />
-              <div className="box">
-                <p className="name">{currentUser.name}</p>
-                <p>{currentUser.email}</p>
-              </div>
-            </div>
+              <ProfileBox>
+                <ProfileName>{currentUser.name}</ProfileName>
+                <ProfileEmail>{currentUser.email}</ProfileEmail>
+              </ProfileBox>
+            </ProfileInformation>
 
-            <div className="logout-box">
-              <button onClick={logout}>Sair</button>
-            </div>
-          </div>
+            <LogoutBox>
+              <LogoutButton onClick={logout}>Sair</LogoutButton>
+            </LogoutBox>
+          </ProfileSection>
 
-          <h1 className="favorit-post-title">Postagens favoritas</h1>
-          <div className="container">
+          <FavoritPostTitle>Postagens favoritas</FavoritPostTitle>
+          <Container>
             {currentPostArray ? (
               currentPostArray.map(post => {
                 return (
                   <PostComponent
+                    slug={post.slug}
                     style={{}}
                     id={post.id}
                     key={post.id}
@@ -125,16 +132,15 @@ function Profile() {
                 );
               })
             ) : (
-              <div>
+              <LoadingWrapper>
                 <Image src="/loading.gif" width={100} height={100} alt="loading icon" />
-              </div>
+              </LoadingWrapper>
             )}
-          </div>
+          </Container>
         </StyledProfile>
       )}
     </div>
   );
 }
 
-
-export default Profile
+export default Profile;

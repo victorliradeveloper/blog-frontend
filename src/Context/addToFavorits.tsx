@@ -46,12 +46,14 @@ export const AddToFavoritsProvider = ({ children }: { children: ReactNode }) => 
   }, []);
 
   const toggleFavoritePost = useCallback((postId: number) => {
-    setFavoritPosts((prev) => {
-      const alreadyFavorited = prev.some((item) => item.post === postId);
-      return alreadyFavorited ? prev.filter((item) => item.post !== postId) : [...prev, { post: postId }];
+    setFavoritPosts(prev => {
+      const alreadyFavorited = prev.some(item => item.post === postId);
+      return alreadyFavorited
+        ? prev.filter(item => item.post !== postId)
+        : [...prev, { post: postId }];
     });
   }, []);
-  
+
   useEffect(() => {
     if (!currentPostId?.id) return;
     toggleFavoritePost(currentPostId.id);

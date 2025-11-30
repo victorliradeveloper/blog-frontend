@@ -1,26 +1,22 @@
-import { ServerPostsService, PostsResponse } from '@/infrastructure/http/ServerPostsService';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { PostService } from '../services/PostService';
+import { GetStaticProps } from 'next';
+import { PostPagination } from '../presenters/Post';
 
-export const getServerSideProps: GetServerSideProps<{ postsData: PostsResponse }> = async (
-  context: GetServerSidePropsContext,
-) => {
+const postService = new PostService();
+
+const REVALIDATE_TIME = 300;
+
+export const getStaticProps: GetStaticProps<{ postsData: PostPagination }> = async () => {
   try {
-    const page = String(context.query?.page ?? '1');
-    const category = context.query?.category ? String(context.query.category) : 'all';
-    const limit = '8';
-
-    let data: PostsResponse;
-
-    if (context.query.query) {
-      data = await ServerPostsService.searchPosts(String(context.query.query), page, limit);
-    } else {
-      data = await ServerPostsService.getAllPosts(page, limit, category);
-    }
+    const data = await postService.getAllPosts('1', '8', 'all', {
+      revalidate: REVALIDATE_TIME,
+    });
 
     return {
       props: {
         postsData: data,
       },
+      revalidate: REVALIDATE_TIME,
     };
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -33,6 +29,7 @@ export const getServerSideProps: GetServerSideProps<{ postsData: PostsResponse }
           previous: null,
         },
       },
+      revalidate: REVALIDATE_TIME,
     };
   }
 };

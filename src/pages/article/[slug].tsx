@@ -1,49 +1,70 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import StyledPostNew from './Posts.styled';
-import MarkdownRenderer from '@/presentation/components/MarkdownRenderer';
+import {
+  StyledPostNew,
+  Container,
+  ParallaxContainer,
+  ParallaxImage,
+  Overlay,
+  OverlayTitle,
+  Profile,
+  BodyPost,
+  PostDate,
+  AsideAbsolute,
+  ShareContent,
+  ShareButtonWrapper,
+  Writer,
+  Author,
+  NameContainer,
+  Text1,
+  Text2,
+  Title,
+  LastPosts,
+  SliderContent,
+} from '@/components/Article/Posts.styled';
 import dateFormatter from '@/helper/functions/dateFormatter';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Image from 'next/image';
 import {
   FacebookShareButton,
   TwitterShareButton,
   RedditShareButton,
   TelegramShareButton,
-} from 'react-share';
+  LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  RedditIcon,
+  TelegramIcon,
+  LinkedinIcon,
+} from 'next-share';
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
-import { FAVICON, POST_BACKGROUND_BLUR } from '@/constants/images';
+import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
-import LoginAlertModal from '@/presentation/components/LoginAlertModal';
-import { generateSlug } from '@/helper/functions/generateSlug';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
-import { ServerPostsService } from '@/infrastructure/http/ServerPostsService';
-import { Post, PostPagination } from '@/domain/posts/entities/Post';
-import PostComponent from '@/presentation/components/Post';
+import { Post } from '../../presenters/Post';
+import PostComponent from '@/components/Post';
+import { GetStaticPropsContext } from 'next';
+import { PostService } from '../../services/PostService';
+import LoginAlertModal from '@/components/LoginAlertModal';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 type IProps = {
   post: Post;
-  data: PostPagination;
+  relatedPosts: Post[];
 };
 
 function Posts(props: IProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const [lastPosts, setLastPost] = useState<Post[]>([]);
   const [settings, setSettings] = useState({});
 
   useEffect(() => {
     setIsLoading(false);
     AOS.init();
-
-    setLastPost(props.data.results.slice(0, 3));
 
     setSettings({
       dots: true,
@@ -70,12 +91,12 @@ function Posts(props: IProps) {
         },
       ],
     });
-  }, [props.data.results]);
+  }, []);
 
   useEffect(() => {
     hljs.initHighlightingOnLoad();
   }, []);
-  
+
   useEffect(() => {
     setTimeout(() => {
       const codeBlocks = document.querySelectorAll('pre');
@@ -86,7 +107,6 @@ function Posts(props: IProps) {
           const highlighted = hljs.highlight(code, { language: 'javascript' }).value;
           block.innerHTML = highlighted;
         }
-        
       });
     }, 500);
   }, []);
@@ -123,124 +143,119 @@ function Posts(props: IProps) {
         <LoginAlertModal onCloseLoginAlertModal={closeLoginAlertModal} />
       )}
 
-      <div className="profile" data-aos="fade-down">
-        <div className="background-image-container">
-          <LazyLoadImage
-            className="background-image"
-            src={props.post.postBackground}
-            placeholderSrc={POST_BACKGROUND_BLUR}
-            alt="Blur background"
-          />
-        </div>
+      <Container>
+        <ParallaxContainer>
+          <ParallaxImage />
+        </ParallaxContainer>
 
-        <div className="body-post" data-aos="fade-up">
-          <h1 className="title">{props.post.title}</h1>
-          <p className="date">{dateFormatter(props.post.date)}</p>
+        <Overlay>
+          <OverlayTitle>{props.post.title}</OverlayTitle>
+        </Overlay>
+      </Container>
+
+      <Profile data-aos="fade-down">
+        <BodyPost data-aos="fade-up">
+          <PostDate>{dateFormatter(props.post.date)}</PostDate>
           <MarkdownRenderer> {props.post.content} </MarkdownRenderer>
-          <div className="aside-absolute">
-            <div className="content">
+          <AsideAbsolute>
+            <ShareContent>
               <TwitterShareButton
+                url={`https://www.victorlirablog.com/article/${props.post.slug}`}
                 title={props.post.metaTagTitle}
-                url={`https://www.victorlirablog.com/article/${generateSlug(props.post.title)}`}
               >
-                <Image
-                  src="/twitter.png"
-                  width={30}
-                  height={30}
-                  alt="twitter icon"
-                  className="img-twitter"
-                />
+                <ShareButtonWrapper>
+                  <TwitterIcon size={30} round />
+                </ShareButtonWrapper>
               </TwitterShareButton>
               <RedditShareButton
+                url={`https://www.victorlirablog.com/article/${props.post.slug}`}
                 title={props.post.metaTagTitle}
-                url={`https://www.victorlirablog.com/article/${generateSlug(props.post.title)}`}
               >
-                <Image
-                  src="/reddit.png"
-                  width={30}
-                  height={30}
-                  alt="reddit icon"
-                  className="img-reddit"
-                />
+                <ShareButtonWrapper>
+                  <RedditIcon size={30} round />
+                </ShareButtonWrapper>
               </RedditShareButton>
               <TelegramShareButton
-                url={`https://www.victorlirablog.com/article/${generateSlug(props.post.title)}`}
+                url={`https://www.victorlirablog.com/article/${props.post.slug}`}
                 title={props.post.metaTagTitle}
               >
-                <Image
-                  src="/telegram.png"
-                  width={30}
-                  height={30}
-                  alt="telegram icon"
-                  className="img-telegram"
-                />
+                <ShareButtonWrapper>
+                  <TelegramIcon size={30} round />
+                </ShareButtonWrapper>
               </TelegramShareButton>
               <FacebookShareButton
-                title={props.post.metaTagTitle}
-                url={`https://www.victorlirablog.com/article/${generateSlug(props.post.title)}`}
+                url={`https://www.victorlirablog.com/article/${props.post.slug}`}
+                quote={props.post.metaTagTitle}
               >
-                <Image
-                  src="/facebook.png"
-                  width={30}
-                  height={30}
-                  alt="facebook icon"
-                  className="img-facebook"
-                />
+                <ShareButtonWrapper>
+                  <FacebookIcon size={30} round />
+                </ShareButtonWrapper>
               </FacebookShareButton>
-            </div>
-          </div>
-        </div>
-        <div className="writter">
-          <div className="author"></div>
-          <div className="name-container">
-            <p className="text-1">Victor Lira &nbsp; 🚀</p>
-            <p className="text-2">Escrito por Victor Lira</p>
-          </div>
-        </div>
-      </div>
-      <h1 className="title">Últimas postagens</h1>
-      <div className="last-posts">
+              <LinkedinShareButton
+                url={`https://www.victorlirablog.com/article/${props.post.slug}`}
+                title={props.post.metaTagTitle}
+                summary={props.post.metaTagDescription}
+              >
+                <ShareButtonWrapper>
+                  <LinkedinIcon size={30} round />
+                </ShareButtonWrapper>
+              </LinkedinShareButton>
+            </ShareContent>
+          </AsideAbsolute>
+        </BodyPost>
+        <Writer>
+          <Author />
+          <NameContainer>
+            <Text1>Victor Lira &nbsp; 🚀</Text1>
+            <Text2>Written by Victor Lira</Text2>
+          </NameContainer>
+        </Writer>
+      </Profile>
+      <Title>Latest posts</Title>
+      <LastPosts>
         <Slider {...settings}>
-                  {lastPosts.map((post: Post) => {
-          return (
-            <div className="slider-content" key={post.id}>
-              <PostComponent
-                  onDisplayLoginAlert={displayLoginAlert}
-                  id={post.id}
-                  category={post.category}
-                  content={post.content}
-                  date={post.date}
-                  metaTagDescription={post.metaTagDescription}
-                  metaTagTitle={post.metaTagTitle}
-                  title={post.title}
-                  postImage={post.postImage}
-                  postBackground={post.postBackground}
-                  author={post.author ?? 'Unknown Author'}
-                  keywords={post.keywords}
-                  aos_delay=""
-                  aos_type=""
-                  hover_animation={-7}
-                  onUpdateFavoritSource={updateFavoritSource(favoritPosts, post)}
-                />
-              </div>
-            );
-          })}
+          {props.relatedPosts &&
+            props.relatedPosts.map((post: Post) => {
+              return (
+                <SliderContent key={post.id}>
+                  <PostComponent
+                    onDisplayLoginAlert={displayLoginAlert}
+                    id={post.id}
+                    category={post.category}
+                    content={post.content}
+                    date={post.date}
+                    metaTagDescription={post.metaTagDescription}
+                    metaTagTitle={post.metaTagTitle}
+                    title={post.title}
+                    postImage={post.postImage}
+                    postBackground={post.postBackground}
+                    author={post.author ?? 'Unknown Author'}
+                    keywords={post.keywords}
+                    slug={post.slug}
+                    aos_delay=""
+                    aos_type=""
+                    hover_animation={-7}
+                    onUpdateFavoritSource={updateFavoritSource(favoritPosts, post)}
+                  />
+                </SliderContent>
+              );
+            })}
         </Slider>
-      </div>
+      </LastPosts>
     </StyledPostNew>
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const page = '1';
-  const limit = '100';
-  const category = 'all';
+const PATHS_CACHE_REVALIDATE_TIME = 3600;
 
+export async function getStaticPaths() {
   try {
-    const data = await ServerPostsService.getAllPosts(page, limit, category);
-    // Aqui removi o tipo ICurrentPost para evitar erro de incompatibilidade
+    const postService = new PostService();
+    const data = await postService.getAllPosts('1', '50', 'all', {
+      revalidate: PATHS_CACHE_REVALIDATE_TIME,
+    });
     const paths = data.results.map((post: Post) => ({
-      params: { slug: generateSlug(post.title) },
+      params: { slug: post.slug },
     }));
 
     return {
@@ -249,43 +264,41 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   } catch (error) {
     console.error('Error fetching paths:', error);
-    return { paths: [], fallback: false };
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
   }
-};
+}
 
-export const getStaticProps: GetStaticProps = async context => {
-  const { slug } = context.params!;
+const POST_CACHE_REVALIDATE_TIME = 3600;
+
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const { slug } = params!;
 
   try {
-    const page = '1';
-    const limit = '100';
-    const category = 'all';
-
-    const data = await ServerPostsService.getAllPosts(page, limit, category);
-
-    const currentPost = data.results.find((post: Post) => {
-      return generateSlug(post.title) === slug;
+    const postService = new PostService();
+    const post = await postService.getPostBySlug(slug as string, {
+      revalidate: POST_CACHE_REVALIDATE_TIME,
     });
-
-    if (!currentPost) {
-      return {
-        notFound: true,
-      };
-    }
+    const relatedPostsData = await postService.getAllPosts('1', '5', 'all', {
+      revalidate: POST_CACHE_REVALIDATE_TIME,
+    });
+    const relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);
 
     return {
       props: {
-        post: currentPost,
-        data: data,
+        post,
+        relatedPosts,
       },
-      revalidate: 60,
+      revalidate: POST_CACHE_REVALIDATE_TIME,
     };
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching post:', error);
     return {
       notFound: true,
     };
   }
-};
+}
 
 export default Posts;
