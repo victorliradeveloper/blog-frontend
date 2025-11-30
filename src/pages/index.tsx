@@ -8,9 +8,7 @@ const REVALIDATE_TIME = 300;
 
 export const getStaticProps: GetStaticProps<{ postsData: PostPagination }> = async () => {
   try {
-    const data = await postService.getAllPosts('1', '8', 'all', {
-      revalidate: REVALIDATE_TIME,
-    });
+    const data = await postService.getAllPosts('1', '8', 'all');
 
     return {
       props: {
