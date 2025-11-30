@@ -81,6 +81,10 @@ export const StyledPostNew = styled.div`
   .hljs-number {
     color: #ae81ff;
   }
+
+  strong {
+    color: white;
+  }
 `;
 
 export const Container = styled.div`
