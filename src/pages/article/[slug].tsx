@@ -246,14 +246,10 @@ function Posts(props: IProps) {
   );
 }
 
-const PATHS_CACHE_REVALIDATE_TIME = 3600;
-
 export async function getStaticPaths() {
   try {
     const postService = new PostService();
-    const data = await postService.getAllPosts('1', '50', 'all', {
-      revalidate: PATHS_CACHE_REVALIDATE_TIME,
-    });
+    const data = await postService.getAllPosts('1', '50', 'all');
     const paths = data.results.map((post: Post) => ({
       params: { slug: post.slug },
     }));
@@ -278,12 +274,8 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
 
   try {
     const postService = new PostService();
-    const post = await postService.getPostBySlug(slug as string, {
-      revalidate: POST_CACHE_REVALIDATE_TIME,
-    });
-    const relatedPostsData = await postService.getAllPosts('1', '5', 'all', {
-      revalidate: POST_CACHE_REVALIDATE_TIME,
-    });
+    const post = await postService.getPostBySlug(slug as string);
+    const relatedPostsData = await postService.getAllPosts('1', '5', 'all');
     const relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);
 
     return {
