@@ -43,8 +43,6 @@ import {
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
 import { Post } from '../../presenters/Post';
 import PostComponent from '@/components/Post';
@@ -93,23 +91,6 @@ function Posts(props: IProps) {
     });
   }, []);
 
-  useEffect(() => {
-    hljs.initHighlightingOnLoad();
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const codeBlocks = document.querySelectorAll('pre');
-      codeBlocks.forEach(block => {
-        const code = block.textContent;
-
-        if (code) {
-          const highlighted = hljs.highlight(code, { language: 'javascript' }).value;
-          block.innerHTML = highlighted;
-        }
-      });
-    }, 500);
-  }, []);
 
   const { favoritPosts } = useAddToFavoritsContext();
   const [displayLoginModal, setDisplayLoginModal] = useState(false);
@@ -267,7 +248,7 @@ export async function getStaticPaths() {
   }
 }
 
-const POST_CACHE_REVALIDATE_TIME = 3600;
+const POST_CACHE_REVALIDATE_TIME = 600;
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
   const { slug } = params!;
