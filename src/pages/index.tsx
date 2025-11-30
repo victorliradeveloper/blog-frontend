@@ -4,7 +4,7 @@ import { PostPagination } from '../presenters/Post';
 
 const postService = new PostService();
 
-const REVALIDATE_TIME = 600;
+const REVALIDATE_TIME = 3600;
 
 export const getStaticProps: GetStaticProps<{ postsData: PostPagination }> = async () => {
   try {
