@@ -659,6 +659,41 @@ export const LastPosts = styled.div`
       justify-content: center;
     }
 
+    .slick-list {
+      @media screen and (max-width: 768px) {
+        padding: 0 !important;
+        margin: 0 auto;
+      }
+    }
+
+    .slick-slide {
+      @media screen and (max-width: 768px) {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+
+        > div {
+          width: 100% !important;
+          display: flex !important;
+          justify-content: center !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      /* Sobrescrever estilos do Post no mobile para centralizar */
+      div[data-aos],
+      div[data-id] {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: unset !important;
+        margin: 0 auto !important;
+      }
+    }
+
     .slick-arrow {
       &.slick-prev {
         left: 7px;
@@ -677,6 +712,12 @@ export const LastPosts = styled.div`
         &::before {
           display: none;
         }
+
+        @media screen and (max-width: 768px) {
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%) rotate(180deg);
+        }
       }
 
       &.slick-next {
@@ -694,6 +735,12 @@ export const LastPosts = styled.div`
         &::before {
           display: none;
         }
+
+        @media screen and (max-width: 768px) {
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
       }
     }
   }
@@ -703,4 +750,29 @@ export const SliderContent = styled.div`
   display: flex !important;
   justify-content: center !important;
   padding-top: 15px;
+
+  @media screen and (max-width: 768px) {
+    width: 100% !important;
+    max-width: 90% !important;
+    margin: 0 auto;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    > div {
+      margin: 0 auto !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: unset !important;
+    }
+
+    /* Sobrescrever estilos do Post no mobile */
+    div[data-aos],
+    div[data-id] {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: unset !important;
+      margin: 0 auto !important;
+    }
+  }
 `;
