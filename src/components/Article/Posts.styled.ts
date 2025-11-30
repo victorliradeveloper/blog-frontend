@@ -35,6 +35,8 @@ export const StyledPostNew = styled.div`
 
 export const Container = styled.div`
   position: relative;
+  min-height: 100vh;
+  width: 100%;
 `;
 
 export const ParallaxContainer = styled.div`

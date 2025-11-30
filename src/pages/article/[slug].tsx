@@ -57,11 +57,9 @@ type IProps = {
 };
 
 function Posts(props: IProps) {
-  const [isLoading, setIsLoading] = useState(true);
   const [settings, setSettings] = useState({});
 
   useEffect(() => {
-    setIsLoading(false);
     AOS.init();
 
     setSettings({
@@ -91,7 +89,6 @@ function Posts(props: IProps) {
     });
   }, []);
 
-
   const { favoritPosts } = useAddToFavoritsContext();
   const [displayLoginModal, setDisplayLoginModal] = useState(false);
   const { currentUser } = useCurrentUser();
@@ -103,10 +100,6 @@ function Posts(props: IProps) {
   const closeLoginAlertModal = function () {
     setDisplayLoginModal(false);
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <StyledPostNew>
