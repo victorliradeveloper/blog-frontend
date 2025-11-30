@@ -248,7 +248,7 @@ export async function getStaticPaths() {
   }
 }
 
-const POST_CACHE_REVALIDATE_TIME = 600;
+const POST_CACHE_REVALIDATE_TIME = 3600;
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
   const { slug } = params!;
