@@ -53,6 +53,10 @@ export const ParallaxImage = styled.div`
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+
+  @media screen and (max-width: 768px) {
+    background-attachment: unset;
+  }
 `;
 
 export const Overlay = styled.div`
