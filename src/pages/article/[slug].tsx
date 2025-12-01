@@ -43,8 +43,6 @@ import {
 import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { FAVICON } from '@/constants/images';
 import { useCurrentUser } from '@/Context/currentUser';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
 import { Post } from '../../presenters/Post';
 import PostComponent from '@/components/Post';
@@ -59,56 +57,35 @@ type IProps = {
 };
 
 function Posts(props: IProps) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [settings, setSettings] = useState({});
+  const [settings] = useState({
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 2,
+    arrows: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1186,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: true,
+        },
+      },
+    ],
+  });
 
   useEffect(() => {
-    setIsLoading(false);
     AOS.init();
-
-    setSettings({
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 2,
-      arrows: true,
-      autoplaySpeed: 2000,
-      responsive: [
-        {
-          breakpoint: 1186,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-          },
-        },
-        {
-          breakpoint: 800,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          },
-        },
-      ],
-    });
-  }, []);
-
-  useEffect(() => {
-    hljs.initHighlightingOnLoad();
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const codeBlocks = document.querySelectorAll('pre');
-      codeBlocks.forEach(block => {
-        const code = block.textContent;
-
-        if (code) {
-          const highlighted = hljs.highlight(code, { language: 'javascript' }).value;
-          block.innerHTML = highlighted;
-        }
-      });
-    }, 500);
   }, []);
 
   const { favoritPosts } = useAddToFavoritsContext();
@@ -122,10 +99,6 @@ function Posts(props: IProps) {
   const closeLoginAlertModal = function () {
     setDisplayLoginModal(false);
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <StyledPostNew>
