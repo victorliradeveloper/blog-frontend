@@ -23,13 +23,7 @@ const Footer = () => {
         <Link href={GITHUB_LINk} target="_blank">
           <IconGroup>
             <IconWrapper>
-              <Image
-                loading="lazy"
-                width={30}
-                height={30}
-                alt="GitHub"
-                src={GITHUB_ICON}
-              />
+              <Image loading="lazy" width={30} height={30} alt="GitHub" src={GITHUB_ICON} />
             </IconWrapper>
           </IconGroup>
         </Link>
@@ -37,13 +31,7 @@ const Footer = () => {
         <Link href={LINKEDIN_LINK} target="_blank">
           <IconGroup>
             <IconWrapper>
-              <Image
-                loading="lazy"
-                width={30}
-                height={30}
-                alt="LinkedIn"
-                src={LINKEDIN_ICON}
-              />
+              <Image loading="lazy" width={30} height={30} alt="LinkedIn" src={LINKEDIN_ICON} />
             </IconWrapper>
           </IconGroup>
         </Link>
@@ -61,8 +49,8 @@ const Footer = () => {
           ,{' '}
           <TechLink href={NODE_LINK} target="_blank" rel="noopener noreferrer">
             <Strong>Node</Strong>
-          </TechLink>
-          {' '}and{' '}
+          </TechLink>{' '}
+          and{' '}
           <TechLink href={MYSQL_LINK} target="_blank" rel="noopener noreferrer">
             <Strong>MySQL</Strong>
           </TechLink>

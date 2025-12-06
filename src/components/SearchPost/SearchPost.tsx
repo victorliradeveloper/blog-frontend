@@ -62,21 +62,11 @@ function SearchPost({ displaySearch = false, onCloseSearch, onCloseMobileMenu }:
   return (
     <StyledSearchPost>
       <SearchWrapper>
-        <SearchInput
-          ref={inputRef}
-          type="search"
-          placeholder="Search"
-          onKeyDown={handleKeyDown}
-        />
+        <SearchInput ref={inputRef} type="search" placeholder="Search" onKeyDown={handleKeyDown} />
         <SearchGreyIcon>
           <SearchHint>Press enter to search</SearchHint>
           <SearchIconWrapper onClick={handleIconClick}>
-            <Image
-              src="/search-gray.png"
-              alt="Gray search icon"
-              width={30}
-              height={30}
-            />
+            <Image src="/search-gray.png" alt="Gray search icon" width={30} height={30} />
           </SearchIconWrapper>
         </SearchGreyIcon>
       </SearchWrapper>

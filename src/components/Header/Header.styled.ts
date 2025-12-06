@@ -205,4 +205,3 @@ export const MobileSearchAndLogin = styled.div`
   position: absolute;
   top: 50px;
 `;
-

@@ -18,8 +18,7 @@ export const StyledFormModal = styled.div<StyledFormModalProps>`
   visibility: ${props => (props.$isActive ? 'visible' : 'hidden')};
   right: 50%;
   top: 50%;
-  transform: ${props =>
-    props.$isActive ? 'translate(50%, -50%)' : 'translate(50%, -300%)'};
+  transform: ${props => (props.$isActive ? 'translate(50%, -50%)' : 'translate(50%, -300%)')};
   transition: 0.5s;
 
   @media screen and (max-width: 768px) {

@@ -91,7 +91,13 @@ const Post: React.FC<IProps> = props => {
           <ReadMoreWrapper>
             <ReadMoreText>Read more</ReadMoreText>
             <ReadMoreArrowWrapper>
-              <Image width={20} height={20} alt="arrow right" loading="lazy" src={PAGINATION_ARROW} />
+              <Image
+                width={20}
+                height={20}
+                alt="arrow right"
+                loading="lazy"
+                src={PAGINATION_ARROW}
+              />
             </ReadMoreArrowWrapper>
           </ReadMoreWrapper>
         </PostBody>

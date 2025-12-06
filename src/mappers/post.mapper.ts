@@ -22,7 +22,7 @@ export class PostMapper {
   static toDomainPagination(response: PostPaginationResponse): PostPagination {
     return {
       totalPages: Math.ceil(response.totalPages),
-      results: response.results.map((post) => PostMapper.toDomain(post)),
+      results: response.results.map(post => PostMapper.toDomain(post)),
       next: response.next ?? null,
       previous: response.previous ?? null,
     };

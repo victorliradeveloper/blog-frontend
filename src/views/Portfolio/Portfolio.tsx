@@ -159,12 +159,7 @@ const Portfolio = function () {
             <ProfileWrapper>
               <CardWrapper data-aos="fade-down" data-aos-delay="100" data-aos-offset="0">
                 <CardImage>
-                  <Image
-                    src={PROFILE_PICTURE}
-                    alt="Profile Picture"
-                    width={300}
-                    height={300}
-                  />
+                  <Image src={PROFILE_PICTURE} alt="Profile Picture" width={300} height={300} />
                 </CardImage>
               </CardWrapper>
 
