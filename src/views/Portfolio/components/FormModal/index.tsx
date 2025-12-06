@@ -1,11 +1,4 @@
-import {
-  StyledFormModal,
-  CheckIconWrapper,
-  Title,
-  Text1,
-  Text2,
-  Button,
-} from './FormModal.styled';
+import { StyledFormModal, CheckIconWrapper, Title, Text1, Text2, Button } from './FormModal.styled';
 import Image from 'next/image';
 
 type FormModalProps = {

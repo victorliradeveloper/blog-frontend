@@ -17,7 +17,12 @@ import LoginAlertModal from '@/components/LoginAlertModal';
 import About from '@/components/About';
 import EmptyState from '@/components/EmptyState';
 import { usePosts, useSearchPosts } from '@/hooks/usePosts';
-import { DEFAULT_CATEGORY, DEFAULT_LIMIT, DEFAULT_PAGE, EMPTY_POSTS_DATA } from '@/constants/pagination';
+import {
+  DEFAULT_CATEGORY,
+  DEFAULT_LIMIT,
+  DEFAULT_PAGE,
+  EMPTY_POSTS_DATA,
+} from '@/constants/pagination';
 
 type HomeProps = {
   postsData: PostPagination;
@@ -55,11 +60,7 @@ export default function Home({ postsData }: HomeProps) {
   const hasDynamicParams = hasDynamicQueryParams(searchQuery, page, category);
   const isSearchMode = !!searchQuery;
 
-  const { data: searchData, isLoading: isSearchLoading } = useSearchPosts(
-    searchQuery,
-    page,
-    limit,
-  );
+  const { data: searchData, isLoading: isSearchLoading } = useSearchPosts(searchQuery, page, limit);
 
   const { data: postsDataQuery, isLoading: isPostsLoading } = usePosts(page, limit, category);
 
@@ -76,14 +77,7 @@ export default function Home({ postsData }: HomeProps) {
     }
 
     return postsDataQuery || postsData;
-  }, [
-    hasDynamicParams,
-    isSearchMode,
-    isSearchLoading,
-    searchData,
-    postsDataQuery,
-    postsData,
-  ]);
+  }, [hasDynamicParams, isSearchMode, isSearchLoading, searchData, postsDataQuery, postsData]);
 
   const isLoadingPosts = hasDynamicParams && !isSearchMode && isPostsLoading;
   const isLoading = (isSearchMode && isSearchLoading) || isLoadingPosts;
@@ -128,9 +122,7 @@ export default function Home({ postsData }: HomeProps) {
           justifyContent: 'center',
         }}
       >
-        <div style={{ fontSize: '18px', color: '#fff' }}>
-          {getLoadingMessage(isSearchMode)}
-        </div>
+        <div style={{ fontSize: '18px', color: '#fff' }}>{getLoadingMessage(isSearchMode)}</div>
       </Container>
     </MainPage>
   );

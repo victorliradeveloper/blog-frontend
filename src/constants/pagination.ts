@@ -1,4 +1,4 @@
-import { PostPagination } from "@/presenters/Post";
+import { PostPagination } from '@/presenters/Post';
 
 const DEFAULT_PAGE = '1';
 const DEFAULT_LIMIT = '8';

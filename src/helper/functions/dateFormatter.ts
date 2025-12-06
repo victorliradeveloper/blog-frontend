@@ -16,7 +16,7 @@ function dateFormatter(input: string) {
 
   const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
 
-  return formattedDate; 
+  return formattedDate;
 }
 
 export default dateFormatter;

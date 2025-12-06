@@ -47,11 +47,7 @@ export const CardSpotlightEffect = ({ children }: CardSpotlightEffectProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <SpotlightEffect
-        $opacity={opacity}
-        $positionX={position.x}
-        $positionY={position.y}
-      />
+      <SpotlightEffect $opacity={opacity} $positionX={position.x} $positionY={position.y} />
       {children}
     </SpotlightContainer>
   );

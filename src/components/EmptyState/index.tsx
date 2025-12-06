@@ -15,4 +15,3 @@ const EmptyState = function ({ title, message, icon = '/error.png' }: EmptyState
 };
 
 export default EmptyState;
-

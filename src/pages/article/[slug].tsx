@@ -21,7 +21,10 @@ import {
   Title,
   LastPosts,
   SliderContent,
+  BreadcrumbContainer,
+  BreadcrumbItem,
 } from '@/components/Article/Posts.styled';
+import Link from 'next/link';
 import dateFormatter from '@/helper/functions/dateFormatter';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -126,9 +129,25 @@ function Posts(props: IProps) {
         </Overlay>
       </Container>
 
-      <Profile data-aos="fade-down">
-        <BodyPost data-aos="fade-up">
+      <Profile>
+        <BodyPost>
           <PostDate>{dateFormatter(props.post.date)}</PostDate>
+          <BreadcrumbContainer>
+            <BreadcrumbItem>
+              <Link href="/">Articles</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <span className="separator">›</span>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <Link href={`/?category=${props.post.category}`}>{props.post.category}</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <span className="separator">›</span>
+            </BreadcrumbItem>
+            <BreadcrumbItem className="current">{props.post.title}</BreadcrumbItem>
+          </BreadcrumbContainer>
+
           <MarkdownRenderer> {props.post.content} </MarkdownRenderer>
           <AsideAbsolute>
             <ShareContent>

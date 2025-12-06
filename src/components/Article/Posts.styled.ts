@@ -95,8 +95,9 @@ export const BodyPost = styled.div`
   padding: 20px 30px;
   padding-top: 60px;
   position: relative;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -509,6 +510,7 @@ export const PostDate = styled.p`
   color: #9ec0fa;
   margin: 0;
   padding: 0;
+  margin-bottom: 0px !important;
 
   @media screen and (max-width: 700px) {
     font-size: 14px;
@@ -778,5 +780,58 @@ export const SliderContent = styled.div`
       min-width: unset !important;
       margin: 0 auto !important;
     }
+  }
+`;
+
+export const BreadcrumbContainer = styled.nav`
+  max-width: 830px;
+  margin: 0 auto;
+  padding: 40px 30px 40px 0px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #8f9ba8;
+
+  @media screen and (max-width: 700px) {
+    padding: 30px 20px 15px 0px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+`;
+
+export const BreadcrumbItem = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  a {
+    color: #01efb3 !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #00d4a3;
+      text-decoration: underline;
+    }
+  }
+
+  &.current {
+    color: #ffffff;
+    font-weight: 500;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media screen and (max-width: 700px) {
+      white-space: normal;
+    }
+  }
+
+  .separator {
+    color: #8f9ba8;
+    margin: 0 4px;
+    user-select: none;
   }
 `;

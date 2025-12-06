@@ -28,4 +28,3 @@ export const SpotlightEffect = styled.div<SpotlightEffectProps>`
   background: ${props =>
     `radial-gradient(600px circle at ${props.$positionX}px ${props.$positionY}px, rgba(255,255,255,.15), transparent 40%)`};
 `;
-
