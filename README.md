@@ -1,6 +1,6 @@
 # Blog Frontend
 
-Um blog moderno construído com Next.js, TypeScript e seguindo padrões de arquitetura limpa.
+Um blog moderno construído com Next.js, TypeScript e seguindo padrões de arquitetura limpa. 
 
 ## 🏗️ Arquitetura
 
