@@ -52,6 +52,7 @@ import { GetStaticPropsContext } from 'next';
 import { PostService } from '../../services/PostService';
 import LoginAlertModal from '@/components/LoginAlertModal';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
+import ReadingProgressBar from '@/components/ReadingProgressBar';
 
 type IProps = {
   post: Post;
@@ -104,6 +105,7 @@ function Posts(props: IProps) {
 
   return (
     <StyledPostNew>
+      <ReadingProgressBar />
       <Head>
         <title>{props.post.metaTagTitle}</title>
         <meta name="title" content={props.post.metaTagTitle} />
