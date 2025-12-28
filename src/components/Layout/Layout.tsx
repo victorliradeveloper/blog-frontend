@@ -1,13 +1,12 @@
 // import Header from '@/presentation/components/Header';
 import { LayoutProps } from './Layout.types';
-import { useScrollContext } from '@/Context/scrollProvider';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import SearchPost from '../SearchPost/SearchPost';
 import Header from '../Header';
 import Footer from '../Footer';
 
 const Layout = ({ children }: LayoutProps) => {
-  const { containerRef } = useScrollContext();
+  const containerRef = useRef<HTMLDivElement>(null);
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const [openSearchModal, setOpenSearchModal] = useState(false);
 
@@ -38,7 +37,7 @@ const Layout = ({ children }: LayoutProps) => {
         onCloseSearch={closeSearch}
         onCloseMobileMenu={closeMobileMenu}
       />
-      <main ref={containerRef as React.RefObject<HTMLDivElement>}>{children}</main>
+      <main ref={containerRef}>{children}</main>
       <Footer />
     </>
   );

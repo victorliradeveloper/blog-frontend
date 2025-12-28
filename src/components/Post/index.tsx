@@ -20,14 +20,14 @@ import 'aos/dist/aos.css';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Image from 'next/image';
-import { useAddToFavoritsContext } from '@/Context/addToFavorits';
+import { useAppDispatch } from '@/store/hooks';
+import { toggleFavorite } from '@/store/slices/favoritesSlice';
 import { IProps } from './types';
 import { PAGINATION_ARROW } from '@/constants/images';
 import { removeSpecialChars } from '@/helper/functions/removeSpecialChars';
 
 const Post: React.FC<IProps> = props => {
-  const { addToFavoritsHandler } = useAddToFavoritsContext();
-
+  const dispatch = useAppDispatch();
   const formattedDate = dateFormatter(props.date);
   const router = useRouter();
 
@@ -48,7 +48,8 @@ const Post: React.FC<IProps> = props => {
         props.onDisplayLoginAlert();
       }
 
-      addToFavoritsHandler(e);
+      e.stopPropagation();
+      dispatch(toggleFavorite(props.id));
       return;
     }
 

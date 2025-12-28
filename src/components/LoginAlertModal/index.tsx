@@ -2,7 +2,8 @@ import { StyledLoginAlertModal } from './LoginAlertModal.styled';
 import { jwtDecode } from 'jwt-decode';
 import { GoogleLogin } from '@react-oauth/google';
 import router from 'next/router';
-import { useCurrentUser } from '@/Context/currentUser';
+import { useAppDispatch } from '@/store/hooks';
+import { setCurrentUser } from '@/store/slices/userSlice';
 import { CLOSE_MODAL_ICON } from '@/constants/images';
 import Image from 'next/image';
 
@@ -11,7 +12,7 @@ type IProps = {
 };
 
 const LoginAlertModal = function (props: IProps) {
-  const { callSetCurrentUser } = useCurrentUser();
+  const dispatch = useAppDispatch();
 
   return (
     <StyledLoginAlertModal>
@@ -44,11 +45,11 @@ const LoginAlertModal = function (props: IProps) {
 
               const { picture, name, email } = user;
 
-              callSetCurrentUser({
+              dispatch(setCurrentUser({
                 name,
                 picture,
                 email,
-              });
+              }));
 
               router.push('/profile');
             } else {

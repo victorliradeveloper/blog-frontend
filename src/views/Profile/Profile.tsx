@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import 'aos/dist/aos.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import PostComponent from '@/components/Post';
 import Image from 'next/image';
 import {
@@ -20,15 +19,17 @@ import {
   LoadingWrapper,
 } from './Profile.styled';
 import { FAVICON } from '@/constants/images';
-import { useCurrentUser } from '@/Context/currentUser';
+import { useAppSelector, useAppDispatch } from '@/store/hooks';
+import { clearUser } from '@/store/slices/userSlice';
 import { useRouter } from 'next/router';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
 import { usePosts } from '@/hooks/usePosts';
 import { Post } from '@/presenters/Post';
 
 function Profile() {
-  const { favoritPosts } = useAddToFavoritsContext();
-  const { currentUser, callSetCurrentUser } = useCurrentUser();
+  const favoritPosts = useAppSelector(state => state.favorites.favoritPosts);
+  const currentUser = useAppSelector(state => state.user.currentUser);
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const { data: postsData } = usePosts('1', '9999', 'all');
@@ -43,12 +44,7 @@ function Profile() {
 
   const logout = async function () {
     await redirect();
-
-    callSetCurrentUser({
-      name: '',
-      email: '',
-      picture: '',
-    });
+    dispatch(clearUser());
   };
 
   const filterFavoritPosts = useCallback(
