@@ -43,9 +43,8 @@ import {
   TelegramIcon,
   LinkedinIcon,
 } from 'next-share';
-import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { FAVICON } from '@/constants/images';
-import { useCurrentUser } from '@/Context/currentUser';
+import { useAppSelector } from '@/store/hooks';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
 import { Post } from '../../presenters/Post';
 import PostComponent from '@/components/Post';
@@ -91,9 +90,9 @@ function Posts(props: IProps) {
     AOS.init();
   }, []);
 
-  const { favoritPosts } = useAddToFavoritsContext();
+  const favoritPosts = useAppSelector(state => state.favorites.favoritPosts);
+  const currentUser = useAppSelector(state => state.user.currentUser);
   const [displayLoginModal, setDisplayLoginModal] = useState(false);
-  const { currentUser } = useCurrentUser();
 
   const displayLoginAlert = function () {
     setDisplayLoginModal(true);

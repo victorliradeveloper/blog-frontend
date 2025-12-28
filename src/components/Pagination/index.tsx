@@ -6,8 +6,8 @@ import {
   ArrowIcon,
   PageInfo,
 } from './Pagination.styled';
-import { GlobalContext } from '@/Context/pagination';
-import { useContext } from 'react';
+import { useAppSelector, useAppDispatch } from '@/store/hooks';
+import { setPage } from '@/store/slices/paginationSlice';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Image from 'next/image';
@@ -15,7 +15,8 @@ import { IpropsPagination } from './types';
 import { PAGINATION_ARROW } from '@/constants/images';
 
 const Pagination = function (props: IpropsPagination) {
-  const { setPage, page } = useContext(GlobalContext);
+  const dispatch = useAppDispatch();
+  const page = useAppSelector(state => state.pagination.page);
   const router = useRouter();
   let currentCategory = router.query.category;
 
@@ -25,7 +26,7 @@ const Pagination = function (props: IpropsPagination) {
 
   function setNextPage(route: number) {
     const nextPage = page + 1;
-    setPage(nextPage);
+    dispatch(setPage(nextPage));
 
     if (!props.queryParam) {
       router.push({
@@ -48,7 +49,7 @@ const Pagination = function (props: IpropsPagination) {
 
   const setPreviowPage = function (route: number) {
     const previousPage = page - 1;
-    setPage(previousPage);
+    dispatch(setPage(previousPage));
 
     if (!props.queryParam) {
       router.push({

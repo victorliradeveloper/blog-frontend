@@ -3,7 +3,9 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Pagination from '../Pagination';
 import { useRouter } from 'next/router';
-import { GlobalContext } from '@/Context/pagination';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import paginationReducer from '@/store/slices/paginationSlice';
 import React from 'react';
 
 jest.mock('next/router', () => ({
@@ -28,22 +30,29 @@ interface PaginationProps {
 
 describe('Pagination', () => {
   const pushMock = jest.fn();
-  const setPageMock = jest.fn();
-  const setTotalPagesMock = jest.fn();
 
-  const renderComponent = (props: PaginationProps) =>
-    render(
-      <GlobalContext.Provider
-        value={{
-          page: props.page || 1,
-          setPage: setPageMock,
-          totalPages: props.pageLength || 1,
-          setTotalPages: setTotalPagesMock,
-        }}
-      >
+  const createMockStore = (initialPage: number = 1) => {
+    return configureStore({
+      reducer: {
+        pagination: paginationReducer,
+      },
+      preloadedState: {
+        pagination: {
+          page: initialPage,
+          totalPages: 1,
+        },
+      },
+    });
+  };
+
+  const renderComponent = (props: PaginationProps) => {
+    const store = createMockStore(props.page || 1);
+    return render(
+      <Provider store={store}>
         <Pagination {...props} />
-      </GlobalContext.Provider>,
+      </Provider>,
     );
+  };
 
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({
@@ -69,24 +78,22 @@ describe('Pagination', () => {
     expect(screen.getByText('1 / 3 Pages')).toBeInTheDocument();
   });
 
-  it('calls setPage and router.push when clicking next arrow', () => {
+  it('calls router.push when clicking next arrow', () => {
     renderComponent({ hasNextPage: true, nextPage: 2, page: 1, pageLength: 3 });
 
     fireEvent.click(screen.getByAltText('arrow right').closest('li')!);
 
-    expect(setPageMock).toHaveBeenCalledWith(2);
     expect(pushMock).toHaveBeenCalledWith({
       pathname: '/test',
       query: { page: 2, category: 'all' },
     });
   });
 
-  it('calls setPage and router.push when clicking previous arrow', () => {
+  it('calls router.push when clicking previous arrow', () => {
     renderComponent({ hasPreviousPage: true, previousPage: 1, page: 2, pageLength: 3 });
 
     fireEvent.click(screen.getByAltText('arrow left').closest('li')!);
 
-    expect(setPageMock).toHaveBeenCalledWith(1);
     expect(pushMock).toHaveBeenCalledWith({
       pathname: '/test',
       query: { page: 1, category: 'all' },

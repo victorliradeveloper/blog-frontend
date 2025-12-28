@@ -1,12 +1,11 @@
 import Head from 'next/head';
 import PostComponent from '@/components/Post';
-import { useContext, useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-import { useAddToFavoritsContext } from '@/Context/addToFavorits';
 import { META_TAG_IMAGE, FAVICON } from '@/constants/images';
-import { useCurrentUser } from '@/Context/currentUser';
-import { GlobalContext } from '@/Context/pagination';
+import { useAppSelector, useAppDispatch } from '@/store/hooks';
+import { setPage } from '@/store/slices/paginationSlice';
 import MainPage from '@/views/Home/components/MainPage';
 import { Container } from '@/views/Home/components/MainPage/MainPage.styled';
 import { updateFavoritSource } from '@/helper/functions/updateFavoritSource';
@@ -42,13 +41,13 @@ const hasDynamicQueryParams = (
 };
 
 const getLoadingMessage = (isSearching: boolean): string => {
-  return isSearching ? 'Buscando posts...' : 'Carregando...';
+  return isSearching ? 'Searching for posts...' : 'Loading...';
 };
 
 export default function Home({ postsData }: HomeProps) {
-  const { setPage } = useContext(GlobalContext);
-  const { favoritPosts } = useAddToFavoritsContext();
-  const { currentUser } = useCurrentUser();
+  const dispatch = useAppDispatch();
+  const favoritPosts = useAppSelector(state => state.favorites.favoritPosts);
+  const currentUser = useAppSelector(state => state.user.currentUser);
   const [displayLoginModal, setDisplayLoginModal] = useState(false);
   const router = useRouter();
 
@@ -92,9 +91,9 @@ export default function Home({ postsData }: HomeProps) {
 
   useEffect(() => {
     if (postsToDisplay?.next?.page) {
-      setPage(postsToDisplay.next.page);
+      dispatch(setPage(postsToDisplay.next.page));
     }
-  }, [postsToDisplay?.next?.page, setPage]);
+  }, [postsToDisplay?.next?.page, dispatch]);
 
   useEffect(() => {
     AOS.init();
