@@ -19,10 +19,10 @@ export class PostService {
     let params: Record<string, string>;
 
     if (categoryParam === 'all') {
-      endpoint = 'api/get';
+      endpoint = 'api/v1/get';
       params = { page: pageParam, limit };
     } else {
-      endpoint = `api/get/category/${categoryParam}`;
+      endpoint = `api/v1/get/category/${categoryParam}`;
       params = { page: pageParam, limit };
     }
 
@@ -37,7 +37,7 @@ export class PostService {
 
   async searchPosts(query: string, page: string, limit: string): Promise<PostPagination> {
     try {
-      const data = await this.http.get<PostPaginationResponse>('api/get/search', {
+      const data = await this.http.get<PostPaginationResponse>('api/v1/get/search', {
         params: { query, page, limit },
       });
       return PostMapper.toDomainPagination(data);
@@ -49,7 +49,7 @@ export class PostService {
 
   async getPostBySlug(slug: string): Promise<Post> {
     try {
-      const data = await this.http.get<PostResponse>(`api/get/slug/${slug}`);
+      const data = await this.http.get<PostResponse>(`api/v1/get/slug/${slug}`);
       return PostMapper.toDomain(data);
     } catch (error) {
       console.error(' Error in getPostBySlug:', error);
