@@ -10,6 +10,7 @@ const POST_ROUTE_CHANGE_DELAY = 300;
 const INITIAL_FRAMES_TO_WAIT = 2;
 
 const calculateScrollProgress = (): number => {
+  console.log('calculateScrollProgress');
   if (typeof window === 'undefined') return 0;
 
   const windowHeight = window.innerHeight;
