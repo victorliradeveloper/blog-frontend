@@ -240,24 +240,10 @@ function Posts(props: IProps) {
 }
 
 export async function getStaticPaths() {
-  try {
-    const postService = new PostService();
-    const data = await postService.getAllPosts('1', '50', 'all');
-    const paths = data.results.map((post: Post) => ({
-      params: { slug: post.slug },
-    }));
-
-    return {
-      paths,
-      fallback: 'blocking',
-    };
-  } catch (error) {
-    console.error('Error fetching paths:', error);
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  }
+  return {
+    paths: [],
+    fallback: 'blocking',
+  };
 }
 
 const POST_CACHE_REVALIDATE_TIME = 3600;
