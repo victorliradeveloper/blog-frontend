@@ -2,9 +2,12 @@ import { Post, PostPagination } from '../presenters/Post';
 import { HttpClient } from '../http/HttpClient';
 import { PostMapper } from '@/mappers/post.mapper';
 import { PostPaginationResponse, PostResponse } from '@/types/posts.types';
+import { HttpError } from '@/http/HttpClient';
 
 export class PostService {
   private readonly http: HttpClient;
+  private readonly maxRetries = 2;
+  private readonly retryDelayMs = 800;
 
   constructor() {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
@@ -27,7 +30,7 @@ export class PostService {
     }
 
     try {
-      const data = await this.http.get<PostPaginationResponse>(endpoint, { params });
+      const data = await this.getWithRetry<PostPaginationResponse>(endpoint, { params });
       return PostMapper.toDomainPagination(data);
     } catch (error) {
       console.error('🔍 Error in getAllPosts:', error);
@@ -49,11 +52,47 @@ export class PostService {
 
   async getPostBySlug(slug: string): Promise<Post> {
     try {
-      const data = await this.http.get<PostResponse>(`api/v1/get/slug/${slug}`);
+      const data = await this.getWithRetry<PostResponse>(`api/v1/get/slug/${slug}`);
       return PostMapper.toDomain(data);
     } catch (error) {
       console.error(' Error in getPostBySlug:', error);
       throw error;
     }
+  }
+
+  private async getWithRetry<T>(
+    path: string,
+    init?: RequestInit & {
+      params?: Record<string, string | string[]>;
+      next?: { revalidate?: number | false };
+    },
+  ): Promise<T> {
+    for (let attempt = 0; attempt <= this.maxRetries; attempt++) {
+      try {
+        return await this.http.get<T>(path, init);
+      } catch (error) {
+        const shouldRetry = this.shouldRetry(error);
+        const hasAttemptsLeft = attempt < this.maxRetries;
+
+        if (!shouldRetry || !hasAttemptsLeft) {
+          throw error;
+        }
+
+        await this.delay(this.retryDelayMs * (attempt + 1));
+      }
+    }
+
+    throw new Error('Unexpected retry flow');
+  }
+
+  private shouldRetry(error: unknown): boolean {
+    if (error instanceof HttpError) {
+      return error.status >= 500;
+    }
+    return true;
+  }
+
+  private async delay(ms: number): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, ms));
   }
 }
