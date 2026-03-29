@@ -242,7 +242,7 @@ function Posts(props: IProps) {
 export async function getStaticPaths() {
   try {
     const postService = new PostService();
-    const data = await postService.getAllPosts('1', '50', 'all');
+    const data = await postService.getAllPosts('1', '10', 'all');
     const paths = data.results.map((post: Post) => ({
       params: { slug: post.slug },
     }));
