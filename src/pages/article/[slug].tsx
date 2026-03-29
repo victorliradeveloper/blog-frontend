@@ -268,8 +268,14 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   try {
     const postService = new PostService();
     const post = await postService.getPostBySlug(slug as string);
-    const relatedPostsData = await postService.getAllPosts('1', '5', 'all');
-    const relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);
+    let relatedPosts: Post[] = [];
+
+    try {
+      const relatedPostsData = await postService.getAllPosts('1', '5', 'all');
+      relatedPosts = relatedPostsData.results.filter(p => p.id !== post.id);
+    } catch (error) {
+      console.error('Error fetching related posts:', error);
+    }
 
     return {
       props: {
