@@ -2,9 +2,9 @@
 import styled from 'styled-components';
 
 export const StyledFooter = styled.footer`
-  padding: 75px 0;
+  padding: 79px 0;
   margin: 20px auto 0;
-  background: #000;
+  background: #cf2323;
 `;
 
 export const IconsWrapper = styled.div`
