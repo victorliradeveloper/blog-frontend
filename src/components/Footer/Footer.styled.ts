@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const StyledFooter = styled.footer`
   padding: 79px 0;
   margin: 20px auto 0;
-  background: #cf2323;
+  background: #000000;
 `;
 
 export const IconsWrapper = styled.div`
